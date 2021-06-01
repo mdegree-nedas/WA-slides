@@ -1,6 +1,8 @@
 \documentclass{article}
 
 % \usepackage[rm]{roboto}
+% \usepackage[T1]{fontenc}
+
 \usepackage[rm]{noto}
 \usepackage[T1]{fontenc}
 \renewcommand*\familydefault{\ttdefault}
@@ -9,6 +11,7 @@
 \usepackage[a4paper, total={6.5in, 10in}]{geometry}
 
 \usepackage{import}
+\usepackage{tikz-network}
 
 \parindent 0px
 \pagestyle{empty}
@@ -16,28 +19,29 @@
 
 \begin{document}
 	\tableofcontents
+	\pagebreak
+	\begin{flushleft}
+		\import{./chapters/}{1_approximation_algorithms/1_computational_complexity.tex}
+		\import{./chapters/}{1_approximation_algorithms/2_optimization_problems.tex}
+		\import{./chapters/}{1_approximation_algorithms/3_approximation.tex}
+		\import{./chapters/}{1_approximation_algorithms/4_algorithmic_techniques/4_1_greedy.tex}
+		\import{./chapters/}{1_approximation_algorithms/4_algorithmic_techniques/4_2_local_search.tex}
+		\import{./chapters/}{1_approximation_algorithms/4_algorithmic_techniques/4_3_linear_programming/4_3_1_rounding.tex}
+		\import{./chapters/}{1_approximation_algorithms/4_algorithmic_techniques/4_3_linear_programming/4_3_2_primal-dual.tex}
+		\import{./chapters/}{1_approximation_algorithms/4_algorithmic_techniques/4_4_dynamic_programming.tex}
+		\import{./chapters/}{1_approximation_algorithms/5_approximation_schemes.tex}
+		\import{./chapters/}{1_approximation_algorithms/6_alternative_approaches.tex}
 
-	\import{./chapters/}{1_approximation_algorithms/1_computational_complexity.tex}
+		\import{./chapters/}{2_web_search/1_social_networks_and_bibliography.tex}
+		\import{./chapters/}{2_web_search/2_centrality_measures.tex}
+		\import{./chapters/}{2_web_search/3_spectral_analysis_and_prestige_index.tex}
+		\import{./chapters/}{2_web_search/4_link_analysis.tex}
+		\import{./chapters/}{2_web_search/5_web_structure.tex}
 
-	\import{./chapters/}{1_approximation_algorithms/2_optimization_problems.tex}
-	\import{./chapters/}{1_approximation_algorithms/3_approximation.tex}
-	\import{./chapters/}{1_approximation_algorithms/4_algorithmic_techniques/4_1_greedy.tex}
-	\import{./chapters/}{1_approximation_algorithms/4_algorithmic_techniques/4_2_local_search.tex}
-	\import{./chapters/}{1_approximation_algorithms/4_algorithmic_techniques/4_3_linear_programming/4_3_1_rounding.tex}
-	\import{./chapters/}{1_approximation_algorithms/4_algorithmic_techniques/4_3_linear_programming/4_3_2_primal-dual.tex}
-	\import{./chapters/}{1_approximation_algorithms/4_algorithmic_techniques/4_4_dynamic_programming.tex}
-	\import{./chapters/}{1_approximation_algorithms/5_approximation_schemes.tex}
-	\import{./chapters/}{1_approximation_algorithms/6_alternative_approaches.tex}
-
-	\import{./chapters/}{2_web_search/1_social_networks_and_bibliography.tex}
-	\import{./chapters/}{2_web_search/2_centrality_measures.tex}
-	\import{./chapters/}{2_web_search/3_spectral_analysis_and_prestige_index.tex}
-	\import{./chapters/}{2_web_search/4_link_analysis.tex}
-	\import{./chapters/}{2_web_search/5_web_structure.tex}
-
-	\import{./chapters/}{3_sponsored_search/1_search_and_advertising.tex}
-	\import{./chapters/}{3_sponsored_search/2_matching_markets.tex}
-	\import{./chapters/}{3_sponsored_search/3_auctions.tex}
-	\import{./chapters/}{3_sponsored_search/4_vcg_mechanism.tex}
-	\import{./chapters/}{3_sponsored_search/5_gsp_mechanism.tex}
+		\import{./chapters/}{3_sponsored_search/1_search_and_advertising.tex}
+		\import{./chapters/}{3_sponsored_search/2_matching_markets.tex}
+		\import{./chapters/}{3_sponsored_search/3_auctions.tex}
+		\import{./chapters/}{3_sponsored_search/4_vcg_mechanism.tex}
+		\import{./chapters/}{3_sponsored_search/5_gsp_mechanism.tex}
+	\end{flushleft}
 \end{document}

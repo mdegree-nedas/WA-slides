@@ -1,16 +1,101 @@
-\begin{flushleft}
-	\section{computational complexity}
+\section{computational complexity}
 
-	\subsection{def: problema in computer science}
-		un problema $\pi$ \'e una relazione
-		$$\pi\subseteq I_{\pi}\times S_{\pi}$$
-		dove:
+\subsection{def: problema in computer science}
+un problema $\pi$ \'e una relazione
+$$\pi\subseteq I_{\pi}\times S_{\pi}$$
+dove:
+\begin{itemize}
+	\item $I_{\pi}=$ insieme delle istanze di input del problema
+	\item $S_{\pi}=$ insieme delle soluzioni del problema
+\end{itemize}
+
+\subsection{tipologie di problema}
+\begin{itemize}
+	\item decisione
 		\begin{itemize}
-			\item $I_{\pi}=$ insieme delle istanze di input del problema
-			\item $S_{\pi}=$ insieme delle soluzioni del problema
+			\item si verifica se una data propriet\'a \'e valida per un determinato input
+			\item $S_{\pi}=\{true,false\}$ o semplicemente $S_{\pi}=\{0,1\}$ e la relazione $\pi\subseteq I_{\pi}\times S_{\pi}$ corrisponde ad una funzione $$f:I_{\pi}\rightarrow\{0,1\}$$ 
+			\item esempi: soddisfacibilit\'a, test di connettivit\'a di un grafo, etc....
 		\end{itemize}
+	\item ricerca
+	\begin{itemize}
+		\item data un'istanza $x\in I_{\pi}$, si chiede di determinare una soluzione $y\in S_{\pi}$ tale che la coppia $(x,y)\in\pi$ appartengono alla relazione che definisce il problema
+		\item esempi: soddisfacibilit\'a, clique, vertex cover, nei quali chiediamo in output un assegnamento di verita' soddisfacente, rispettivamente una clique o un vertex cover, invece di semplicemente "si" o "no"
+	\end{itemize}
+	\item ottimizzazione
+	\begin{itemize}
+		\item data un'istanza $x\in I_{\pi}$, si chiede di determinare una soluzione $y\in S_{\pi}$ ottimizzando una data misura della funzione costo
+		\item esempi: min spanning tree, max SAT, max clique, min vertex cover, min TSP, etc....
+	\end{itemize}
+\end{itemize}
 
-	\subsection{tipologie di problema}
+\subsection{complessit\'a degli algoritmi e dei problemi}
+\begin{itemize}
+	\item espressa in funzione della taglia dell'input (denotata come $|x|, \forall x\in I_{\pi}$)
+	\item taglia dell'istanza $x$
+	\begin{itemize}
+		\item quantit\'a di memoria necessaria a memorizzare $x$ in un computer
+		\item lunghezza $|x|_{c}$ della stringa che codifica $x$ in un particolare codice naturale $c:I_{\pi}\rightarrow\Sigma$, dove $\Sigma$ \'e l'alfabeto del codice $c$
+	\end{itemize}
+	\item codice naturale
+	\begin{itemize}
+		\item conciso: le stringhe che codificano le istanze non devono essere ridondanti o allungate inutilmente
+		\item numeri espressi in base $\geq 2$
+	\end{itemize}
+\end{itemize}
 
-	\pagebreak
+\subsection{esempio}
+\begin{flushleft}
+	\begin{itemize}
+		\item istanza: grafo $G$
+	\end{itemize}
 \end{flushleft}
+\begin{center}
+\begin{tikzpicture}
+	\Vertex[fontsize=\normalsize, x=0, y=0, label=1, opacity=0]{1}
+	\Vertex[fontsize=\normalsize, x=3, y=0, label=2, opacity=0]{2}
+	\Vertex[fontsize=\normalsize, x=0, y=-3, label=3, opacity=0]{3}
+	\Vertex[fontsize=\normalsize, x=3, y=-3, label=4, opacity=0]{4}
+	\Edge[fontsize=\normalsize, position=above, label=2](1)(2)
+	\Edge[fontsize=\normalsize, position=left, label=1](1)(3)
+	\Edge[fontsize=\normalsize, position=right, label=7](2)(4)
+	\Edge[fontsize=\normalsize, position=below, label=4](3)(4)
+	\Edge[fontsize=\normalsize, position={above left}, label=3](3)(2)
+\end{tikzpicture}
+\end{center}
+\begin{flushleft}
+	\begin{itemize}
+		\item codice per $G$
+		\begin{itemize}
+			\item $\Sigma=\{\{,\},,,0,1,2,3,4,5,6,7,8,9\}$ (simboli)
+			\item $c(G)=\{1,2,3,4,\{1,2\},\{1,3\},\{2,3\},\{2,4\},\{3,4\},2,1,3,7,4\}$
+			\begin{itemize}
+				\item $\{1,2,3,4\}$ (nodi)
+				\item $\{\{1,2\},\{1,3\},\{2,3\},\{2,4\},\{3,4\}\}$ (archi)
+				\item $\{2,1,3,7,4\}$ (pesi)
+			\end{itemize}
+			\item $|G|_{c}=49$
+		\end{itemize}
+	\end{itemize}
+\end{flushleft}
+
+\subsection{def: tempo di esecuzione dell'algoritmo $A$}
+\begin{flushleft}
+	sia $t_{A}(x)$ il tempo di esecuzione dell'algoritmo $A$ per l'input $x_{i}$, allora il tempo di esecuzione nel caso peggiore di $A$ \'e:
+	$$T_{A}(n)=\max\{t_{A}(x)\hspace{0.1cm}|\hspace{0.1cm}|x|\leq n\},\hspace{0.5cm}\forall n>0$$
+\end{flushleft}
+
+\subsection{def: complessit\'a temporale dell'algoritmo $A$}
+\begin{flushleft}
+	l'algoritmo $A$ ha complessit\'a temporale
+	\begin{itemize}
+		\item $O(g(n))$ se $T_{A}(n)=O(g(n))$, ovvero $$\lim_{n\to\infty}\frac{T_{A}(n)}{g(n)}\leq c\text{, per una costante }c>0$$
+		\item $\Omega(g(n))$ se $T_{A}(n)=\Omega(g(n))$, ovvero $$\lim_{n\to\infty}\frac{T_{A}(n)}{g(n)}\geq c\text{, per una costante }c>0$$
+		\item $\Theta(g(n))$ se $T_{A}(n)=\Theta(g(n))$, ovvero $$T_{A}(n)=\Omega(g(n))\text{ e
+			}T_{A}(n)=O(g(n))$$
+	\end{itemize}
+\end{flushleft}
+
+\subsection{def: complessit\'a di un problema}
+
+\pagebreak
