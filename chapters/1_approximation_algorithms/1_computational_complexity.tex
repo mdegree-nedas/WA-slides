@@ -1,6 +1,10 @@
-\section{computational complexity}
+\section*{computational complexity}
+\addcontentsline{toc}{section}{computational complexity}
 
-\subsection{def: problema in computer science}
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{def: problema in computer science}
+\addcontentsline{toc}{subsection}{def: problema in computer science}
 un problema $\pi$ \'e una relazione
 $$\pi\subseteq I_{\pi}\times S_{\pi}$$
 dove:
@@ -9,7 +13,10 @@ dove:
 	\item $S_{\pi}=$ insieme delle soluzioni del problema
 \end{itemize}
 
-\subsection{tipologie di problema}
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{tipologie di problema}
+\addcontentsline{toc}{subsection}{tipologie di problema}
 \begin{itemize}
 	\item decisione
 		\begin{itemize}
@@ -20,7 +27,7 @@ dove:
 	\item ricerca
 	\begin{itemize}
 		\item data un'istanza $x\in I_{\pi}$, si chiede di determinare una soluzione $y\in S_{\pi}$ tale che la coppia $(x,y)\in\pi$ appartengono alla relazione che definisce il problema
-		\item esempi: soddisfacibilit\'a, clique, vertex cover, nei quali chiediamo in output un assegnamento di verita' soddisfacente, rispettivamente una clique o un vertex cover, invece di semplicemente "si" o "no"
+		\item esempi: soddisfacibilit\'a, clique, vertex cover, nei quali chiediamo in output un assegnamento di verit\'a soddisfacente, rispettivamente una clique o un vertex cover, invece di semplicemente "si" o "no"
 	\end{itemize}
 	\item ottimizzazione
 	\begin{itemize}
@@ -29,7 +36,10 @@ dove:
 	\end{itemize}
 \end{itemize}
 
-\subsection{complessit\'a degli algoritmi e dei problemi}
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{complessit\'a degli algoritmi e dei problemi}
+\addcontentsline{toc}{subsection}{complessit\'a degli algoritmi e dei problemi}
 \begin{itemize}
 	\item espressa in funzione della taglia dell'input (denotata come $|x|, \forall x\in I_{\pi}$)
 	\item taglia dell'istanza $x$
@@ -44,7 +54,10 @@ dove:
 	\end{itemize}
 \end{itemize}
 
-\subsection{esempio}
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{esempio: codice}
+\addcontentsline{toc}{subsection}{esempio: codice}
 \begin{flushleft}
 	\begin{itemize}
 		\item istanza: grafo $G$
@@ -79,13 +92,19 @@ dove:
 	\end{itemize}
 \end{flushleft}
 
-\subsection{def: tempo di esecuzione dell'algoritmo $A$}
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{def: tempo di esecuzione dell'algoritmo $A$}
+\addcontentsline{toc}{subsection}{def: tempo di esecuzione dell'algoritmo $A$}
 \begin{flushleft}
 	sia $t_{A}(x)$ il tempo di esecuzione dell'algoritmo $A$ per l'input $x_{i}$, allora il tempo di esecuzione nel caso peggiore di $A$ \'e:
 	$$T_{A}(n)=\max\{t_{A}(x)\hspace{0.1cm}|\hspace{0.1cm}|x|\leq n\},\hspace{0.5cm}\forall n>0$$
 \end{flushleft}
 
-\subsection{def: complessit\'a temporale dell'algoritmo $A$}
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{def: complessit\'a temporale dell'algoritmo $A$}
+\addcontentsline{toc}{subsection}{def: complessit\'a temporale dell'algoritmo $A$}
 \begin{flushleft}
 	l'algoritmo $A$ ha complessit\'a temporale
 	\begin{itemize}
@@ -96,6 +115,66 @@ dove:
 	\end{itemize}
 \end{flushleft}
 
-\subsection{def: complessit\'a di un problema}
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\pagebreak
+\subsection*{def: complessit\'a di un problema}
+\addcontentsline{toc}{subsection}{def: complessit\'a di un problema}
+\begin{flushleft}
+	un problema ha complessit\'a
+	\begin{itemize}
+		\item $O(g(n))$ se esiste un algoritmo che lo risolve avente complessit\'a $O(g(n))$
+		\item $\Omega(g(n))$ se ogni algoritmo $A$ che lo risolve ha complessit\'a $\Omega(g(n))$
+		\item $\Theta(g(n))$ se ha complessit\'a $O(g(n))$ e $\Omega(g(n))$
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{problemi di decisione e classi di complessit\'a}
+\addcontentsline{toc}{subsection}{problemi di decisione e classi di complessit\'a}
+\begin{flushleft}
+	i problemi di decisione sono solitamente descritti da un'istanza di input (o semplicemente INPUT) e da una DOMANDA sull'input
+	esempi:
+	\begin{itemize}
+		\item soddisfacibilit\'a
+			\begin{itemize}
+				\item INPUT: CNF (Conjunctive Normal Form) formula definita su un insieme di variabili
+				\item DOMANDA: esiste un assegnamento di verit\'a $\tau:V\rightarrow\{0,1\}$ ?
+			\end{itemize}
+		\item clique
+			\begin{itemize}
+				\item INPUT: un grafo non orientato $G=(V,E)$ di $n$ nodi e un intero $k>0$
+				\item DOMANDA: esiste in $G$ una clique di almeno $k$ nodi ($>k$), ovvero un sottoinsieme $U\subseteq V$ tale che $|U|\geq K$ e $\{u,v\}\in E$, $V\in U$ ?
+			\end{itemize}
+		\item vertex cover
+			\begin{itemize}
+				\item INPUT: un grafo non orientato $G=(V,E)$ di $n$ nodi e un intero $k>0$
+				\item DOMANDA: esiste in $G$ una vertex cover di al massimo $k$ nodi ($<k$), ovvero un sottoinsieme $U\subseteq V$ tale che $|U|\leq K$ e $u\in U$ o $v\in U$, $\forall\{u,v\}\in E$ ?
+			\end{itemize}
+	\end{itemize}
+	nei problemi di decisione $I_{\pi}=Y_{\pi}\cup N_{\pi}$
+	\begin{itemize}
+		\item $Y_{\pi}=$ insieme di istanze positive, ovvero con soluzione $1$
+		\item $N_{\pi}=$ insieme di istanze negative, ovvero con soluzione $0$
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{def: un algoritmo $A$ risolve $\pi$}
+\addcontentsline{toc}{subsection}{def: un algoritmo $A$ risolve $\pi$}
+\begin{flushleft}
+	un algoritmo $A$ risolve $\pi\iff\forall$ input $x\in I_{\pi}$, $A$ risponde $1\iff x\in Y_{\pi}$
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{def: classe dei problemi $TIME(g(n))$}
+\addcontentsline{toc}{subsection}{def: classe dei problemi $TIME(g(n))$}
+\begin{flushleft}
+	$TIME(g(n))=$ classe dei problemi di decisione con complessit\'a $O(g(n))$
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\newpage
