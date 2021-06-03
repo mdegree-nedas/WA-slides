@@ -1,9 +1,9 @@
-\section*{\color{purple} computational complexity}
+\section*{computational complexity}
 \addcontentsline{toc}{section}{computational complexity}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{\color{cyan} def: problema in computer science}
+\subsection*{def: problema in computer science}
 \addcontentsline{toc}{subsection}{def: problema in computer science}
 un problema $\pi$ \'e una relazione
 $$\pi\subseteq I_{\pi}\times S_{\pi}$$
@@ -15,21 +15,21 @@ dove:
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{\color{cyan} tipologie di problema}
+\subsection*{tipologie di problema}
 \addcontentsline{toc}{subsection}{tipologie di problema}
 \begin{itemize}
-	\item decisione
+	\item \textbf{decisione:}
 		\begin{itemize}
 			\item si verifica se una data propriet\'a \'e valida per un determinato input
 			\item $S_{\pi}=\{true,false\}$ o semplicemente $S_{\pi}=\{0,1\}$ e la relazione $\pi\subseteq I_{\pi}\times S_{\pi}$ corrisponde ad una funzione $$f:I_{\pi}\rightarrow\{0,1\}$$ 
 			\item esempi: soddisfacibilit\'a, test di connettivit\'a di un grafo, etc....
 		\end{itemize}
-	\item ricerca
+	\item \textbf{ricerca:}
 	\begin{itemize}
 		\item data un'istanza $x\in I_{\pi}$, si chiede di determinare una soluzione $y\in S_{\pi}$ tale che la coppia $(x,y)\in\pi$ appartengono alla relazione che definisce il problema
 		\item esempi: soddisfacibilit\'a, clique, vertex cover, nei quali chiediamo in output un assegnamento di verit\'a soddisfacente, rispettivamente una clique o un vertex cover, invece di semplicemente "si" o "no"
 	\end{itemize}
-	\item ottimizzazione
+	\item \textbf{ottimizzazione}
 	\begin{itemize}
 		\item data un'istanza $x\in I_{\pi}$, si chiede di determinare una soluzione $y\in S_{\pi}$ ottimizzando una data misura della funzione costo
 		\item esempi: min spanning tree, max SAT, max clique, min vertex cover, min TSP, etc....
@@ -38,7 +38,7 @@ dove:
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{\color{cyan} complessit\'a degli algoritmi e dei problemi}
+\subsection*{complessit\'a degli algoritmi e dei problemi}
 \addcontentsline{toc}{subsection}{complessit\'a degli algoritmi e dei problemi}
 \begin{itemize}
 	\item espressa in funzione della taglia dell'input (denotata come $|x|, \forall x\in I_{\pi}$)
@@ -56,7 +56,7 @@ dove:
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{\color{cyan} esempio: codice}
+\subsection*{esempio: codice}
 \addcontentsline{toc}{subsection}{esempio: codice}
 \begin{flushleft}
 	\begin{itemize}
@@ -94,15 +94,15 @@ dove:
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{\color{cyan} def: tempo di esecuzione dell'algoritmo $A$}
+\subsection*{def: tempo di esecuzione dell'algoritmo $A$}
 \addcontentsline{toc}{subsection}{def: tempo di esecuzione dell'algoritmo $A$}
 \begin{flushleft}
-	sia $t_{A}(x)$ il tempo di esecuzione dell'algoritmo $A$ per l'input $x_{i}$, allora il tempo di esecuzione nel caso peggiore di $A$ \'e: $$T_{A}(n)=\max\{t_{A}(x)\hspace{0.1cm}|\hspace{0.1cm}|x|\leq n\},\hspace{0.5cm}\forall n>0$$
+	sia $t_{A}(x)$ il tempo di esecuzione dell'algoritmo $A$ per l'input $x$, allora il tempo di esecuzione nel caso peggiore di $A$ \'e: $$T_{A}(n)=\max\{t_{A}(x)\hspace{0.1cm}|\hspace{0.1cm}|x|\leq n\},\hspace{0.5cm}\forall n>0$$
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{\color{cyan} def: complessit\'a temporale dell'algoritmo $A$}
+\subsection*{def: complessit\'a temporale dell'algoritmo $A$}
 \addcontentsline{toc}{subsection}{def: complessit\'a temporale dell'algoritmo $A$}
 \begin{flushleft}
 	l'algoritmo $A$ ha complessit\'a temporale
@@ -115,7 +115,7 @@ dove:
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{\color{cyan} def: complessit\'a di un problema}
+\subsection*{def: complessit\'a di un problema}
 \addcontentsline{toc}{subsection}{def: complessit\'a di un problema}
 \begin{flushleft}
 	un problema ha complessit\'a
@@ -128,10 +128,10 @@ dove:
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{\color{cyan} problemi di decisione e classi di complessit\'a}
+\subsection*{problemi di decisione e classi di complessit\'a}
 \addcontentsline{toc}{subsection}{problemi di decisione e classi di complessit\'a}
 \begin{flushleft}
-	i problemi di decisione sono solitamente descritti da un'istanza di input (o semplicemente INPUT) e da una DOMANDA sull'input
+	i problemi di decisione sono solitamente descritti da un'istanza di input (o semplicemente INPUT) e da una DOMANDA sull'input \newline \\
 	esempi:
 	\begin{itemize}
 		\item soddisfacibilit\'a
@@ -142,12 +142,12 @@ dove:
 		\item clique
 			\begin{itemize}
 				\item INPUT: un grafo non orientato $G=(V,E)$ di $n$ nodi e un intero $k>0$
-				\item DOMANDA: esiste in $G$ una clique di almeno $k$ nodi ($>k$), ovvero un sottoinsieme $U\subseteq V$ tale che $|U|\geq K$ e $\{u,v\}\in E$, $V\in U$ ?
+				\item DOMANDA: esiste in $G$ una clique di almeno $k$ nodi ($\geq k$), ovvero un sottoinsieme $U\subseteq V$ tale che $|U|\geq k$ e $\{u,v\}\in E,\hspace{0.1cm}\forall u,v\in U$ ?
 			\end{itemize}
 		\item vertex cover
 			\begin{itemize}
 				\item INPUT: un grafo non orientato $G=(V,E)$ di $n$ nodi e un intero $k>0$
-				\item DOMANDA: esiste in $G$ una vertex cover di al massimo $k$ nodi ($<k$), ovvero un sottoinsieme $U\subseteq V$ tale che $|U|\leq K$ e $u\in U$ o $v\in U$, $\forall\{u,v\}\in E$ ?
+				\item DOMANDA: esiste in $G$ un vertex cover di al massimo $k$ nodi ($\leq k$), ovvero un sottoinsieme $U\subseteq V$ tale che $|U|\leq k$ e $u\in U$ o $v\in U$, $\forall\{u,v\}\in E$ ?
 			\end{itemize}
 	\end{itemize}
 	nei problemi di decisione $I_{\pi}=Y_{\pi}\cup N_{\pi}$
@@ -159,7 +159,7 @@ dove:
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{\color{cyan} def: un algoritmo $A$ risolve $\pi$}
+\subsection*{def: un algoritmo $A$ risolve $\pi$}
 \addcontentsline{toc}{subsection}{def: un algoritmo $A$ risolve $\pi$}
 \begin{flushleft}
 	un algoritmo $A$ risolve $\pi\iff\forall$ input $x\in I_{\pi}$, $A$ risponde $1\iff x\in Y_{\pi}$
@@ -167,7 +167,7 @@ dove:
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{\color{cyan} def: classe dei problemi $TIME(g(n))$}
+\subsection*{def: classe dei problemi $TIME(g(n))$}
 \addcontentsline{toc}{subsection}{def: classe dei problemi $TIME(g(n))$}
 \begin{flushleft}
 	$TIME(g(n))=$ classe dei problemi di decisione con complessit\'a $O(g(n))$
@@ -175,7 +175,7 @@ dove:
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{\color{cyan} algoritmi non-deterministici per i problemi di decisione}
+\subsection*{algoritmi non-deterministici per i problemi di decisione}
 \addcontentsline{toc}{subsection}{algoritmi non-deterministici per i problemi di decisione}
 \begin{flushleft}
 	essi si compongono di 2 fasi
@@ -193,10 +193,10 @@ dove:
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{\color{cyan} def: un algoritmo non-deterministico $A$ risolve $\pi$}
+\subsection*{def: un algoritmo non-deterministico $A$ risolve $\pi$}
 \addcontentsline{toc}{subsection}{def: un algoritmo non-deterministico $A$ risolve $\pi$}
 \begin{flushleft}
-	un algoritmo non-deterministico $A$ risolve $\pi$ se si ferma per ogni possibile certificato $y$ ed esiste un certificato $y$ per cui $A$ risponde $1$ (vero) $\iff x\in I_{\pi}$
+	un algoritmo non-deterministico $A$ risolve $\pi$ se si ferma per ogni possibile certificato $y$ ed esiste un certificato $y$ per cui $A$ risponde $1$ ($true$) $\iff x\in Y_{\pi}$
 	\begin{itemize}
 		\item complessit\'a
 		\begin{itemize}
@@ -208,7 +208,7 @@ dove:
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{\color{cyan} def: classe dei problemi $NTIME(g(n))$}
+\subsection*{def: classe dei problemi $NTIME(g(n))$}
 \addcontentsline{toc}{subsection}{def: classe dei problemi $NTIME(g(n))$}
 \begin{flushleft}
 	$NTIME(g(n))=$ classe di problemi di decisione con complessit\'a non-deterministica $O(g(n))$
@@ -216,7 +216,7 @@ dove:
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{\color{cyan} esempio: algoritmo non-deterministico per il problema della clique}
+\subsection*{esempio: algoritmo non-deterministico per il problema della clique}
 \addcontentsline{toc}{subsection}{esempio: algoritmo non-deterministico per il problema della clique}
 \begin{flushleft}
 	\begin{itemize}
@@ -235,11 +235,11 @@ dove:
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{\color{cyan} osservazioni (algoritmi deterministici e non-deterministici)}
+\subsection*{osservazioni (algoritmi deterministici e non-deterministici)}
 \addcontentsline{toc}{subsection}{osservazioni (algoritmi deterministici e non-deterministici)}
 \begin{flushleft}
 	\begin{itemize}
-		\item un algoritmo deterministico \'e meno potente di uno non deterministico poich\'e non pu\'o eseguire la fase 1
+		\item un algoritmo deterministico \'e meno potente di uno non-deterministico poich\'e non pu\'o eseguire la fase 1
 		\item se esiste un algoritmo deterministico $A$ che risolve $\pi$, allora esiste anche un algoritmo non-deterministico $A'$ che risolve $\pi$ con la stessa complessit\'a come segue:
 			\begin{itemize}
 				\item esso esegue al fase 1 e coincide con $A$ nella fase 2, ignorando il certificato $y$
@@ -249,7 +249,7 @@ dove:
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{\color{cyan} corollario: $TIME(g(n))\subseteq NTIME(g(n))$}
+\subsection*{corollario: $TIME(g(n))\subseteq NTIME(g(n))$}
 \addcontentsline{toc}{subsection}{corollario: $TIME(g(n))\subseteq NTIME(g(n))$}
 \begin{flushleft}
 	$$TIME(g(n))\subseteq NTIME(g(n))$$
@@ -264,7 +264,7 @@ dove:
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{\color{cyan} efficienza e trattabilit\'a}
+\subsection*{efficienza e trattabilit\'a}
 \addcontentsline{toc}{subsection}{efficienza e trattabilit\'a}
 \begin{flushleft}
 	\begin{itemize}
@@ -276,7 +276,7 @@ dove:
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{\color{cyan} efficienza e trattabilit\'a: ragione 1}
+\subsection*{efficienza e trattabilit\'a: ragione 1}
 \addcontentsline{toc}{subsection}{efficienza e trattabilit\'a: ragione 1}
 \begin{flushleft}
 	la crescita delle funzioni polinomiali rispetto a quelle esponenziali (sia per ci\'o che riguarda il tempo di esecuzione sia per ci\'o che riguarda la dimensione delle istanze risolvibili entro un certo tempo di esecuzione)
@@ -284,7 +284,7 @@ dove:
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{\color{cyan} efficienza e trattabilit\'a: ragione 2}
+\subsection*{efficienza e trattabilit\'a: ragione 2}
 \addcontentsline{toc}{subsection}{efficienza e trattabilit\'a: ragione 2}
 \begin{flushleft}
 	\begin{itemize}
@@ -298,7 +298,7 @@ dove:
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{\color{cyan} osservazione: macchina di turing non-deterministica}
+\subsection*{osservazione: macchina di turing non-deterministica}
 \addcontentsline{toc}{subsection}{osservazione: macchina di turing non-deterministica}
 \begin{flushleft}
 	la macchina di turing non-deterministica non \'e un modello di calcolo ragionevole, poich\'e la quantit\'a di lavoro svolto in ogni fase (ciascun livello dell'albero delle computazioni) cresce in modo esponenziale
@@ -306,79 +306,125 @@ dove:
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{\color{cyan} }
-\addcontentsline{toc}{subsection}{}
+\subsection*{def: codici polinomialmente correlati}
+\addcontentsline{toc}{subsection}{def: codici polinomialmente correlati}
 \begin{flushleft}
+	\begin{itemize}
+		\item 2 codici $c_1$ e $c_2$ per un problema $\pi$ sono correlati polinomialmente se esistono 2 polinomi $p_1$ e $p_2$ tali che, $\forall x\in I_{\pi}$:
+		\begin{itemize}
+			\item $|x|_{c_1}\leq p_1(|x|_{c_2})$
+			\item $|x|_{c_2}\leq p_2(|x|_{c_1})$
+		\end{itemize}
+	\item se la complessit\'a rispetto a $c_1$ \'e $O(q_1(|x|_{c_1}))$ per un dato polinomio $q_1$, allora rispetto a $c_2$ \'e $O(q_1(p_1(|x|_{c_2})))=O(q_2(|x|_{c_2}))$ dove $q_2$ \'e il polinomio tale che $\forall\lambda\hspace{0.1cm}q_2(\lambda)=q_1(p_1(\lambda))$
+	\item tutti i codici naturali sono correlati polinomialmente, ovvero la risolvibilit\'a polinomiale non dipende dal particolare codice utilizzato
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{\color{cyan} }
-\addcontentsline{toc}{subsection}{}
+\subsection*{dimensione dell'input (def: codici correlati polinomialmente)}
+\addcontentsline{toc}{subsection}{dimensione dell'input (def: codici correlati polinomialmente)}
 \begin{flushleft}
+	qualsiasi quantit\'a polinomialmente correlata ad un codice naturale \'e dunque correlata ad un qualsiasi codice naturale possibile, dato che tutti i codici naturali sono correlati polinomialmente e che la composizione di polinomi \'e un polinomio
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{\color{cyan} }
-\addcontentsline{toc}{subsection}{}
+\subsection*{esempio: codici correlati polinomialmente}
+\addcontentsline{toc}{subsection}{esempio: codici correlati polinomialmente}
 \begin{flushleft}
+	\begin{itemize}
+		\item assumiamo che per ogni grafo $G$ di $n$ nodi
+		\begin{itemize}
+			\item $|G|_{c_1}=10n^2$
+			\item $|G|_{c_2}=n^3$
+		\end{itemize}
+		\item se $p_1(\lambda)=10\lambda$ e $p_2(\lambda)=\lambda^2$ abbiamo che:
+		\begin{itemize}
+			\item $|G|_{c_1}=10n^2\leq 10n^3=p_1(|G|_{c_2})$
+			\item $|G|_{c_2}=n^3\leq 100n^4=p_2(|G|_{c_1})$
+		\end{itemize}
+		\item dunque i 2 codici sono correlati polinomialmente
+		\vspace{1cm}
+		\item regola pratica:
+		\begin{itemize}
+			\item 2 quantit\'a sono polinomialmente correlate se sono polinomi sulle stesse variabili
+		\end{itemize}
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{\color{cyan} }
-\addcontentsline{toc}{subsection}{}
+\subsection*{esempio: codifica non naturale}
+\addcontentsline{toc}{subsection}{esempio: codifica non naturale}
 \begin{flushleft}
+	\begin{itemize}
+		\item test di primalit\'a
+		\begin{itemize}
+			\item INPUT: un numero intero $n>0$ 
+			\item DOMANDA: $n$ \'e un numero primo?
+			\item ALGORITMO (banale):
+			\begin{itemize}
+				\item scansiona tutti i numeri da $2$ a $n-1$ e risponde $1$ ($true$) se nessuno di essi lo divide
+			\end{itemize}
+			\item COMPLESSIT\'A: $O(n)$, polinomiale?
+			\item CODICE $c_1$ (naturale): $n$ espresso in base $2$, ovvero $|n|_{c_1}=\log_2{n}$
+			\item CODICE $c_2$ (non naturale): $n$ espresso in base $1$, ovvero $|n|_{c_2}=n$
+		\end{itemize}
+		\item dunque la complessit\'a dell'algoritmo \'e:
+		\begin{itemize}
+			\item $O(2^{|n|_{c_1}})$ rispetto a $c_1$, che \'e esponenziale
+			\item $O(|n|_{c_2})$ rispetto a $c_2$, che \'e polinomiale!
+		\end{itemize}
+		\item dimensione dell'input
+			\begin{itemize}
+				\item correlata polinomialmente ai codici naturali $|n|_{c_1}=\log_2{n}$
+			\end{itemize}
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{\color{cyan} }
-\addcontentsline{toc}{subsection}{}
+\subsection*{def: modelli computazionali simulabili in modo polinomiale}
+\addcontentsline{toc}{subsection}{def: modelli computazionali simulabili in modo polinomiale}
 \begin{flushleft}
+	\begin{itemize}
+		\item 2 modelli computazionali $M_1$ e $M_2$ sono mutualmente simulabili in modo polinomiale se esistono 2 polinomi $p_1$ a $p_2$ tali che:
+		\begin{enumerate}
+			\item ogni algoritmo  $A$ per $M_1$ con complessit\'a $T_A(n)$ pu\'o essere simulato su $M_2$ in tempo $p_1(T_A(n))$
+			\item ogni algoritmo  $A$ per $M_2$ con complessit\'a $T_A(n)$ pu\'o essere simulato su $M_1$ in tempo $p_2(T_A(n))$
+		\end{enumerate}
+		\item dunque se $A$ \'e polinomiale in $M_1$ allora \'e polinomiale anche in $M_2$ e viceversa
+		\item tutti i modelli computazionali ragionevoli sono mutualmente simulabili in modo polinomiale, ovvero la risolvibilit\'a polinomiale non dipende dal particolare modello utilizzato
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{\color{cyan} }
-\addcontentsline{toc}{subsection}{}
+\subsection*{classi $P$ e $NP$}
+\addcontentsline{toc}{subsection}{classi $P$ e $NP$}
 \begin{flushleft}
+	\begin{itemize}
+		\item $P=$ classe di tutti i problemi risolvibili deterministicamente in tempo polinomiale, ovvero
+			$$P=\cup_{k=0}^{\infty}TIME(n^k)$$
+		\item $NP=$ classe di tutti i problemi risolvibili non-deterministicamente in tempo polinomiale, ovvero
+			$$NP=\cup_{k=0}^{\infty}NTIME(n^k)$$
+		\item $P=NP$ ? nessuno lo a dimostrato
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{\color{cyan} }
-\addcontentsline{toc}{subsection}{}
+\subsection*{problemi $NP$-completi}
+\addcontentsline{toc}{subsection}{problemi $NP$-completi}
 \begin{flushleft}
+	\begin{itemize}
+		\item i problemi pi\'u difficili di $NP$ e tali che se $P\neq NP$ non appartengono a $P$, viceversa, se 1 di essi appartiene a $P$, allora $P=NP$
+		\item finora nessuno \'e riuscito a trovare un algoritmo polinomiale deterministico per nessun problema $NP$-completo
+		\item congettura: $P\neq NP$
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{\color{cyan} }
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{\color{cyan} }
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{\color{cyan} }
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{\color{cyan} }
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
-\end{flushleft}
 
 \newpage
