@@ -1,0 +1,327 @@
+\subsection*{glossario}
+\addcontentsline{toc}{subsection}{glossario}
+
+    \begin{itemize}
+
+\item
+  \textbf{problema}: min vertex cover
+\item
+  \textbf{algoritmo}: approx-cover
+\item
+  \textbf{lemma}: alla fine dell'esecuzione di approx-cover, \(M\) forma
+  un matching
+\item
+  \textbf{dimostrazione}
+\item
+  \textbf{teorema}: approx-cover è \(2\) approssimante
+\item
+  \textbf{dimostrazione}
+\end{itemize}
+
+    \begin{itemize}
+
+\item
+  \textbf{problema}: max 0-1 knapsack
+\item
+  \textbf{algoritmo}: greedy-knapsack
+\item
+  \textbf{teorema}: per ogni \(r < 1\), greedy-knapsack non è
+  \(r\)-approssimante
+\item
+  \textbf{dimostrazione}
+\end{itemize}
+
+(greedy-knapsack non è una buona approssimazione perchè ignora l'oggetto
+con profitto massimo)
+
+\begin{itemize}
+\item
+  \textbf{algoritmo}: modified-greedy
+\item
+  \textbf{lemma}: sia \(o_j\) il primo oggetto che l'algoritmo
+  greedy-kanpsack non mette nello zaino e sia
+  \(m_j = \sum_{i=1}^{j-1}p_i\), allora \(m^* \leq m_j + p_j\)
+\item
+  \textbf{lemma2}: \(m^* \leq m_{gr} + p_{max}\)
+\end{itemize}
+
+(algoritmo ritorna una soluzione di valore \(max(m_{gr}, p_{max})\)),
+essa è almeno la metà di \(m_{gr} + p_{max}\), possiamo sfruttare il
+lemma 2
+
+\begin{itemize}
+
+\item
+  \textbf{teorema}: modified-greedy è \({1 \over 2}\)-approssimante
+\item
+  \textbf{dimostrazione}
+\end{itemize}
+
+    \begin{itemize}
+
+\item
+  \textbf{problema}: min multiprocessor scheduling
+\item
+  \textbf{algoritmo}: algoritmo greedy di Graham
+\item
+  \textbf{fatto}: dato \(s \geq 0\) e \(h\) numeri \(a_1, \dots, a_h\)
+  tali che \(a_1 + \dots + a_h = s\), esiste \(j\) tale che
+  \(a_j \geq {s \over h}\) ed esiste \(j'\) tale che
+  \(a_{j'} \leq {s \over h}\)
+\item
+  \textbf{teorema}: l'algoritmo greedy di Graham è
+  \((2 - {1 \over h})\)-approssimante
+\item
+  \textbf{dimostrazione}
+\item
+  \textbf{teorema}: l'algoritmo greedy di Graham non è
+  \(r\)-approssimante per \(r < (2 - {1 \over h})\)
+\end{itemize}
+
+(possiamo migliorare il rapporto di approssimazione, abbiamo usato 2
+lower bounds ad \(m^*\): \({T \over h} \leq m^*\) e \(t_l \leq m^*\),
+diminuiamo ancora \(t_l\) per trovare un miglior rapporto di
+approssimazione, progettiamo un algoritmo che eviti il caso peggiore
+dell'algoritmo di Graham assegnando i jobs dal più grande al più
+piccolo)
+
+\begin{itemize}
+
+\item
+  \textbf{algoritmo}: ordered-greedy
+\item
+  \textbf{lemma}: se \(n > h\) allora \(t_{h+1} \leq {m^* \over 2}\)
+\item
+  \textbf{dimostrazione}
+\item
+  \textbf{teorema}: ordered-greedy è
+  \(({3 \over 2} - {1 \over 2h})\)-approssimante
+\item
+  \textbf{dimostrazione}
+\end{itemize}
+
+    \begin{itemize}
+
+\item
+  \textbf{problema}: max cut
+\item
+  \textbf{algoritmo}: greedy-max-cut
+\item
+  \textbf{teorema}: greedy-max-cut è \({1 \over 2}\)-approssimante
+\item
+  \textbf{dimostrazione}
+\end{itemize}
+
+    \begin{itemize}
+
+\item
+  \textbf{algoritmo}: local-search-max-cut
+\item
+  \textbf{fatto}: dato un grafo \(G=(V,E)\), sia \(\delta_i\) il grado
+  di un generico nodo \(v_i \in V\). Allora:
+  \(\sum_{i=1}^{n} \delta_i = 2 |E|\)
+\item
+  \textbf{dimostrazione}
+\item
+  \textbf{teorema}: l'algoritmo local-search-max-cut è
+  \({1 \over 2}\)-approssimante
+\item
+  \textbf{dimostrazione}
+\end{itemize}
+
+    \begin{itemize}
+
+\item
+  \textbf{problema}: min weighted vertex cover
+\item
+  \textbf{algoritmo}: round-vertex-cover
+\item
+  \textbf{teorema}: round-vertex-cover è \(2\)-approssimante
+\item
+  \textbf{dimostrazione}
+\item
+  \textbf{problema}: min weighted set cover
+\item
+  \textbf{algoritmo}: round-set-cover
+\item
+  \textbf{teorema}: round-set-cover è \(f\)-approssimante (per
+  \(f \geq 1\))
+\item
+  \textbf{dimostrazione}
+\end{itemize}
+
+    \begin{itemize}
+
+\item
+  \textbf{problema}: fibonacci
+\item
+  \textbf{algoritmo}: fibonacci(n)
+\item
+  \textbf{algoritmo}: fibonacci2(n)
+\item
+  \textbf{algoritmo}: fibonacci3(n)
+\item
+  \textbf{problema (recall)}: max 0-1 knapsack
+\item
+  \textbf{definizione \(OPT(i,w)\) ed \(m(i,w)\)}
+\item
+  \textbf{algoritmo}: progr-dyn-knapsack
+\item
+  \textbf{algoritmo per esercizio knapsack}
+\item
+  \textbf{algoritmo per scoprire oggetti inseriti nello knapsack}
+\item
+  \textbf{teorema}: la complessità temporale di progr-dyn-knapsack è
+  \(O(nb)\)
+\item
+  \textbf{dimostrazione}
+\item
+  \textbf{definizione duale \(OPT(i,p)\) e \(v(i,p)\)}
+\item
+  \textbf{algoritmo}: progr-dyn-knapsack-dual
+\item
+  \textbf{teorema}: la complessità di progr-dyn-knapsack-dual è
+  \(O(n^2p_{max})\)
+\item
+  \textbf{dimostrazione}
+\end{itemize}
+
+    \begin{itemize}
+
+\item
+  \textbf{problema (recall)}: min multiprocessor scheduling
+\item
+  \textbf{lemma}: se \(t_1,\dots,t_n\) sono ordinati in ordine
+  non-crescente, allora \(\forall i\), \(1 \leq i \leq n\):
+  \(t_i \leq {T \over i}\)
+\item
+  \textbf{dimostrazione}
+\item
+  \textbf{algoritmo}: PTAS-scheduling
+\item
+  \textbf{teorema}: PTAS-scheduling ritorna sempre una soluzione
+  (\(1+\epsilon\))-approssimata
+\item
+  \textbf{dimostrazione}
+\end{itemize}
+
+(complessità PTAS-scheduling è esponenziale anche in h (che fa parte
+dell'input) \(\rightarrow\) PTAS-scheduling non è un PTAS se non
+fissiamo h costante)
+
+\begin{itemize}
+
+\item
+  \textbf{problema}: min \(h\)-processor scheduling
+\item
+  \textbf{teorema}: PTAS-scheduling è un PTAS per min \(h\)-processor
+  scheduling
+\item
+  \textbf{dimostrazione}
+\item
+  \textbf{problema}: min partition
+\item
+  \textbf{lemma}: esiste un algoritmo di programmazione dinamica che
+  determina in tempo polinomiale uno scheduling per i primi \(q\) jobs,
+  lo scheduling ha completion time \(t \leq (1+\epsilon)m^*\)
+\item
+  \textbf{teorema}: esiste un PTAS per min multiprocessor scheduling
+\end{itemize}
+
+    (progr-dyn-knapsack-dual ha complessità pseudo-polinomiale
+\(O(n^2p_{max})\), scalando i profitti originali possiamo ridurre la
+complessità ed ottenere un'approssimazione migliore, dobbiamo scegliere
+\(k\) sufficientemente grande per complessità polinomiale,
+sufficientemente piccolo per buona approssimazione:
+\(k=\lfloor {{\epsilon \cdot p_{max}} \over n } \rfloor\))
+
+(errore al più \(k\) per ogni oggetto scelto: \(m \geq m^* - nk\))
+
+\begin{itemize}
+
+\item
+  \textbf{algoritmo}: FPTAS-knapsack
+\item
+  \textbf{complessità FPTAS-knapsack}
+\item
+  \textbf{approssimazione FPTAS-knapsack}
+\item
+  \textbf{lemma}: \(m \geq m^* - nk\)
+\item
+  \textbf{dimostrazione}
+\item
+  \textbf{teorema}: FPTAS-knapsack è un FPTAS per max 0-1 knapsack
+\item
+  \textbf{dimostrazione}
+\end{itemize}
+
+(\(p_{max} \leq m^* \leq np_{max}\), miglioriamo i bounds per \(m^*\)
+usando l'algoritmo modified-greedy (\({1 \over 2}\)-approssimante))
+
+(abbiamo che \({m \over m^*} \geq {1 \over 2}\) e dato che
+\(m_{mg} \leq m^*\) allora \(m_{mg} \leq m^* \leq 2m_{mg}\))
+
+(consideriamo \(P' = \lceil {{2m_{mg}} \over {k}} \rceil\) come profitto
+massimo in progr-dyn-knapsack-dual (progr-dyn-knapsack-dual modificato))
+
+(settiamo \(k = \lfloor {{\epsilon \cdot m_{mg}} \over {n}} \rfloor\) ed
+eseguiamo progr-dyn-knapsack-dual modificato sui nuovi profitti scalati)
+
+\begin{itemize}
+
+\item
+  \textbf{algoritmo}: FPTAS-knapsack-new
+\item
+  \textbf{complessità FPTAS-knapsack-new}
+\item
+  \textbf{approssimazione FPTAS-knapsack-new}
+\end{itemize}
+
+    \begin{itemize}
+
+\item
+  \textbf{problema}: max weighted cut
+\item
+  \textbf{algoritmo}: random-cut
+\item
+  \textbf{teorema}: random-cut è \({1 \over 2}\)-approssimato
+\item
+  \textbf{dimostrazione}
+\item
+  \textbf{problema (recall)}: min weighted set cover
+\item
+  \textbf{definizione scelta greedy (cosa è \(eff(S_j)\))}
+\item
+  \textbf{algoritmo}: greedy-min-weighted-set-cover
+\item
+  \textbf{lemma}:
+  \(m = \sum_{S_j \in \hat{c}} c_j = \sum_{i=1}^{n} price(o_i)\)
+\item
+  \textbf{dimostrazione}
+\item
+  \textbf{lemma}: \(\forall j\), data qualsiasi scelta di sottoinsiemi
+  \(S'_j,\dots,S'_t\) che formano un cover con i sottoinsiemi
+  \(S_1,\dots,S_{j-1}\) scelti dall'algoritmo greedy all'inizio dello
+  step \(j\), \(\forall\) oggetto \(o_i\) non ancora coperto all'inizio
+  dello step \(j\): \(price'(o_i) \geq eff(S_j)\) (dove: \(S_j\) è il
+  sottoinsieme scelto dall'algoritmo greedy nello step \(j\),
+  \(eff(S_j)\) è la sua efficacia, \(price'(o_i)\) è l'efficacia del
+  sottoinsieme \(S'_l\) che copre \(o_i\) assumendo che, partendo dallo
+  step \(j\), la scelta greedy è fatta solo tra i sottoinsiemi
+  \(S'_j,\dots,S'_t\))
+\item
+  \textbf{lemma}: sia \(o_1,\dots,o_n\) gli oggetti listati nell'ordine
+  del covering dell'algoritmo greedy, cioè tale che gli oggetti coperti
+  durante lo step \(j\) sono listati dopo quelli coperti dagli steps
+  precedenti e prima di quelli coperti negli steps successivi, allora
+  \(\forall i\), \(1 \leq i \leq n\):
+  \(price(o_i) \leq {{m^*} \over {n - i + 1}}\)
+\item
+  \textbf{dimostrazione}
+\item
+  \textbf{teorema}: greedy-min-weighted-set-cover è
+  \(H_n\)-approssimante, dove
+  \(H_n = 1 + {1 \over 2} + {1 \over 3} + {1 \over 4} + \dots + {1 \over n}\)
+\item
+  \textbf{dimostrazione}
+\end{itemize}
