@@ -1,9 +1,9 @@
-\section*{computational complexity}
+\section*{\color{purple} computational complexity}
 \addcontentsline{toc}{section}{computational complexity}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{def: problema in computer science}
+\subsection*{\color{cyan} def: problema in computer science}
 \addcontentsline{toc}{subsection}{def: problema in computer science}
 un problema $\pi$ \'e una relazione
 $$\pi\subseteq I_{\pi}\times S_{\pi}$$
@@ -15,7 +15,7 @@ dove:
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{tipologie di problema}
+\subsection*{\color{cyan} tipologie di problema}
 \addcontentsline{toc}{subsection}{tipologie di problema}
 \begin{itemize}
 	\item decisione
@@ -38,7 +38,7 @@ dove:
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{complessit\'a degli algoritmi e dei problemi}
+\subsection*{\color{cyan} complessit\'a degli algoritmi e dei problemi}
 \addcontentsline{toc}{subsection}{complessit\'a degli algoritmi e dei problemi}
 \begin{itemize}
 	\item espressa in funzione della taglia dell'input (denotata come $|x|, \forall x\in I_{\pi}$)
@@ -56,7 +56,7 @@ dove:
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{esempio: codice}
+\subsection*{\color{cyan} esempio: codice}
 \addcontentsline{toc}{subsection}{esempio: codice}
 \begin{flushleft}
 	\begin{itemize}
@@ -94,30 +94,28 @@ dove:
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{def: tempo di esecuzione dell'algoritmo $A$}
+\subsection*{\color{cyan} def: tempo di esecuzione dell'algoritmo $A$}
 \addcontentsline{toc}{subsection}{def: tempo di esecuzione dell'algoritmo $A$}
 \begin{flushleft}
-	sia $t_{A}(x)$ il tempo di esecuzione dell'algoritmo $A$ per l'input $x_{i}$, allora il tempo di esecuzione nel caso peggiore di $A$ \'e:
-	$$T_{A}(n)=\max\{t_{A}(x)\hspace{0.1cm}|\hspace{0.1cm}|x|\leq n\},\hspace{0.5cm}\forall n>0$$
+	sia $t_{A}(x)$ il tempo di esecuzione dell'algoritmo $A$ per l'input $x_{i}$, allora il tempo di esecuzione nel caso peggiore di $A$ \'e: $$T_{A}(n)=\max\{t_{A}(x)\hspace{0.1cm}|\hspace{0.1cm}|x|\leq n\},\hspace{0.5cm}\forall n>0$$
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{def: complessit\'a temporale dell'algoritmo $A$}
+\subsection*{\color{cyan} def: complessit\'a temporale dell'algoritmo $A$}
 \addcontentsline{toc}{subsection}{def: complessit\'a temporale dell'algoritmo $A$}
 \begin{flushleft}
 	l'algoritmo $A$ ha complessit\'a temporale
 	\begin{itemize}
 		\item $O(g(n))$ se $T_{A}(n)=O(g(n))$, ovvero $$\lim_{n\to\infty}\frac{T_{A}(n)}{g(n)}\leq c\text{, per una costante }c>0$$
 		\item $\Omega(g(n))$ se $T_{A}(n)=\Omega(g(n))$, ovvero $$\lim_{n\to\infty}\frac{T_{A}(n)}{g(n)}\geq c\text{, per una costante }c>0$$
-		\item $\Theta(g(n))$ se $T_{A}(n)=\Theta(g(n))$, ovvero $$T_{A}(n)=\Omega(g(n))\text{ e
-			}T_{A}(n)=O(g(n))$$
+		\item $\Theta(g(n))$ se $T_{A}(n)=\Theta(g(n))$, ovvero $$T_{A}(n)=\Omega(g(n))\text{ e }T_{A}(n)=O(g(n))$$
 	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{def: complessit\'a di un problema}
+\subsection*{\color{cyan} def: complessit\'a di un problema}
 \addcontentsline{toc}{subsection}{def: complessit\'a di un problema}
 \begin{flushleft}
 	un problema ha complessit\'a
@@ -130,7 +128,7 @@ dove:
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{problemi di decisione e classi di complessit\'a}
+\subsection*{\color{cyan} problemi di decisione e classi di complessit\'a}
 \addcontentsline{toc}{subsection}{problemi di decisione e classi di complessit\'a}
 \begin{flushleft}
 	i problemi di decisione sono solitamente descritti da un'istanza di input (o semplicemente INPUT) e da una DOMANDA sull'input
@@ -161,7 +159,7 @@ dove:
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{def: un algoritmo $A$ risolve $\pi$}
+\subsection*{\color{cyan} def: un algoritmo $A$ risolve $\pi$}
 \addcontentsline{toc}{subsection}{def: un algoritmo $A$ risolve $\pi$}
 \begin{flushleft}
 	un algoritmo $A$ risolve $\pi\iff\forall$ input $x\in I_{\pi}$, $A$ risponde $1\iff x\in Y_{\pi}$
@@ -169,12 +167,218 @@ dove:
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{def: classe dei problemi $TIME(g(n))$}
+\subsection*{\color{cyan} def: classe dei problemi $TIME(g(n))$}
 \addcontentsline{toc}{subsection}{def: classe dei problemi $TIME(g(n))$}
 \begin{flushleft}
 	$TIME(g(n))=$ classe dei problemi di decisione con complessit\'a $O(g(n))$
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{\color{cyan} algoritmi non-deterministici per i problemi di decisione}
+\addcontentsline{toc}{subsection}{algoritmi non-deterministici per i problemi di decisione}
+\begin{flushleft}
+	essi si compongono di 2 fasi
+	\begin{itemize}
+		\item fase 1
+		\begin{itemize}
+			\item generano in modo non-deterministico un "certificato" $y$
+		\end{itemize}
+		\item fase 2
+		\begin{itemize}
+			\item partendo dall'input $x$ e dal certificato $y$, verificano se $x$ \'e un'istanza positiva
+		\end{itemize}
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{\color{cyan} def: un algoritmo non-deterministico $A$ risolve $\pi$}
+\addcontentsline{toc}{subsection}{def: un algoritmo non-deterministico $A$ risolve $\pi$}
+\begin{flushleft}
+	un algoritmo non-deterministico $A$ risolve $\pi$ se si ferma per ogni possibile certificato $y$ ed esiste un certificato $y$ per cui $A$ risponde $1$ (vero) $\iff x\in I_{\pi}$
+	\begin{itemize}
+		\item complessit\'a
+		\begin{itemize}
+			\item costo della fase 2
+			\item espressa in funzione di $|x|$
+		\end{itemize}
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{\color{cyan} def: classe dei problemi $NTIME(g(n))$}
+\addcontentsline{toc}{subsection}{def: classe dei problemi $NTIME(g(n))$}
+\begin{flushleft}
+	$NTIME(g(n))=$ classe di problemi di decisione con complessit\'a non-deterministica $O(g(n))$
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{\color{cyan} esempio: algoritmo non-deterministico per il problema della clique}
+\addcontentsline{toc}{subsection}{esempio: algoritmo non-deterministico per il problema della clique}
+\begin{flushleft}
+	\begin{itemize}
+		\item fase 1
+		\begin{itemize}
+			\item dato in input il grafo $G=(V,E)$, genera non-deterministicamente un sottoinsieme $U\subseteq V$ di $k$ nodi
+		\end{itemize}
+		\item fase 2
+		\begin{itemize}
+			\item verifica se $U$ \'e una clique, ovvero se $\{u,v\}\in E,\hspace{0.1cm}\forall u,v\in U$, e in tal caso risponde $1$, altrimenti risponde $0$
+		\end{itemize}
+	\item chiaramente l'algoritmo risolve il problema della clique, in quanto si ferma per ogni possibile sottoinsieme $U$ ed esiste un sottoinsieme $U$ per il quale risponde $1$ se e solo se esiste una clique di $k$ nodi in $G$, ovvero $\iff(G,K)\in Y_{clique}$
+	\item complessit\'a: $O(n^2)$, poich\'e $|U|\leq|V|=n$
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{\color{cyan} osservazioni (algoritmi deterministici e non-deterministici)}
+\addcontentsline{toc}{subsection}{osservazioni (algoritmi deterministici e non-deterministici)}
+\begin{flushleft}
+	\begin{itemize}
+		\item un algoritmo deterministico \'e meno potente di uno non deterministico poich\'e non pu\'o eseguire la fase 1
+		\item se esiste un algoritmo deterministico $A$ che risolve $\pi$, allora esiste anche un algoritmo non-deterministico $A'$ che risolve $\pi$ con la stessa complessit\'a come segue:
+			\begin{itemize}
+				\item esso esegue al fase 1 e coincide con $A$ nella fase 2, ignorando il certificato $y$
+			\end{itemize}
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{\color{cyan} corollario: $TIME(g(n))\subseteq NTIME(g(n))$}
+\addcontentsline{toc}{subsection}{corollario: $TIME(g(n))\subseteq NTIME(g(n))$}
+\begin{flushleft}
+	$$TIME(g(n))\subseteq NTIME(g(n))$$
+	\begin{itemize}
+		\item dove:
+		\begin{itemize}
+			\item $TIME(g(n))=$ classe dei problemi deterministicamente risolvibili in tempo $O(g(n))$
+			\item $NTIME(g(n))=$ classe dei problemi non-deterministicamente risolvibili in tempo $O(g(n))$
+		\end{itemize}
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{\color{cyan} efficienza e trattabilit\'a}
+\addcontentsline{toc}{subsection}{efficienza e trattabilit\'a}
+\begin{flushleft}
+	\begin{itemize}
+		\item un problema \'e trattabile se pu\'o essere risolto efficientemente (deterministicamente)
+		\item sono considerati trattabili o efficientemente risolvibili tutti i problemi aventi complessit\'a limitata da un polinomio della dimensione dell'input
+	\end{itemize}
+	$$\text{TRATTABILIT\'A}\equiv\text{EFFICIENZA}\equiv\text{POLINOMIALIT\'A}$$
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{\color{cyan} efficienza e trattabilit\'a: ragione 1}
+\addcontentsline{toc}{subsection}{efficienza e trattabilit\'a: ragione 1}
+\begin{flushleft}
+	la crescita delle funzioni polinomiali rispetto a quelle esponenziali (sia per ci\'o che riguarda il tempo di esecuzione sia per ci\'o che riguarda la dimensione delle istanze risolvibili entro un certo tempo di esecuzione)
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{\color{cyan} efficienza e trattabilit\'a: ragione 2}
+\addcontentsline{toc}{subsection}{efficienza e trattabilit\'a: ragione 2}
+\begin{flushleft}
+	\begin{itemize}
+		\item la composizione di polinomi \'e un polinomio e dunque la risolvibilit\'a in tempo polinomiale di un problema \'e indipendente da
+		\begin{itemize}
+			\item il codice naturale utilizzato, poich\'e tutti i codici naturali sono correlati in maniera polinomiale
+			\item il modello computazionale adottato, se ragionevole (cio\'e costruibile nella pratica o meglio in grado di eseguire un lavoro limitato costante per step), in quanto tali modelli sono polinomialmente correlati, ovvero possono simularsi l'un l'altro in tempo polinomiale
+		\end{itemize}
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{\color{cyan} osservazione: macchina di turing non-deterministica}
+\addcontentsline{toc}{subsection}{osservazione: macchina di turing non-deterministica}
+\begin{flushleft}
+	la macchina di turing non-deterministica non \'e un modello di calcolo ragionevole, poich\'e la quantit\'a di lavoro svolto in ogni fase (ciascun livello dell'albero delle computazioni) cresce in modo esponenziale
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{\color{cyan} }
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{\color{cyan} }
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{\color{cyan} }
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{\color{cyan} }
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{\color{cyan} }
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{\color{cyan} }
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{\color{cyan} }
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{\color{cyan} }
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{\color{cyan} }
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{\color{cyan} }
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{\color{cyan} }
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
 
 \newpage
