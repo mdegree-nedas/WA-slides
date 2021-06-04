@@ -5,54 +5,60 @@
 
 \subsection*{def: problema in computer science}
 \addcontentsline{toc}{subsection}{def: problema in computer science}
-un problema $\pi$ \'e una relazione
-$$\pi\subseteq I_{\pi}\times S_{\pi}$$
-dove:
-\begin{itemize}
-	\item $I_{\pi}=$ insieme delle istanze di input del problema
-	\item $S_{\pi}=$ insieme delle soluzioni del problema
-\end{itemize}
+\begin{flushleft}
+	un problema $\pi$ \'e una relazione
+	$$\pi\subseteq I_{\pi}\times S_{\pi}$$
+	dove:
+	\begin{itemize}
+		\item $I_{\pi}=$ insieme delle istanze di input del problema
+		\item $S_{\pi}=$ insieme delle soluzioni del problema
+	\end{itemize}
+\end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 \subsection*{tipologie di problema}
 \addcontentsline{toc}{subsection}{tipologie di problema}
-\begin{itemize}
-	\item \textbf{decisione:}
+\begin{flushleft}
+	\begin{itemize}
+		\item \textbf{decisione:}
+			\begin{itemize}
+				\item si verifica se una data propriet\'a \'e valida per un determinato input
+				\item $S_{\pi}=\{true,false\}$ o semplicemente $S_{\pi}=\{0,1\}$ e la relazione $\pi\subseteq I_{\pi}\times S_{\pi}$ corrisponde ad una funzione $$f:I_{\pi}\rightarrow\{0,1\}$$ 
+				\item esempi: soddisfacibilit\'a, test di connettivit\'a di un grafo, etc....
+			\end{itemize}
+		\item \textbf{ricerca:}
 		\begin{itemize}
-			\item si verifica se una data propriet\'a \'e valida per un determinato input
-			\item $S_{\pi}=\{true,false\}$ o semplicemente $S_{\pi}=\{0,1\}$ e la relazione $\pi\subseteq I_{\pi}\times S_{\pi}$ corrisponde ad una funzione $$f:I_{\pi}\rightarrow\{0,1\}$$ 
-			\item esempi: soddisfacibilit\'a, test di connettivit\'a di un grafo, etc....
+			\item data un'istanza $x\in I_{\pi}$, si chiede di determinare una soluzione $y\in S_{\pi}$ tale che la coppia $(x,y)\in\pi$ appartengono alla relazione che definisce il problema
+			\item esempi: soddisfacibilit\'a, clique, vertex cover, nei quali chiediamo in output un assegnamento di verit\'a soddisfacente, rispettivamente una clique o un vertex cover, invece di semplicemente "si" o "no"
 		\end{itemize}
-	\item \textbf{ricerca:}
-	\begin{itemize}
-		\item data un'istanza $x\in I_{\pi}$, si chiede di determinare una soluzione $y\in S_{\pi}$ tale che la coppia $(x,y)\in\pi$ appartengono alla relazione che definisce il problema
-		\item esempi: soddisfacibilit\'a, clique, vertex cover, nei quali chiediamo in output un assegnamento di verit\'a soddisfacente, rispettivamente una clique o un vertex cover, invece di semplicemente "si" o "no"
+		\item \textbf{ottimizzazione}
+		\begin{itemize}
+			\item data un'istanza $x\in I_{\pi}$, si chiede di determinare una soluzione $y\in S_{\pi}$ ottimizzando una data misura della funzione costo
+			\item esempi: min spanning tree, max SAT, max clique, min vertex cover, min TSP, etc....
+		\end{itemize}
 	\end{itemize}
-	\item \textbf{ottimizzazione}
-	\begin{itemize}
-		\item data un'istanza $x\in I_{\pi}$, si chiede di determinare una soluzione $y\in S_{\pi}$ ottimizzando una data misura della funzione costo
-		\item esempi: min spanning tree, max SAT, max clique, min vertex cover, min TSP, etc....
-	\end{itemize}
-\end{itemize}
+\end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 \subsection*{complessit\'a degli algoritmi e dei problemi}
 \addcontentsline{toc}{subsection}{complessit\'a degli algoritmi e dei problemi}
-\begin{itemize}
-	\item espressa in funzione della taglia dell'input (denotata come $|x|, \forall x\in I_{\pi}$)
-	\item taglia dell'istanza $x$
+\begin{flushleft}
 	\begin{itemize}
-		\item quantit\'a di memoria necessaria a memorizzare $x$ in un computer
-		\item lunghezza $|x|_{c}$ della stringa che codifica $x$ in un particolare codice naturale $c:I_{\pi}\rightarrow\Sigma$, dove $\Sigma$ \'e l'alfabeto del codice $c$
+		\item espressa in funzione della taglia dell'input (denotata come $|x|, \forall x\in I_{\pi}$)
+		\item taglia dell'istanza $x$
+		\begin{itemize}
+			\item quantit\'a di memoria necessaria a memorizzare $x$ in un computer
+			\item lunghezza $|x|_{c}$ della stringa che codifica $x$ in un particolare codice naturale $c:I_{\pi}\rightarrow\Sigma$, dove $\Sigma$ \'e l'alfabeto del codice $c$
+		\end{itemize}
+		\item codice naturale
+		\begin{itemize}
+			\item conciso: le stringhe che codificano le istanze non devono essere ridondanti o allungate inutilmente
+			\item numeri espressi in base $\geq 2$
+		\end{itemize}
 	\end{itemize}
-	\item codice naturale
-	\begin{itemize}
-		\item conciso: le stringhe che codificano le istanze non devono essere ridondanti o allungate inutilmente
-		\item numeri espressi in base $\geq 2$
-	\end{itemize}
-\end{itemize}
+\end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
