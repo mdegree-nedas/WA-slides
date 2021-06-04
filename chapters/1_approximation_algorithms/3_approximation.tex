@@ -1,2 +1,123 @@
-approximation
+\section*{approximation}
+\addcontentsline{toc}{section}{approximation}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{introduzione}
+\addcontentsline{toc}{subsection}{introduzione}
+\begin{flushleft}
+	\begin{itemize}
+		\item DOMANDA: supponiamo di dover risolvere un problema NP-HARD, cosa dovremmo fare?
+		\item RISPOSTA: sacrificare 1 delle 3 caratteristiche desiderate
+		\begin{enumerate}
+			\item risolvere istanze arbitrarie del problema
+			\item risolvere il problema di ottimalit\'a
+			\item risolvere il problema in tempo polinomiale
+		\end{enumerate}
+		\item STRATEGIE:
+		\begin{enumerate}
+			\item progettare algoritmi per casi speciali del problema 
+			\item progettare algoritmi di approssimazione o euristiche
+			\item progettare algoritmi che possono richiedere tempo esponenziale
+		\end{enumerate}
+		\item d'ora in poi ci concentreremo sui problemi di ottizzazione NP-HARD, ovvero problemi che non possono essere risolti in modo efficiente (a meno che $P=NP$)
+		\item per tali problemi verranno progettati algoritmi in grado di determinare soluzioni prossime a quelle ottime, ovvero "buone approssimazioni"
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{def: algorimo di r-approssimazione per problemi di minimizzazione}
+\addcontentsline{toc}{subsection}{def: algorimo di r-approssimazione per problemi di minimizzazione}
+\begin{flushleft}
+	dato un problema di minimizzazione $\pi$ e un numero $r\geq 1$, un algoritmo $A$ \'e un algoritmo di r-approssimazione per $\pi$ se per ogni input $x\in I$ restituisce sempre una soluzione r-approssimata, ovvero una soluzione ammissibile $y\in S(x)$ tale che
+	$$\frac{m(x,y)}{m^*(x)}\leq r$$
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{def: algorimo di r-approssimazione per problemi di massimizzazione}
+\addcontentsline{toc}{subsection}{def: algorimo di r-approssimazione per problemi di massimizzazione}
+\begin{flushleft}
+	dato un problema di massimizzazione $\pi$ e un numero $r\leq 1$, un algoritmo $A$ \'e un algoritmo di r-approssimazione per $\pi$ se per ogni input $x\in I$ restituisce sempre una soluzione r-approssimata, ovvero una soluzione ammissibile $y\in S(x)$ tale che
+	$$\frac{m(x,y)}{m^*(x)}\geq r$$
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{determinazione del fattore di approssimazione $r$}
+\addcontentsline{toc}{subsection}{determinazione del fattore di approssimazione $r$}
+\begin{flushleft}
+	\begin{itemize}
+		\item come possiamo determinare il fattore di approssimazione $r$ se non conosciamo il valore $m^*$ di una soluzione ottima?
+		\item per problemi di minimizzazione (rispettivamente massimizzazione), confrontiamo il valore della soluzione restituita $m(x,y)$ con un lower bound (rispettivamente upper bound) appropriato $l(x)$ (rispettivamente $u(x)$) di $m^*(x)$
+		\item se il loro rapporto \'e al massimo $r$ ($\leq$) per $\min$ o almeno $r$ ($\geq$) per $\max$, allora l'algoritmo \'e r-approssimante
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{$\min$ (analogo per $\max$) fattore di approssimazione $r$}
+\addcontentsline{toc}{subsection}{$\min$ (analogo per $\max$) fattore di approssimazione $r$}
+\begin{flushleft}
+	\begin{itemize}
+		\item se $$\frac{m(x,y)}{l(x)}\leq r$$
+		\item allora $$\frac{m(x,y)}{m^*(x)}\leq\frac{m(x,y)}{l(x)}\leq r$$
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{algoritmo: Approx-Cover per min vertex cover}
+\addcontentsline{toc}{subsection}{algoritmo: Approx-Cover per min vertex cover}
+\begin{flushleft}
+	\begin{algorithm}
+		\caption{Approx-Cover}
+		\begin{algorithmic}
+			\STATE $M=\emptyset$
+			\STATE $U=\emptyset$
+			\REPEAT
+				\STATE seleziona un arco $\{u,v\}\in E$
+				\STATE $U=U\cup\{u,v\}$
+				\STATE $E=E\setminus\{e\in E\}\hspace{0.1cm}\vert\hspace{0.1cm}e$ \'e incidente a $u$ o a $v$
+				\STATE $M=M\cup\{\{u,v\}\}$
+			\UNTIL $(E=\emptyset)$
+			\RETURN $U$
+		\end{algorithmic}
+	\end{algorithm}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{lemma: Approx-Cover forma un matching al termine dell'esecuzione}
+\addcontentsline{toc}{subsection}{lemma: Approx-Cover forma un matching al termine dell'esecuzione}
+\begin{flushleft}
+	al termine dell'esecuzione dell'algoritmo di approssimazione Approx-Cover, $M$ forma un matching, ovvero gli archi in $M$ non condividono alcun nodo \newline \\
+	\textbf{dimostrazione:}
+	\begin{itemize}
+		\item banalmente, ogni volta che un arco $e$ \'e selezionato in $M$, tutti gli archi con un nodo in comune con $e$ vegono eliminati da $E$
+		\item pertanto nei passi successivi nessun arco con un nodo in comune con $e$ pu\'o essere selezionato dall'algoritmo
+	\end{itemize}
+	\hfill$\square$
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{teorema: Approx-Cover \'e $2$-approssimante}
+\addcontentsline{toc}{subsection}{teorema: Approx-Cover \'e $2$-approssimante}
+\begin{flushleft}
+	Approx-Cover \'e $2$-approssimante \newline \\
+	\textbf{dimostrazione:}
+	\begin{itemize}
+		\item il valore della soluzione restituita dall'algoritmo \'e $$m=|U|=2|M|$$
+		\item sia $U^*$ il cover ottimo. \newline
+			Poich\'e gli archi in $M$ non condividono alcun nodo ($M$ \'e un matching) e poich\'e ciascuno di essi deve avere un nodo in $U^*$
+			$$m^*=|U^*|\geq|M|$$
+		\item dunque: $$\frac{m}{m^*}\leq\frac{2|M|}{|M|}=2$$
+	\end{itemize}
+	\hfill$\square$
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
 \newpage

@@ -1,2 +1,178 @@
-greedy
+\section*{approximation}
+\addcontentsline{toc}{section}{algorithmic techniques: greedy}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{caratteristiche}
+\addcontentsline{toc}{subsection}{caratteristiche}
+\begin{flushleft}
+	\begin{itemize}
+		\item la soluzione viene determinata in step
+		\item ad ogni step l'algoritmo esegue la scelta che sembra essere la migliore in quello step, senza considerare le possibili conseguenze nei futuri step
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{problema: max 0-1 knapsack}
+\addcontentsline{toc}{subsection}{problema: max 0-1 knapsack}
+\begin{flushleft}
+	\begin{itemize}
+		\item INPUT:
+		\begin{itemize}
+			\item un insieme finito di oggetti $O$
+			\item un profitto intero $p_i$ $\forall o_i\in O$
+			\item un volume intero $a_i$ $\forall o_i\in O$
+			\item un intero positivo $b$
+		\end{itemize}
+		\item SOLUZIONE:
+		\begin{itemize}
+			\item un sottoinsieme di oggetti $Q\subseteq O$ tale che $\sum_{o_i\in Q}a_i\leq b$
+		\end{itemize}
+		\item MISURA:
+		\begin{itemize}
+			\item profitto totale degli oggetti scelti, ovvero $\sum_{o_i\in Q}p_i$
+		\end{itemize}
+		\vspace{0.5cm}
+		\item senza perdere di generalit\'a, in seguito, assumeremo sempre che:
+		\begin{itemize}
+			\item $a_i\leq b$ $\forall o_i\in O$
+			\item $p_i>0$ $\forall o_i\in O$
+		\end{itemize}
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{max 0-1 knapsack: descrizione della scelta greedy}
+\addcontentsline{toc}{subsection}{max 0-1 knapsack: descrizione della scelta greedy}
+\begin{flushleft}
+	\begin{itemize}
+		\item nella scelta greedy:
+		\begin{itemize}
+			\item non possiamo considerare solo il profitto degli oggetti, in quanto il loro volume potrebbe essere troppo grande
+			\item non possiamo considerare solo il il volume degli oggetti, in quanto il loro profitto potrebbe essere troppo basso
+		\end{itemize}
+		\item idea: consideriamo gli oggetti in base al profitto per unit\'a di volume, ovvero in base al rapporto $$\frac{p_i}{a_i}$$
+		\item l'algoritmo greedy seleziona gli oggetti in ordine decrescente di profitto per volume
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\newpage
+\subsection*{algoritmo: Greedy-Knapsack}
+\addcontentsline{toc}{subsection}{algoritmo: Greedy-Knapsack}
+\begin{flushleft}
+	\begin{algorithm}
+		\caption{Greedy-Knapsack}
+		\begin{algorithmic}
+			\STATE $Q=\emptyset$
+			\STATE $v=0$
+			\color{gray}
+			\hfill v = volume del sottoinsieme corrente degli oggetti scelti
+			\color{black}
+			\STATE ordina gli oggetti in ordine decrescente di profitto per volume $\frac{p_i}{a_i}$
+			\STATE siano $o_1,\ldots,o_n$ gli oggetti elencati secondo tale ordine
+			\FOR{$i=1$ to $n$}
+				\IF{$v+a_i\leq b$}
+					\STATE $Q=Q\cup\{o_i\}$
+					\STATE $v=v+a_i$
+				\ENDIF
+			\ENDFOR
+			\RETURN $Q$
+		\end{algorithmic}
+	\end{algorithm}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{teorema: $\forall r<1$ Greedy-Knapsack non \'e r-approssimante}
+\addcontentsline{toc}{subsection}{teorema: $\forall r<1$ Greedy-Knapsack non \'e r-approssimante}
+\begin{flushleft}
+	$\forall r<1$ dato, Greedy-Knapsack non \'e r-approssimante \newline \\
+	\textbf{dimostrazione:}
+	\begin{itemize}
+		\item dato un intero $k=\lceil\frac{1}{r}\rceil$, consideriamo la seguente istanza di max 0-1 knapsack
+		\item $\forall n\geq 2$
+		\begin{itemize}
+			\item $b=kn$ \'e il volume del knapsack
+			\item $n-1$ oggetti con profitto $p_i=1$ e volume $a_i=1$
+			\item $1$ oggetto con profitto $b-1$ e volume $b$
+		\end{itemize}
+		\item soluzione restituita:
+		\begin{itemize}
+			\item l'insieme dei primi $n-1$ oggetti, ovvero $m=n-1$
+		\end{itemize}
+		\item soluzione ottima
+		\begin{itemize}
+			\item l'insieme contenente solo l'$n$-esimo oggetto, ovvero $$m^*=b-1=kn-1$$
+		\end{itemize}
+		\vspace{0.5cm}
+		\item quindi: $$\frac{m}{m^*}=\frac{n-1}{kn-1}$$
+		\item cos\'i che:
+			% TODO: last part of the proof %
+			$$\frac{m}{m^*}=\frac{n-1}{kn-1}\leq\frac{n-1}{\frac{n}{r}-1}$$
+	\end{itemize}
+	\hfill$\square$
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
 \newpage
