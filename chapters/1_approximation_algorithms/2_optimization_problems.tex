@@ -5,35 +5,31 @@
 
 \subsection*{def: problema di ottimizzazione}
 \addcontentsline{toc}{subsection}{def: problema di ottimizzazione}
-\begin{flushleft}
-	un problema di ottimizzazione $\pi$ \'e una quadrupla $(I_{\pi}, S_{\pi}, m_{\pi}, goal_{\pi})$ con:
-	\begin{itemize}
-		\item $I_{\pi}=$ insieme delle istanze di input di $\pi$
-		\item $S_{\pi}(x)=$ insieme delle soluzioni ammissibili dell'istanza $x\in I_{\pi}$
-		\item $m_{\pi}(x,y)=$ misura della soluzione ammissibile $y\in S_{\pi}(x)$ per l'input $x\in I_{\pi}$ (intera)
-		\item $goal_{\pi}\in\{\min,\max\}=$ specifica se abbiamo un problema di minimizzazione o di massimizzazione
-	\end{itemize}
-\end{flushleft}
+un problema di ottimizzazione $\pi$ \'e una quadrupla $(I_{\pi}, S_{\pi}, m_{\pi}, goal_{\pi})$ con:
+\begin{itemize}
+	\item $I_{\pi}=$ insieme delle istanze di input di $\pi$
+	\item $S_{\pi}(x)=$ insieme delle soluzioni ammissibili dell'istanza $x\in I_{\pi}$
+	\item $m_{\pi}(x,y)=$ misura della soluzione ammissibile $y\in S_{\pi}(x)$ per l'input $x\in I_{\pi}$ (intera)
+	\item $goal_{\pi}\in\{\min,\max\}=$ specifica se abbiamo un problema di minimizzazione o di massimizzazione
+\end{itemize}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 \subsection*{osservazioni (problemi di ottimizzazione)}
 \addcontentsline{toc}{subsection}{osservazioni (problemi di ottimizzazione)}
-\begin{flushleft}
+\begin{itemize}
+	\item assumiamo che $m_{\pi}(x,y)$ \'e sempre un numero intero
 	\begin{itemize}
-		\item assumiamo che $m_{\pi}(x,y)$ \'e sempre un numero intero
-		\begin{itemize}
-			\item i nostri modelli computazionali possono trattare solo l'approssimazione razionale dei reali
-			\item scalando tali reali possiamo ottenere numeri interi equivalenti
-			\item i valori interi rivelano gi\'a le difficolt\'a intrinseche dei problemi
-		\end{itemize}
-		\item quando sono chiari dal contesto (in seguito):
-		\begin{itemize}
-			\item $\pi$ sar\'a omesso
-			\item $m_(x,y)=$ sar\'a denotato semplicemente come $m$ 
-		\end{itemize}
+		\item i nostri modelli computazionali possono trattare solo l'approssimazione razionale dei reali
+		\item scalando tali reali possiamo ottenere numeri interi equivalenti
+		\item i valori interi rivelano gi\'a le difficolt\'a intrinseche dei problemi
 	\end{itemize}
-\end{flushleft}
+	\item quando sono chiari dal contesto (in seguito):
+	\begin{itemize}
+		\item $\pi$ sar\'a omesso
+		\item $m_(x,y)=$ sar\'a denotato semplicemente come $m$ 
+	\end{itemize}
+\end{itemize}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
@@ -109,93 +105,88 @@
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{osservazioni (problema decisionale sottostante)}
+\addcontentsline{toc}{subsection}{osservazioni (problema decisionale sottostante)}
 \begin{flushleft}
+	\begin{itemize}
+		\item se esiste un algoritmo polinomiale $A$ per il problema di ottimizzazione, allora esiste un algoritmo polinomiale anche per il problema decisionale sottostante che funziona come segue:
+			\begin{enumerate}
+				\item esegue $A$ per determinare la soluzione ottime $y^*$ per l'input $x$
+				\item risponde $1$ ($true$) se $m(x,y^*)\leq k$ ($\min$) o $\geq k$ ($\max$)
+			\end{enumerate}
+		\item il problema di ottimizzazione \'e difficile almeno quanto il problema decisionale sottostante
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{classi di complessit\'a dei problemi di ottimizzazione: $PO$}
+\addcontentsline{toc}{subsection}{classi di complessit\'a dei problemi di ottimizzazione: $PO$}
 \begin{flushleft}
+	\begin{itemize}
+		\item un problema di ottimizzazione $\pi$ appartiene alla classe $PO$ se:
+		\begin{itemize}
+			\item per ogni input $x$, $x\in I$ pu\'o essere verificato in tempo polinomale
+			\item esiste un polinomio $p\hspace{0.1cm}\vert\hspace{0.1cm}\forall x\in I$ e $y\in S(x)$ vale $|y|\leq p(|x|)$ 
+			\item $\forall x\in I$ e $y\in S(x)$, $m(x,y)$ pu\'o essere calcolata in tempo polinomale (rispetto a $|x|$) 
+			\item $\forall x\in I$, una soluzione ottima $y^*$ pu\'o essere calcolata in tempo polinomiale
+		\end{itemize}
+		\item esempi: shortest path fra 2 nodi, min spanning tree, ecc...
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{classi di complessit\'a dei problemi di ottimizzazione: $PO$}
+\addcontentsline{toc}{subsection}{classi di complessit\'a dei problemi di ottimizzazione: $PO$}
 \begin{flushleft}
+		\item un problema di ottimizzazione $\pi$ appartiene alla classe $NPO$ se:
+		\begin{itemize}
+			\item per ogni input $x$, $x\in I$ pu\'o essere verificato in tempo polinomale
+			\item esiste un polinomio $p\hspace{0.1cm}\vert\hspace{0.1cm}\forall x\in I$ e $y\in S(x)$ vale $|y|\leq p(|x|)$ 
+			\item $\forall x\in I$ e $y\in S(x)$, $m(x,y)$ pu\'o essere calcolata in tempo polinomale (rispetto a $|x|$) 
+		\end{itemize}
+		\item esempi: max clique, min vertex cover, min TSP, ecc...
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{$PO$ e $NPO$: nella pratica}
+\addcontentsline{toc}{subsection}{$PO$ e $NPO$: nella pratica}
 \begin{flushleft}
+	\begin{itemize}
+		\item $PO$: classe dei problemi di ottimizzazione il cui problema decisonale sottostante appartiene a $P$
+		\item $NPO$: classe dei problemi di ottimizzazione il cui problema decisonale sottostante appartiene a $NP$
+		\item chiaramente $PO\subseteq NPO$
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{def: relazione $NPO$ - $NP\text{-}HARD$}
+\addcontentsline{toc}{subsection}{def: relazione $NPO$ $NP-HARD$}
 \begin{flushleft}
+	un problema di ottimizzazione in $NPO$ \'e $NP\text{-}HARD$ se il problema decisonale sottostante \'e $NP\text{-}Completo$
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{teorema: relazione tra $P\neq NP$ e risolvibilit\'a polinomiale dei problemi $NP\text{-}HARD$}
+\addcontentsline{toc}{subsection}{teorema: relazione tra $P\neq NP$ e risolvibilit\'a polinomiale dei problemi $NP\text{-}HARD$}
 \begin{flushleft}
+	se $P\neq NP$, un problema di ottimizzazione $NP\text{-}HARD$ non pu\'o essere risolto in tempo polinomiale (poich\'e \'e difficile almeno quanto il problema decisionale sottostante)
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{teorema: relazione tra $P=NP$ e $PO=NPO$} 
+\addcontentsline{toc}{subsection}{teorema: relazione tra $P=NP$ e $PO=NPO$}
 \begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
+	se $P=NP$ allora $PO=NPO$
+	\begin{itemize}
+		\item quasi tutti i problemi che verranno presentati in seguito sono $NP\text{-}HARD$, ovvero non efficientemente risolvibili
+		\item verranno progettati algoritmi per tali problemi che restituiscono soluzioni "vicine" a quelle ottime
+	\end{itemize}
 \end{flushleft}
 
 \newpage
