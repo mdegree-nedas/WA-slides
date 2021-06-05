@@ -110,11 +110,209 @@
 		\end{itemize}
 		\vspace{0.5cm}
 		\item quindi: $$\frac{m}{m^*}=\frac{n-1}{kn-1}$$
-		\item cos\'i che:
-			% TODO: last part of the proof %
-			$$\frac{m}{m^*}=\frac{n-1}{kn-1}\leq\frac{n-1}{\frac{n}{r}-1}$$
+		\item cos\'i che: \newline \\
+			\hspace{8cm}$(<)$ poich\'e $\frac{1}{r}>1$
+			$$\frac{m}{m^*}=\frac{n-1}{kn-1}\leq\frac{n-1}{\frac{n}{r}-1}<\frac{n-1}{\frac{n}{r}-\frac{1}{r}}=\frac{n-1}{\frac{1}{r}(n-1)}=r$$
 	\end{itemize}
 	\hfill$\square$
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{miglioramento algoritmo: Greedy-Knapsack}
+\addcontentsline{toc}{subsection}{miglioramento algoritmo: Greedy-Knapsack}
+\begin{flushleft}
+	\begin{itemize}
+		\item osservazione:
+		\begin{itemize}
+			\item intuitivamente, Greedy-Knapsack non restituisce una buona approssimazione, poich\'e ignora l'oggetto avente il profitto massimo
+		\end{itemize}
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{Greedy-Knapsack modificato}
+\addcontentsline{toc}{subsection}{Greedy-Knapsack modificato}
+\begin{flushleft}
+	\begin{itemize}
+		\item calcola una soluzione greedy $Q_{GR}$ e sia $m_{GR}$ la misura di quest'ultima
+		\item considera l'oggetto $O_{\max}$ avente il massimo profitto $p_{\max}$ \item se $m_{GR}\geq p_{\max}$ restituisci $Q_{GR}$ altrimenti restituisci $Q=\{O_{\max}\}$
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{lemma 1: Greedy-Knapsack modificato}
+\addcontentsline{toc}{subsection}{lemma 1: Greedy-Knapsack modificato}
+\begin{flushleft}
+	\begin{itemize}
+		\item sia $o_j$ il primo oggetto che l'algoritmo Greedy-Knapsack non inserisce nel knapsack e sia:
+			$$m_j=\sum_{i=1}^{j-1}p_i$$
+		\item allora:
+			$$m^*\leq m_j+p_j$$
+	\end{itemize}
+	\vspace{0.5cm}
+	\textbf{dimostrazione:}
+	\begin{itemize}
+		\item $m^*\leq m_j+p_j$ deriva direttamente osservando semplicemente che, denotando con $v$ la somma dei volumi dei primi $j=1$ oggetti scelti, $m_j+p_j$ \'e il valore della soluzione ottima dell'istanza in cui il volume del knapsack \'e $v+a_j>b$
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{lemma 2: Greedy-Knapsack modificato}
+\addcontentsline{toc}{subsection}{lemma 2: Greedy-Knapsack modificato}
+\begin{flushleft}
+	\begin{itemize}
+		\item $m^*\leq m_{GR}+p_{\max}$
+	\end{itemize}
+	\vspace{0.5cm}
+	\textbf{dimostrazione:}
+	\begin{itemize}
+		\item diretta conseguenza del procedente lemma osservando che $m_j\leq m_{GR}$ e $p_j\leq p_{\max}$, e quindi:
+			$$m^*\leq m_j+p_j\leq m_{GR}+p_{\max}$$
+		\item intuizione: l'algoritmo restituisce una soluzione di valore $\max\{m_{GR},p_{\max}\}$, che \'e almeno la met\'a di $m_{GR}+p_{\max}$, ovvero la met\'a di un upper bound di $m^*$
+			$$\max\{m_{GR},p_{\max}\}\geq\frac{m_{GR}+p_{\max}}{2}$$
+	\end{itemize}
+\end{flushleft}
+
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{teorema: Greedy-Knapsack modificato \'e $\frac{1}{2}$-approssimante}
+\addcontentsline{toc}{subsection}{teorema: Greedy-Knapsack modificato \'e $\frac{1}{2}$-approssimante}
+\begin{flushleft}
+	Greedy-Knapsack modificato \'e $\frac{1}{2}$-approssimante \newline \\
+	\vspace{0.5cm}
+	\textbf{dimostrazione:}
+	\begin{itemize}
+		\item $m_{Mod}\geq\max\{m_{GR},p_{\max}\}\geq\frac{(m_{GR}+p_{\max})}{2}\geq\frac{m^*}{2}$
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{problema: min multiprocessor scheduling}
+\addcontentsline{toc}{subsection}{problema: min multiprocessor scheduling}
+\begin{flushleft}
+	\begin{itemize}
+		\item INPUT:
+		\begin{itemize}
+			\item insieme di $n$ jobs $P$
+			\item numero di processori $h$
+			\item tempo di esecuzione $t_j$ $\forall p_j\in P$
+		\end{itemize}
+		\item SOLUZIONE:
+		\begin{itemize}
+			\item uno schedule per $P$, ovvero una funzione
+				$$f:P\rightarrow\{1,\ldots,h\}$$
+		\end{itemize}
+		\item MISURA:
+		\begin{itemize}
+			\item $makespan$ o tempo di completamento di $f$, ovvero
+				$$\max_{i\in[1,\ldots,h]}\sum_{p_j\in P\hspace{0.1cm}\vert\hspace{0.1cm}f(p_j)=i}t_j$$
+		\end{itemize}
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{algoritmo: Greedy-Graham}
+\addcontentsline{toc}{subsection}{algoritmo: Greedy-Graham}
+\begin{flushleft}
+	\begin{itemize}
+		\item scelta greedy: ad ogni step assegna un job al processore meno carico
+		\item $T_i(j)$:
+		\begin{itemize}
+			\item tempo di completamento (somma dei tempi di esecuzione dei jobs assegnati) del processore $i$ al termine del tempo $j$, ovvero una volta schedulati i primi $j$ jobs (in qualunque ordine)
+		\end{itemize}
+	\end{itemize}
+	\begin{algorithm}
+		\caption{Greedy-Graham}
+		\begin{algorithmic}
+			\STATE siano $p_1,\ldots,p_n$ i jobs elencati in un qualsiasi ordine
+			\FOR{$j=1$ to $n$}
+				\STATE assegna $p_j$ al processore $i$ avente il minimo $T_i(j-1)$ ovvero $f(p_j)i$
+			\ENDFOR
+			\RETURN lo schedule $i$
+		\end{algorithmic}
+	\end{algorithm}
+	\begin{itemize}
+		\item osservazione:
+		\begin{itemize}
+			\item se i jobs vengono schedulati in accordo con il tempo di arrivo, l'algoritmo assegna ciascun job senza conoscere quelli futuri, ovvero ONLINE
+		\end{itemize}
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{teorema: Greedy-Graham \'e $\frac{2-1}{h}$-approssimante}
+\addcontentsline{toc}{subsection}{teorema: Greedy-Graham \'e $\frac{2-1}{h}$-approssimante}
+\begin{flushleft}
+	l'algoritmo Greedy-Graham \'e $\frac{2-1}{h}$-approssimante, dove $h$ \'e il numero di processori \newline \\
+	\vspace{0.5cm}
+	\textbf{fatto:}
+	\begin{itemize}
+		\item dato $s\geq 0$ e $h$ numeri $a_1,\ldots,a_h\hspace{0.1cm}\vert\hspace{0.1cm}a_1+\ldots+a_h=s$, allora esiste $j$, $1\leq j\leq h$, tale che \newline
+			$$a_j\geq\frac{s}{h}\hspace{3cm}a_1+\ldots+a_h<h\frac{s}{h}$$
+		\item altrimenti, contraddizione
+		\item analogamente, esiste $j'$, $1\leq j'\leq h$, tale che $a_{j'}\leq\frac{s}{h}$
+		\item in altre parole, un numero \'e al massimo uguale alla media e uno maggiore o uguale alla media
+		\item pertanto, $\min_j a_j\leq\frac{s}{h}$ e $\max_j a_j\geq\frac{s}{h}$
+	\end{itemize}
+	\vspace{0.5cm}
+	\textbf{dimostrazione:}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
