@@ -264,20 +264,76 @@
 	\end{itemize}
 	\vspace{0.5cm}
 	\textbf{dimostrazione:}
+	\begin{itemize}
+		\item sia $T$ la somma di tutti i tempi di esecuzione dei job, ovvero
+			$$T=\sum_{j=1}^n t_j$$
+		\item siano $T_1^*,T_2^*,\ldots,T_h^*$ i tempi di completamento degli $h$ processori nella soluzione ottima
+		\item poich\'e $T_1^*+T_2^*+\ldots+T_h^*=T$ dal precedente 'fatto', esiste $j$ tale che $T_j^*\geq\frac{T}{h}$
+		\item quindi:
+			$$m^*\geq T_j^*\geq\frac{T}{h}$$
+		\item sia $k$ il processore con il massimo tempo di completamento nello schedule $f$ restituito dall'algoritmo, ovvero con $T_k(n)$ massimo
+		\item in pi\'u sia $p_l$ l'ultimo job assegnato al processore $k$
+		\item dato che, per la scelta greedy, $p_l$ \'e stato assegnato ad uno dei processori meno carichi all'inizio dello step $l$, sempre per il 'fatto' precedente, abbiamo:
+			$$T_k(l-1)\leq\frac{\sum_{j<l}t_j}{h}\leq\frac{T-t_l}{h}$$
+		\item dato che la somma dei tempi di esecuzione di tutti i jobs assegnati prima di $p_l$ \'e al massimo ($\leq$) $T-t_l$
+		\item pertanto:
+			$$m=T_k(n)=T_k(l-1)+t_l\leq\frac{T-t_l}{h}+t_l=$$
+			$$=\color{gray}\frac{T-t_l+ht_l}{h}=\frac{T}{h}-\frac{1+h}{h}t_l\color{black}=\frac{T}{h}+\frac{h-1}{h}t_l\leq\ldots$$
+		\item poich\'e $\frac{T}{h}\leq m^*$ e $t_l\leq m^*$
+			$$\ldots\leq m^*+\frac{h-1}{h}m^*\color{gray}=\frac{hm^*+(h-1)m^*}{h}=\frac{hm^*+hm^*-m^*}{h}=$$
+			$$\color{gray}=\frac{2hm^*-m^*}{h}=\frac{2h-1}{h}m^*\color{black}=(2-\frac{1}{h})m^*$$
+		\item e quindi:
+			$$\frac{m}{m^*}\leq 2-\frac{1}{h}$$
+	\end{itemize}
+	\hfill$\square$
+	\begin{itemize}
+		\item osservazioni:
+		\begin{itemize}
+			\item quando $h$ cresce, il rapporto di approssimazione $\frac{2-1}{h}$ tende a $2$
+			\item l'analisi \'e stretta, ovvero vale il seguente teorema
+		\end{itemize}
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{teorema: Greedy-Graham non \'e $r$-approssimante per $r<\frac{2-1}{h}$}
+\addcontentsline{toc}{subsection}{teorema: Greedy-Graham non \'e $r$-approssimante per $r<\frac{2-1}{h}$}
 \begin{flushleft}
+	Greedy-Graham non \'e $r$-approssimante per $r<\frac{2-1}{h}$ \newline \\
+	\vspace{0.5cm}
+	\textbf{dimostrazione:}
+	\begin{itemize}
+		\item considera la seguente istanza:
+		\begin{itemize}
+			\item $h(h-1)$ jobs con tempo di esecuzione $1$
+			\item $1$ job con tempo di esecuzione $h$
+		\end{itemize}
+		\item Greedy-Graham assegna i jobs nella seguente maniera:
+			% TODO: grafico %
+		\item e quindi: $$m=2(h-1)$$
+		\item la soluzione ottima pu\'o essere ottenuta assegnando il job pi\'u lungo ad un processore e distribuendo ugualmente i jobs pi\'u corti tra i processori restanti:
+			% TODO: grafico %
+		\item e quindi: $$m^*=h$$
+		\item in conclusione:
+			$$\frac{m}{m^*}=\frac{2(h-1)}{h}=2-\frac{1}{h}\hspace{2cm}\text{(diverso da }\leq 2-\frac{1}{h}\text{)}$$
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{migliorare il rapporto di approssimazione $r$ per Greedy-Graham}
+\addcontentsline{toc}{subsection}{migliorare il rapporto di approssimazione $r$ per Greedy-Graham}
 \begin{flushleft}
+	\begin{itemize}
+		\item DOMANDA: come possiamo migliorare il rapporto di approssimazione $r$
+		\item richiamiamo rapidamente gli step base della dimostrazione del rapporto di approssimazione di Greedy-Graham
+		\item abbiamo utilizzato i seguenti $lower\text{ }bounds$ per il valore della soluzione ottima:
+		\begin{itemize}
+			\item $m^*\geq\frac{T}{h}$, come in qualsiasi soluzione almeno 1 processore deve avere tempo di completamento $\frac{T}{h}$ (richiamiamo che $T=\sum_j t_j$)
+			\item $m^*\geq t_j$, per ogni job $p_j$, come in qualsiasi soluzione uno dei processori deve eseguire $p_j$
+		\end{itemize}
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
