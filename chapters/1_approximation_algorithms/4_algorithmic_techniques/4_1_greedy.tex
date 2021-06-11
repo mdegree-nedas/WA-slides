@@ -69,9 +69,7 @@
 		\begin{algorithmic}
 			\STATE $Q=\emptyset$
 			\STATE $v=0$
-			\color{gray}
-			\hfill v = volume del sottoinsieme corrente degli oggetti scelti
-			\color{black}
+			\STATE \color{gray} // v = volume del sottoinsieme corrente degli oggetti scelti \color{black}
 			\STATE ordina gli oggetti in ordine decrescente di profitto per volume $\frac{p_i}{a_i}$
 			\STATE siano $o_1,\ldots,o_n$ gli oggetti elencati secondo tale ordine
 			\FOR{$i=1$ to $n$}
@@ -333,42 +331,125 @@
 			\item $m^*\geq\frac{T}{h}$, come in qualsiasi soluzione almeno 1 processore deve avere tempo di completamento $\frac{T}{h}$ (richiamiamo che $T=\sum_j t_j$)
 			\item $m^*\geq t_j$, per ogni job $p_j$, come in qualsiasi soluzione uno dei processori deve eseguire $p_j$
 		\end{itemize}
+		\item abbiamo utilizzato il seguente $upper\text{ }bounds$ per il valore della soluzione restituita:
+		\begin{itemize}
+			\item per limitare superiormente il valore della soluzione restituita, se $k$ \'e uno dei processori pi\'u carichi e $p_l$ \'e l'ultimo job assegnato a $k$, per la scelta greedy:
+				$$T_k(l-1)\leq\frac{\sum_{j<l}t_j}{h}\leq\frac{T-t_l}{h}$$
+		\end{itemize}
+		\item quindi possiamo derivare la seguente disuguaglianza:
+			$$m=T_k(n)=T_k(l-1)+t_l\leq\frac{T-t_l}{h}+t_l=$$
+			$$=\color{gray}\frac{T-t_l+ht_l}{h}=\frac{T}{h}-\frac{1+h}{h}t_l\color{black}=\frac{T}{h}+\frac{h-1}{h}t_l\leq\ldots$$
+		\item poich\'e $\frac{T}{h}\leq m^*$ e $t_l\leq m^*$
+			$$\ldots\leq m^*+\frac{h-1}{h}m^*\color{gray}=\frac{hm^*+(h-1)m^*}{h}=\frac{hm^*+hm^*-m^*}{h}=$$
+			$$\color{gray}=\frac{2hm^*-m^*}{h}=\frac{2h-1}{h}m^*\color{black}=(2-\frac{1}{h})m^*$$
+		\item idea per il miglioramento: decrementa $t_l$ il pi\'u possibile e trova un rapporto di approssimazione migliore sfruttando le disuguaglianze
+			$$m\leq\frac{T}{h}+\frac{h-1}{h}t_l\leq m^*+\frac{h-1}{h}t_l$$
+		\item modificando l'algoritmo e/o migliorando l'analisi vedremo come limitare superiormente $t_l$ progressivamente con:
+		\begin{itemize}
+			\item $\frac{m^*}{2}$ ($\frac{3}{2}$-approssimante),
+			\item $\frac{m^*}{3}$ ($\frac{4}{3}$-approssimante),
+			\item e arbitrariamente piccolo, ovvero $\epsilon m^*$ ($(1+\epsilon)$-approssimante), cio\'e un PTAS 
+		\end{itemize}
 	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{Greedy-Graham, primo miglioramento}
+\addcontentsline{toc}{subsection}{Greedy-Graham, primo miglioramento}
 \begin{flushleft}
+	\begin{itemize}
+		\item assegnare i jobs dal pi\'u lungo al pi\'u corto
+		\item ci\'o ci consente di evitare il caso peggiore dell'algoritmo di Graham, ovvero il fatto che un job lungo arrivi alla fine, sbilanciando significativamente il carico dei processori
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{algoritmo: Ordered-Greedy}
+\addcontentsline{toc}{subsection}{algoritmo: Ordered-Greedy}
 \begin{flushleft}
+	\begin{algorithm}
+		\caption{Ordered-Greedy}
+		\begin{algorithmic}
+			\STATE siano $p_1,p_2,\ldots,p_n$ i job elencati in ordine decrescente di tempo di
+			esecuzione, ovvero tale che $t_1\geq t_2\geq\ldots\geq t_n$
+			\FOR{$j=1$ to $n$}
+				\STATE assegna $p_j$ al processore $i$ con il minimo $T_i(j-1)$, ovvero $f(p_j)=i$
+			\ENDFOR
+			\RETURN schedule $f$
+		\end{algorithmic}
+	\end{algorithm}
+	\begin{itemize}
+		\item vediamo un'analisi pi\'u semplice che porta ad un rapporto di approssimazione di circa $\frac{3}{2}$
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{lemma: Ordered-Greedy}
+\addcontentsline{toc}{subsection}{lemma: Ordered-Greedy}
 \begin{flushleft}
+	se $n>h$, allora $t_{h+1}\leq\frac{m^*}{2}$ \newline \\
+	\vspace{0.5cm}
+	\textbf{dimostrazione:}
+	\begin{itemize}
+		\item dall'ordinamento dei job, i primi $h+1$ hanno tutti un tempo di esecuzione $\geq t_{h+1}$
+		\item ma allora $m^*\geq 2 t_{h+1}$, poich\'e in ogni schedule almeno $1$ degli $h$ processori deve ricevere almeno $2$ dei primi $h+1$ job
+	\end{itemize}
+	\hfill$\square$
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{teorema: Ordered-Greedy \'e $(\frac{3}{2}-\frac{1}{2h})$-approssimante}
+\addcontentsline{toc}{subsection}{teorema: Ordered-Greedy \'e $(\frac{3}{2}-\frac{1}{2h})$-approssimante}
 \begin{flushleft}
+	Ordered-Greedy \'e $(\frac{3}{2}-\frac{1}{2h})$-approssimante \newline \\
+	\vspace{0.5cm}
+	\textbf{dimostrazione:}
+	\begin{itemize}
+		\item di nuovo sia $k$ uno dei processori pi\'u carichi (alla fine)
+		\item se $k$ ha $1$ solo job, allora chiaramente la soluzione ritornata \'e ottima
+		\item altrimenti considera l'ultimo job $p_l$ assegnato a $k$
+		\item dato che $p_l$ non \'e il primo job assegnato a $k$, $l\geq h+1$ e quindi $t_l\leq t_{h+1}\leq\frac{m^*}{2}$, e cos\'i:
+			$$m\leq\frac{T}{h}+\frac{h-1}{h}t_l\leq m^*+\frac{h-1}{h}\frac{m^*}{2}\color{gray}=$$
+			$$\color{gray}=m^*+\frac{m^*(h-1)}{2h}=\frac{2hm^*+m^*(h-1)}{2h}=\frac{2hm^*+hm^*-m^*}{2h}=$$
+			$$\color{gray}=\frac{3hm^*-m^*}{2h}=(\frac{3h-1}{2h})m^*=(\frac{3h}{2h}-\frac{1}{2h})m^*\color{black}=(\frac{3}{2}-\frac{1}{2h})m^*$$
+	\end{itemize}
+	\hfill$\square$
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{problema: max cut}
+\addcontentsline{toc}{subsection}{problema: max cut}
 \begin{flushleft}
+	\begin{itemize}
+		\item INPUT: grafo $G=(V,E)$
+		\item SOLUZIONE: una partizione di $V$ in 2 sottoinsiemi $V_1$ e $V_2$, ovvero tale che:
+			$$V_1\cup V_2=V\text{ e }V_1\cap V_2=\emptyset$$
+		\item MISURA: la cardinalit\'a del taglio, ovvero il numero di archi con un estremo (nodo) in $V_1$ e un estremo in $V_2$, cio\'e:
+			$$\vert\{\{u,v\}\hspace{0.1cm}\vert\hspace{0.1cm}u\in V_1\text{ e }v\in V_2\}\vert$$
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{algoritmo: Greedy-Max-Cut}
+\addcontentsline{toc}{subsection}{algoritmo: Greedy-Max-Cut}
+\begin{flushleft}
+	\begin{algorithm}
+		\caption{Greedy-Max-Cut}
+		\begin{algorithmic}
+			\STATE $V_1=V_2=\emptyset$
+			\FOR{$i=1$ to $n$}
+				\STATE \color{gray} // $\Delta_i$ = set di archi tra $i$ e i nodi $j<i$ (adiacenti) \color{black}
+				\STATE $\Delta_i=\{\{i,j\}\in E\vert j<i\}$
+			\ENDFOR
+			\RETURN $V_1,V_2$
+		\end{algorithmic}
+	\end{algorithm}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
