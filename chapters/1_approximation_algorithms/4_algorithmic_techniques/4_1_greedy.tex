@@ -1,4 +1,4 @@
-\section*{approximation}
+\section*{algorithmic techniques: greedy}
 \addcontentsline{toc}{section}{algorithmic techniques: greedy}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -446,66 +446,66 @@
 			\FOR{$i=1$ to $n$}
 				\STATE \color{gray} // $\Delta_i$ = set di archi tra $i$ e i nodi $j<i$ (adiacenti) \color{black}
 				\STATE $\Delta_i=\{\{i,j\}\in E\vert j<i\}$
+				\STATE \color{gray} // $U_i$ = set di nodi gi\'a inseriti (adiacenti ad $i$, all'inizio dello step $i$ \color{black}
+				\STATE $U_i=\{j\vert\{i,j\}\in\Delta_i\}$
+				\STATE $\delta_i=\vert\Delta_i\vert=\vert U_i\vert$
+				\STATE $\delta_{1i}=\vert V_1\cap U_i\vert$
+				\STATE $\delta_{2i}=\vert V_2\cap U_i\vert$
+				\STATE \color{gray} // chiaramente $\delta_{1i}+\delta_{2i}=\delta_i$ \color{black}
+				\IF{$\delta_{1i}>\delta_{2i}$}
+					\STATE $V_2=V_2\cup\{i\}$
+				\ELSE
+					\STATE $V_1=V_1\cup\{i\}$
+				\ENDIF
 			\ENDFOR
 			\RETURN $V_1,V_2$
 		\end{algorithmic}
 	\end{algorithm}
+	\begin{itemize}
+		\item per semplicit\'a sia $V=\{1,\ldots,n\}$
+		\item l'algoritmo ad ogni step inserisce un nuovo nodo in $V_1$ o in $V_2$
+		\item scelta greedy:
+		\begin{itemize}
+			\item allo step $i$, il nodo $i$ viene inserito in modo da massimizzare il numero di archi nuovi nel taglio, ovvero in $V_1$ se il numero di archi che ha verso i nodi gi\'a inseriti in $V_2$ \'e maggiore ($>$) del numero di archi che ha verso quelli in $V_1$, altrimenti in $V_2$ ($\leq$)
+		\end{itemize}
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{teorema: Greedy-Max-Cut \'e $\frac{1}{2}$-approssimante}
+\addcontentsline{toc}{subsection}{teorema: Greedy-Max-Cut \'e $\frac{1}{2}$-approssimante}
 \begin{flushleft}
+	Greedy-Max-Cut \'e $\frac{1}{2}$-approssimante \newline \\
+	\vspace{0.5cm}
+	\textbf{dimostrazione:}
+	\begin{itemize}
+		\item chiaramente poich\'e quel taglio pu\'o solo contenere un sottoinsieme di tutti gli archi in $E$
+			$$m^*\leq\vert E\vert$$
+		\item mostriamo ora che la misura $m$ del taglio restituita dall'algoritmo \'e almeno la met\'a del numero totale di archi, ovvero:
+			$$m\geq\frac{\vert E\vert}{2}$$
+		\item ci\'o implica chiaramente l'affermazione, poich\'e
+			$$\frac{m}{m^*}\geq\frac{\frac{\vert E\vert}{2}}{\vert E\vert}=\frac{1}{2}$$
+		\item poich\'e gli insiemi $\Delta_i$ determinati dall'algoritmo formano una partizione di $E$ e per definizione $\delta_i=\vert\Delta_i\vert$:
+			$$\sum_{i=1}^n\delta_i=\sum_{i=1}^n\vert\Delta_i\vert=\vert E\vert$$
+		\item inoltre, il numero di archi aggiunti al taglio durante lo step $i$, ovvero con un estremo in $V_1$ e l'altro in $V_2$ (dopo l'esecuzione dell' $i$-esima iterazione dell'istruzione $for$), \'e:
+			$$\max(\delta_{1i},\delta_{2i})\geq\frac{(\delta_{1i},\delta_{2i})}{2}=\frac{\delta_i}{2}$$
+		\item quindi:
+			$$m=\sum_{i=1}^n\max(\delta_{1i},\delta_{2i})\geq\sum_{i=1}^n\frac{\delta_i}{2}=\frac{\vert E\vert}{2}$$
+	\end{itemize}
+	\hfill$\square$
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{conclusioni sulla tecnica greedy}
+\addcontentsline{toc}{subsection}{conclusioni sulla tecnica greedy}
 \begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
+	\begin{itemize}
+		\item tutti gli algoritmi visti fin ora hanno complessit\'a temporale polinomiale
+		\item gli algoritmi greedy hanno buone performance in pratica poich\'e possono essere implementati in modo semplice
+		\item ma come abbiamo visto, compiere la scelta che sembra migliore a ciascun singolo step, senza badare alle conseguenze future, in generale non permette di trovare la soluzione ottima
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
