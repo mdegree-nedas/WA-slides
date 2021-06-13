@@ -3,9 +3,235 @@
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{caratteristiche}
+\addcontentsline{toc}{subsection}{caratteristiche}
 \begin{flushleft}
+	\begin{itemize}
+		\item definiamo, per ogni soluzione ammissibile $y$, un sottoinsieme di soluzioni ammissibili "vicine" chiamato intorno di $y$ o semplicemente $neighborhood(y)$
+		\item partendo da una soluzione iniziale, si passa ripetutamente ad una soluzione migliore nell'intorno corrente, finch\'e possibile
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{schema di un algoritmo di ricerca locale}
+\addcontentsline{toc}{subsection}{schema di un algoritmo di ricerca locale}
+\begin{flushleft}
+	\begin{itemize}
+		\item risolve una soluzione iniziale $y$ ammissibile per l'input $x$ (di solito una banale)
+		\item fintanto che esiste una $y'\in neighborhood(y)$ migliore di $y$
+		\begin{itemize}
+			\item sia $y=y'$
+		\end{itemize}
+		\item ritorna $y$
+		\item per definire un algoritmo di ricerca locale per un determinato problema \'e quindi sufficiente definire:
+		\begin{itemize}
+			\item la soluzione iniziale
+			\item l'intorno delle soluzioni ammissibili
+		\end{itemize}
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{complessit\'a}
+\addcontentsline{toc}{subsection}{complessit\'a}
+\begin{flushleft}
+	\begin{itemize}
+		\item per ottenere una complessit\'a temporale polinomiale:
+		\begin{itemize}
+			\item la soluzione iniziale deve essere determinata in tempo polinomiale
+			\item il test della condizione di guardia del $while$ e l'eventuale conseguente determinazione di una soluzione migliore nell'intorno deve essere eseguito in tempo polinomiale
+			\item NOTA: l'intorno pu\'o avere una cardinalit\'a esponenziale rispetto alla dimensione dell'input!
+			\item il numero di iterazioni del $while$ deve essere polinomiale
+		\end{itemize}
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{approssimazione}
+\addcontentsline{toc}{subsection}{approssimazione}
+\begin{flushleft}
+	\begin{itemize}
+		\item OTTIMO LOCALE: la soluzione $y$ restituita \'e la migliore nell'intorno considerato
+		\item per limitare il rapporto di approssimazione \'e sufficiente limitare il rapporto tra il valore di un qualsiasi ottimo locale con quello della misura di una soluzione ottima globale
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{definizione dell'intorno}
+\addcontentsline{toc}{subsection}{definizione dell'intorno}
+\begin{flushleft}
+	\begin{itemize}
+		\item $neighborhood(y)$:
+		\begin{itemize}
+			\item sufficientemente "ricco", per ottenere buone soluzioni (ottimi locali)
+			\item sufficientemente "povero", per garantire una complessit\'a temporale polinomiale
+		\end{itemize}
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{definizione dell'intorno: casi estremi}
+\addcontentsline{toc}{subsection}{definizione dell'intorno: casi estremi}
+\begin{flushleft}
+	\begin{itemize}
+		\item $neighborhood(y)=\emptyset$
+		\begin{itemize}
+			\item tempo di esecuzione polinomiale (se la soluzione iniziale viene determinata in tempo polinomiale)
+			\item cattiva approssimazione (ogni soluzione \'e un ottimo locale)
+		\end{itemize}
+		\item $neighborhood(y)=S(x)$, ovvero l'insieme di tutte le soluzioni ammissibili per $x$
+		\begin{itemize}
+			\item tempo di esecuzione non polinomiale (se il problema \'e NP-HARD)
+			\item buona approssimazione (poich\'e ogni ottimo locale \'e anche un ottimo globale)
+		\end{itemize}
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{problema: max cut (gi\'a definito precedentemente)}
+\addcontentsline{toc}{subsection}{problema: max cut (gi\'a definito precedentemente)}
+\begin{flushleft}
+	\begin{itemize}
+		\item INPUT: grafo $G=(V,E)$
+		\item SOLUZIONE: una partizione di $V$ in 2 sottoinsiemi $V_1$ e $V_2$, ovvero tale che:
+			$$V_1\cup V_2=V\text{ e }V_1\cap V_2=\emptyset$$
+		\item MISURA: la cardinalit\'a del taglio, ovvero il numero di archi con un estremo (nodo) in $V_1$ e un estremo in $V_2$, cio\'e:
+			$$\vert\{\{u,v\}\hspace{0.1cm}\vert\hspace{0.1cm}u\in V_1\text{ e }v\in V_2\}\vert$$
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{algoritmo di ricerca locale per max cut}
+\addcontentsline{toc}{subsection}{algoritmo di ricerca locale per max cut}
+\begin{flushleft}
+	\begin{itemize}
+		\item per definire l'algoritmo di ricerca locale, \'e sufficiente determinare:
+		\begin{itemize}
+			\item la soluzione iniziale:
+				$$V_1=V\text{, }V_2=\emptyset$$
+			\item l'intorno:
+			\begin{itemize}
+				\item dati $V=\{v_1,\ldots,v_n\}$ e $V_1$, $V_2$, le soluzioni dell'intorno di $(V_1,V_2)$ sono tutte le coppie $(V_{1i},V_{2i})$ con $1\leq i\leq n$ che possono essere ottenute muovendo un nodo $v_i$ da $V_1$ a $V_2$ o viceversa, ovvero:
+					$$\text{if }(v_i\in V_1)\text{ }V_{1i}=V_1\setminus\{v_i\}\text{ e }V_{2i}=V_2\cup\{v_i\}$$
+					$$\text{else }(v_i\in V_2)\text{ }V_{1i}=V_1\cup\{v_i\}\text{ e }V_{2i}=V_2\setminus\{v_i\}$$
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{complessit\'a (algoritmo di ricerca locale per max cut)}
+\addcontentsline{toc}{subsection}{complessit\'a (algoritmo di ricerca locale per max cut)}
+\begin{flushleft}
+	\begin{itemize}
+		\item la soluzione iniziale viene banalmente ottenuta in tempo polinomiale
+		\item il test della guardia $while$ e l'eventuale determinazione di una migliore soluzione nell'intorno viene effettuata in tempo polinomale come segue:
+		\begin{itemize}
+			\item per ciascuna delle $n$ soluzioni dell'intorno ($n$ iterazioni), controlla se la soluzione corrente \'e migliore ($n^2$ iterazioni) $\rightarrow O(n^3)$
+		\end{itemize}
+		\item le iterazioni nel $while$ sono al massimo ($\leq$) $\vert E\vert=O(n^2)$,poich\'e ogni iterazione migliora la soluzione corrente, ovvero aumenta  almeno di $1$ il numero di archi del taglio, e vi sono $\vert E\vert$ archi nel taglio (al massimo)
+		\item quindi l'algoritmo ha complessit\'a temporale:
+			$$O(n^3n^2)=O(n^5)$$
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{approssimazione (algoritmo di ricerca locale per max cut)}
+\addcontentsline{toc}{subsection}{approssimazione (algoritmo di ricerca locale per max cut)}
+\begin{flushleft}
+	\begin{itemize}
+		\item vediamo una propriet\'a utile a mostrare il rapporto di approssimazione dell'algoritmo:
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{fatto (approssimazione (algoritmo di ricerca locale per max cut))}
+\addcontentsline{toc}{subsection}{fatto (approssimazione (algoritmo di ricerca locale per max cut))}
+\begin{flushleft}
+	dato un grafo $G=(V,E)$, sia $\delta_i$ il grado di un generico nodo $v_i\in V$, allora:
+	$$\sum_{i=1}^n\delta_i=2\vert E\vert$$
+	\vspace{0.5cm}
+	\textbf{dimostrazione:}
+	\begin{itemize}
+		\item banalmente vero, poich\'e ogni arco viene contato $2$ volte nella somma, ovvero
+			incrementa la somma di $2$
+	\end{itemize}
+	\hfill$\square$
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{teorema: l'algoritmo di ricerca locale \'e $\frac{1}{2}$-approssimante}
+\addcontentsline{toc}{subsection}{teorema: l'algoritmo di ricerca locale \'e $\frac{1}{2}$-approssimante}
+\begin{flushleft}
+	l'algoritmo di ricerca locale \'e $\frac{1}{2}$-approssimante \newline \\
+	\vspace{0.5cm}
+	\textbf{dimostrazione:}
+	\begin{itemize}
+		\item mostriamo che ogni ottimo locale ha $(V_1,V_2)$ ha misura:
+			$$m\geq\frac{\vert E\vert}{2}$$
+		\item ci\'o implica:
+			$$\frac{m}{m^*}\geq\frac{\frac{\vert E\vert}{2}}{\vert E\vert}=\frac{1}{2}$$
+		\vspace{0.5cm}
+		\item poich\'e $m^*\leq\vert E\vert$
+		\item dato un ottimo locale $(V_1,V_2)$ denotiamo con $h$ il numero di archi interni, ovvero con entrambi gli estremi in $V_1$ o in $V_2$
+		\item chiaramente, $m+h=\vert E\vert$
+		\item per ogni nodo $v_i\in V$ definiamo i gradi interni ed esterni del nodo come segue:
+		\begin{itemize}
+			\item $\delta_i^{int}=$ numero di archi che $v_i$ ha verso i nodi nella sua stessa partizione, ovvero:
+				$$\delta_i^{int}=\vert\{v_k\vert\{v_i,v_k\}\in E\text{ e }(v_i,v_k\in V_1)\text{ o }(v_i,v_k\in V_2)\}\vert$$
+			\item $\delta_i^{ext}=$ numero di archi che $v_i$ ha verso i nodi nell'altra partizione, ovvero:
+				$$\delta_i^{ext}=\vert\{v_k\vert\{v_i,v_k\}\in E\text{ e }(v_i\in V_1,v_k\in V_2)\text{ o }(v_i\in V_2,v_k\in V_1)\}\vert$$
+		\end{itemize}
+		\item poich\'e la soluzione nell'intorno $(V_{1i},V_{2i})$ ha misura non maggiore ($\leq$) di quella di $(V_1,V_2)$ (ottimo locale), abbiamo:
+			$$m-\delta_i^{ext}+\delta_i^{int}\leq m$$
+		\item e quindi:
+			$$\delta_i^{int}-\delta_i^{ext}\leq 0$$
+		\item riassumento, su tutti i nodi, abbiamo:
+			$$\sum_{v_i\in V}\delta_i^{int}-\sum_{v_i\in V}\delta_i^{ext}=\sum_{v_i\in V}(\delta_i^{int}-\delta_i^{ext})\leq 0$$
+		\item dal fatto precedente:
+			$$\sum_{v_i\in V}\delta_i^{int}=2h$$
+			(perch\'e \'e come sommare i gradi dei nodi del grafo contenente solo gli archi interni)
+		\item e (sempre dal fatto precedente):
+			$$\sum_{v_i\in V}\delta_i^{ext}=2m$$
+			(perch\'e \'e come sommare i gradi dei nodi del grafo contenente solo gli archi esterni)
+		\item quindi:
+			$$0\geq\sum_{v_i\in V}\delta_i^{int}-\sum_{v_i\in V}\delta_i^{ext}=2h-2m$$
+		\item ovvero $m\geq h$
+		\item quindi (aggiungendo $m$ su entrambi i lati e dividendo per $2$), otteniamo:
+			$$\color{gray}\frac{2m}{2}\geq\frac{(m+h)}{2}=\color{black}m\geq\frac{(m+h)}{2}=\frac{\vert E\vert}{2}$$
+	\end{itemize}
+	\hfill$\square$
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{TODO: esempio esecuzione algoritmo di ricerca locale su grafo}
+\addcontentsline{toc}{subsection}{TODO: esempio esecuzione algoritmo di ricerca locale su grafo}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{conclusioni sulla tecnica della ricerca locale}
+\addcontentsline{toc}{subsection}{conclusioni sulla tecnica della ricerca locale}
+\begin{flushleft}
+	\begin{itemize}
+		\item come gli algoritmi greedy, gli algoritmi di ricerca locale hanno buone performance
+			nella pratica e portano alla determinazione di buone euristiche (algoritmi che eseguono
+			bene nella pratica ma che di solito non hanno prestazioni garantite in termini di tempo
+			o approssimazione)
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
