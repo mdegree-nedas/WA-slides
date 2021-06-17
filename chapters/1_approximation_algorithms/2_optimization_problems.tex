@@ -55,6 +55,23 @@
 			\item SOLUZIONE: $U\subseteq V\hspace{0.1cm}\vert\hspace{0.1cm}\{u,v\}\in E,\hspace{0.1cm}\forall u,v\in U$
 			\item MISURA: $|U|$
 		\end{itemize}
+		\item MIN VERTEX COVER
+		\begin{itemize}
+			\item INPUT: grafo $G=(V,E)$
+			\item SOLUZIONE: $U\subseteq V\hspace{0.1cm}\vert\hspace{0.1cm}\forall\{u,v\}\in E,\hspace{0.1cm}u\in U\text{ o }v\in U$
+			\item MISURA: $|U|$
+		\end{itemize}
+		\item MIN TSP (Traveling Salesman Problem, problema del commesso viaggiatore)
+		\begin{itemize}
+			\item INPUT:
+			\begin{itemize}
+				\item insieme di citt\'a $C=\{c_1,c_2,\ldots,c_n\}$
+				\item distanza $d(c_i,c_j)\in\mathbb{N}$, per ogni coppia di citt\'a $(c_i,c_j)\in C$
+			\end{itemize}
+		\item SOLUZIONE: un tour di tutte le citt\'a, ovvero una permutazione $<c_{p(1)},c_{p(2)},\ldots,c_{p(n)}>$ che descriva l'ordine di visita delle citt\'a
+			\item MISURA: lunghezza del tour, ovvero
+				$$(\sum_{i=1}^{n-1}d(c_{p(i)},c_{p(i+1)}))+d(c_{p(n)},c_{p(1)})$$
+		\end{itemize}
 	\end{itemize}
 \end{flushleft}
 
@@ -64,7 +81,7 @@
 \addcontentsline{toc}{subsection}{def: soluzione ottima}
 \begin{flushleft}
 	\begin{itemize}
-		\item data un'istanza $x\in I_\pi$, una soluzione $y^*\in S_\pi$ \'e ottima per $x$ se $m(x,y^*)=goal\{m(x,y)\hspace{0.1cm}\vert\hspace{0.1cm}y\in S(x)\}$
+		\item data un'istanza $x\in I_\pi$, una soluzione $y^*\in S_\pi(x)$ \'e ottima per $x$ se $m(x,y^*)=goal\{m(x,y)\hspace{0.1cm}\vert\hspace{0.1cm}y\in S(x)\}$
 	\item la misura di una soluzione ottima (o in modo analogo di tutte le soluzioni ottime) di $x$ \'e denotata come $m^*(x)$ o semplicemente $m^*$
 	\end{itemize}
 \end{flushleft}

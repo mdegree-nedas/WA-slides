@@ -234,7 +234,7 @@
 		\begin{itemize}
 			\item verifica se $U$ \'e una clique, ovvero se $\{u,v\}\in E,\hspace{0.1cm}\forall u,v\in U$, e in tal caso risponde $1$, altrimenti risponde $0$
 		\end{itemize}
-	\item chiaramente l'algoritmo risolve il problema della clique, in quanto si ferma per ogni possibile sottoinsieme $U$ ed esiste un sottoinsieme $U$ per il quale risponde $1$ se e solo se esiste una clique di $k$ nodi in $G$, ovvero $\iff(G,K)\in Y_{clique}$
+	\item chiaramente l'algoritmo risolve il problema della clique, in quanto si ferma per ogni possibile sottoinsieme $U$ ed esiste un sottoinsieme $U$ per il quale risponde $1$ se e solo se esiste una clique di $k$ nodi in $G$, ovvero $\iff(G,k)\in Y_{clique}$
 	\item complessit\'a: $O(n^2)$, poich\'e $|U|\leq|V|=n$
 	\end{itemize}
 \end{flushleft}
