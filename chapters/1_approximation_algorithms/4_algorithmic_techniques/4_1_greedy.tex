@@ -201,7 +201,7 @@
 		\begin{itemize}
 			\item insieme di $n$ jobs $P$
 			\item numero di processori $h$
-			\item tempo di esecuzione $t_j$ $\forall p_j\in P$
+			\item tempo di esecuzione $t_j$, $\forall p_j\in P$
 		\end{itemize}
 		\item SOLUZIONE:
 		\begin{itemize}
@@ -233,9 +233,9 @@
 		\begin{algorithmic}
 			\STATE siano $p_1,\ldots,p_n$ i jobs elencati in un qualsiasi ordine
 			\FOR{$j=1$ to $n$}
-				\STATE assegna $p_j$ al processore $i$ avente il minimo $T_i(j-1)$ ovvero $f(p_j)i$
+				\STATE assegna $p_j$ al processore $i$ avente il minimo $T_i(j-1)$ ovvero $f(p_j)=i$
 			\ENDFOR
-			\RETURN lo schedule $i$
+			\RETURN schedule $i$
 		\end{algorithmic}
 	\end{algorithm}
 	\begin{itemize}
@@ -256,8 +256,8 @@
 	\textbf{fatto:}
 	\begin{itemize}
 		\item dato $s\geq 0$ e $h$ numeri $a_1,\ldots,a_h\hspace{0.1cm}\vert\hspace{0.1cm}a_1+\ldots+a_h=s$, allora esiste $j$, $1\leq j\leq h$, tale che \newline
-			$$a_j\geq\frac{s}{h}\hspace{3cm}a_1+\ldots+a_h<h\frac{s}{h}$$
-		\item altrimenti, contraddizione
+			$$a_j\geq\frac{s}{h}$$
+		\item altrimenti, contraddizione ($a_1+\ldots+a_h<h\frac{s}{h}=s$)
 		\item analogamente, esiste $j'$, $1\leq j'\leq h$, tale che $a_{j'}\leq\frac{s}{h}$
 		\item in altre parole, un numero \'e al massimo uguale alla media e uno maggiore o uguale alla media
 		\item pertanto, $\min_j a_j\leq\frac{s}{h}$ e $\max_j a_j\geq\frac{s}{h}$
@@ -318,6 +318,7 @@
 		\item in conclusione:
 			$$\frac{m}{m^*}=\frac{2(h-1)}{h}=2-\frac{1}{h}\hspace{2cm}\text{(diverso da }\leq 2-\frac{1}{h}\text{)}$$
 	\end{itemize}
+	\hfill$\square$
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -333,7 +334,7 @@
 			\item $m^*\geq\frac{T}{h}$, come in qualsiasi soluzione almeno 1 processore deve avere tempo di completamento $\frac{T}{h}$ (richiamiamo che $T=\sum_j t_j$)
 			\item $m^*\geq t_j$, per ogni job $p_j$, come in qualsiasi soluzione uno dei processori deve eseguire $p_j$
 		\end{itemize}
-		\item abbiamo utilizzato il seguente $upper\text{ }bounds$ per il valore della soluzione restituita:
+		\item abbiamo utilizzato il seguente $upper\text{ }bound$ per il valore della soluzione restituita:
 		\begin{itemize}
 			\item per limitare superiormente il valore della soluzione restituita, se $k$ \'e uno dei processori pi\'u carichi e $p_l$ \'e l'ultimo job assegnato a $k$, per la scelta greedy:
 				$$T_k(l-1)\leq\frac{\sum_{j<l}t_j}{h}\leq\frac{T-t_l}{h}$$
@@ -396,7 +397,7 @@
 	\vspace{0.5cm}
 	\textbf{dimostrazione:}
 	\begin{itemize}
-		\item dall'ordinamento dei job, i primi $h+1$ hanno tutti un tempo di esecuzione $\geq t_{h+1}$
+		\item dall'ordinamento dei jobs, i primi $h+1$ hanno tutti un tempo di esecuzione $\geq t_{h+1}$
 		\item ma allora $m^*\geq 2 t_{h+1}$, poich\'e in ogni schedule almeno $1$ degli $h$ processori deve ricevere almeno $2$ dei primi $h+1$ job
 	\end{itemize}
 	\hfill$\square$
@@ -447,9 +448,9 @@
 			\STATE $V_1=V_2=\emptyset$
 			\FOR{$i=1$ to $n$}
 				\STATE \color{gray} // $\Delta_i$ = set di archi tra $i$ e i nodi $j<i$ (adiacenti) \color{black}
-				\STATE $\Delta_i=\{\{i,j\}\in E\vert j<i\}$
-				\STATE \color{gray} // $U_i$ = set di nodi gi\'a inseriti (adiacenti ad $i$, all'inizio dello step $i$ \color{black}
-				\STATE $U_i=\{j\vert\{i,j\}\in\Delta_i\}$
+				\STATE $\Delta_i=\{\{i,j\}\in E\text{ }\vert\text{ }j<i\}$
+				\STATE \color{gray} // $U_i$ = set di nodi gi\'a inseriti (adiacenti ad $i$, all'inizio dello step $i$) \color{black}
+				\STATE $U_i=\{j\text{ }\vert\text{ }\{i,j\}\in\Delta_i\}$
 				\STATE $\delta_i=\vert\Delta_i\vert=\vert U_i\vert$
 				\STATE $\delta_{1i}=\vert V_1\cap U_i\vert$
 				\STATE $\delta_{2i}=\vert V_2\cap U_i\vert$
@@ -468,7 +469,7 @@
 		\item l'algoritmo ad ogni step inserisce un nuovo nodo in $V_1$ o in $V_2$
 		\item scelta greedy:
 		\begin{itemize}
-			\item allo step $i$, il nodo $i$ viene inserito in modo da massimizzare il numero di archi nuovi nel taglio, ovvero in $V_1$ se il numero di archi che ha verso i nodi gi\'a inseriti in $V_2$ \'e maggiore ($>$) del numero di archi che ha verso quelli in $V_1$, altrimenti in $V_2$ ($\leq$)
+			\item allo step $i$, il nodo $i$ viene inserito in modo da massimizzare il numero di archi nuovi nel taglio, ovvero in $V_1$ se il numero di archi che ha verso i nodi gi\'a inseriti in $V_2$ \'e maggiore ($\geq$) del numero di archi che ha verso quelli in $V_1$, altrimenti in $V_2$ ($<$)
 		\end{itemize}
 	\end{itemize}
 \end{flushleft}
@@ -491,7 +492,7 @@
 		\item poich\'e gli insiemi $\Delta_i$ determinati dall'algoritmo formano una partizione di $E$ e per definizione $\delta_i=\vert\Delta_i\vert$:
 			$$\sum_{i=1}^n\delta_i=\sum_{i=1}^n\vert\Delta_i\vert=\vert E\vert$$
 		\item inoltre, il numero di archi aggiunti al taglio durante lo step $i$, ovvero con un estremo in $V_1$ e l'altro in $V_2$ (dopo l'esecuzione dell' $i$-esima iterazione dell'istruzione $for$), \'e:
-			$$\max(\delta_{1i},\delta_{2i})\geq\frac{(\delta_{1i},\delta_{2i})}{2}=\frac{\delta_i}{2}$$
+			$$\max(\delta_{1i},\delta_{2i})\geq\frac{(\delta_{1i}+\delta_{2i})}{2}=\frac{\delta_i}{2}$$
 		\item quindi:
 			$$m=\sum_{i=1}^n\max(\delta_{1i},\delta_{2i})\geq\sum_{i=1}^n\frac{\delta_i}{2}=\frac{\vert E\vert}{2}$$
 	\end{itemize}
