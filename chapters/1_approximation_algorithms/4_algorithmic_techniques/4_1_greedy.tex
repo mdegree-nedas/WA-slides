@@ -21,9 +21,9 @@
 		\item INPUT:
 		\begin{itemize}
 			\item un insieme finito di oggetti $O$
-			\item un profitto intero $p_i$ $\forall o_i\in O$
-			\item un volume intero $a_i$ $\forall o_i\in O$
-			\item un intero positivo $b$
+			\item un profitto intero $p_i$, $\forall o_i\in O$
+			\item un volume intero $a_i$, $\forall o_i\in O$
+			\item un intero positivo $b$ ($b>0$)
 		\end{itemize}
 		\item SOLUZIONE:
 		\begin{itemize}
@@ -36,8 +36,8 @@
 		\vspace{0.5cm}
 		\item senza perdere di generalit\'a, in seguito, assumeremo sempre che:
 		\begin{itemize}
-			\item $a_i\leq b$ $\forall o_i\in O$
-			\item $p_i>0$ $\forall o_i\in O$
+			\item $a_i\leq b$, $\forall o_i\in O$
+			\item $p_i>0$, $\forall o_i\in O$
 		\end{itemize}
 	\end{itemize}
 \end{flushleft}
@@ -51,9 +51,9 @@
 		\item nella scelta greedy:
 		\begin{itemize}
 			\item non possiamo considerare solo il profitto degli oggetti, in quanto il loro volume potrebbe essere troppo grande
-			\item non possiamo considerare solo il il volume degli oggetti, in quanto il loro profitto potrebbe essere troppo basso
+			\item non possiamo considerare solo il volume degli oggetti, in quanto il loro profitto potrebbe essere troppo basso
 		\end{itemize}
-		\item idea: consideriamo gli oggetti in base al profitto per unit\'a di volume, ovvero in base al rapporto $$\frac{p_i}{a_i}$$
+		\item idea: consideriamo gli oggetti in base al profitto per unit\'a di volume, ovvero in base al rapporto $$\frac{p_i}{a_i}\text{, }\forall o_i\in O$$
 		\item l'algoritmo greedy seleziona gli oggetti in ordine decrescente di profitto per volume
 	\end{itemize}
 \end{flushleft}
@@ -67,9 +67,10 @@
 	\begin{algorithm}
 		\caption{Greedy-Knapsack}
 		\begin{algorithmic}
+			\STATE \color{gray} // Q = insieme degli oggetti scelti \color{black}
 			\STATE $Q=\emptyset$
-			\STATE $v=0$
 			\STATE \color{gray} // v = volume del sottoinsieme corrente degli oggetti scelti \color{black}
+			\STATE $v=0$
 			\STATE ordina gli oggetti in ordine decrescente di profitto per volume $\frac{p_i}{a_i}$
 			\STATE siano $o_1,\ldots,o_n$ gli oggetti elencati secondo tale ordine
 			\FOR{$i=1$ to $n$}
@@ -111,6 +112,7 @@
 		\item cos\'i che: \newline \\
 			\hspace{8cm}$(<)$ poich\'e $\frac{1}{r}>1$
 			$$\frac{m}{m^*}=\frac{n-1}{kn-1}\leq\frac{n-1}{\frac{n}{r}-1}<\frac{n-1}{\frac{n}{r}-\frac{1}{r}}=\frac{n-1}{\frac{1}{r}(n-1)}=r$$
+		\item \color{gray} $\forall r<1\rightarrow\frac{m}{m^*}\leq r$, invece di $\forall r\leq 1\rightarrow\frac{m}{m^*}\geq r$
 	\end{itemize}
 	\hfill$\square$
 \end{flushleft}
@@ -153,7 +155,7 @@
 	\vspace{0.5cm}
 	\textbf{dimostrazione:}
 	\begin{itemize}
-		\item $m^*\leq m_j+p_j$ deriva direttamente osservando semplicemente che, denotando con $v$ la somma dei volumi dei primi $j=1$ oggetti scelti, $m_j+p_j$ \'e il valore della soluzione ottima dell'istanza in cui il volume del knapsack \'e $v+a_j>b$
+		\item $m^*\leq m_j+p_j$ deriva direttamente osservando semplicemente che, denotando con $v$ la somma dei volumi dei primi $j-1$ oggetti scelti, $m_j+p_j$ \'e il valore della soluzione ottima dell'istanza in cui il volume del knapsack \'e $v+a_j>b$
 	\end{itemize}
 \end{flushleft}
 
