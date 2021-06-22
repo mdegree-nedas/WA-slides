@@ -224,23 +224,75 @@
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{problema: max 0-1 knapsack (gi\'a definito precedentemente)}
+\addcontentsline{toc}{subsection}{problema: max 0-1 knapsack (gi\'a definito precedentemente)}
 \begin{flushleft}
+	\begin{itemize}
+		\item INPUT:
+		\begin{itemize}
+			\item un insieme finito di oggetti $O$
+			\item un profitto intero $p_i$, $\forall o_i\in O$
+			\item un peso intero $w_i$, $\forall o_i\in O$
+			\item un intero positivo $b$ ($b>0$)
+		\end{itemize}
+		\item SOLUZIONE:
+		\begin{itemize}
+			\item un sottoinsieme di oggetti $Q\subseteq O$ tale che $\sum_{o_i\in Q}w_i\leq b$
+		\end{itemize}
+		\item MISURA:
+		\begin{itemize}
+			\item profitto totale degli oggetti scelti, ovvero $\sum_{o_i\in Q}p_i$
+		\end{itemize}
+		\vspace{0.5cm}
+		\item senza perdere di generalit\'a, in seguito, assumeremo sempre che:
+		\begin{itemize}
+			\item $w_i\leq b$, $\forall o_i\in O$
+			\item $p_i>0$, $\forall o_i\in O$
+		\end{itemize}
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{algoritmo brute force}
+\addcontentsline{toc}{subsection}{algoritmo brute force}
 \begin{flushleft}
+	\begin{itemize}
+		\item semplice algoritmo che enumera tutti i possibili $2^n$ sottoinsiemi degli $n$ elementi
+		\item sceglie la migliore combinazione (miglior profitto)
+		\item l'algoritmo di programmazione solutamente ha performance migliori
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{progettazione dell'algoritmo di programmazione dinamica}
+\addcontentsline{toc}{subsection}{progettazione dell'algoritmo di programmazionedinamica}
 \begin{flushleft}
+	\begin{itemize}
+		\item definizione:
+		\begin{itemize}
+			\item $OPT(i,w)=$ sottoinsieme con profitto massimo di oggetti $1,2,\ldots,n$ con limite di peso $w$
+		\end{itemize}
+		\item fatto:
+		\begin{itemize}
+			\item $OPT(n,b)=$ soluzione ottima del problema iniziale
+		\end{itemize}
+		\item le seguente alternative possono occorrere per OPT:
+		\begin{enumerate}
+			\item OPT non seleziona l'oggetto $i$
+			\begin{itemize}
+				\item OPT seleziona il migliore tra $\{1,2,\ldots,n-1\}$ utilizzando il limite di peso $w$
+			\end{itemize}
+			\item OPT seleziona l'oggetto $i$
+			\begin{itemize}
+				\item OPT seleziona il migliore tra $\{1,2,\ldots,n-1\}$ utilizzando il limite di peso $w-w_i$
+			\end{itemize}
+		\end{enumerate}
+		\item assumiamo che $OPT(k,w)$ sia la soluzione ottima per gli elementi $\{o_1,o_2,\ldots,o_k\}$
+		\item nota: la soluzione ottima $OPT(k+1,w)$ potrebbe non corrispondere a $OPT(k,w)$
+		\item anche perch\'e $OPT(k+1,w)$ potrebbe non essere un superset di $OPT(k,w)$
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
