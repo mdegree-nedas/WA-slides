@@ -6,20 +6,220 @@
 \subsection*{caratteristiche}
 \addcontentsline{toc}{subsection}{caratteristiche}
 \begin{flushleft}
+	\begin{itemize}
+		\item come nel paradigma divide-and-conquer, suddividi il problema in sottoproblemi pi\'u piccoli, risolvi ricorsivamente ciasun sottoproblema e combina le soluzioni dei sottoproblemi per formare la soluzione al problema originale
+		\item ricorrenza facile da calcolare che consente di determinare la soluzione ad un sottoproblema dalla soluzione di sottoproblemi pi\'u piccoli
+		\item differentemente da divide-and-conquer, i sottoproblemi non sono indipendenti, ma si sovrappongono, ovvero durante le decomposizioni occorrono frequentemente gli stessi sottoproblemi
+		\item idea: ciascun sottoproblema viene risolto solo una volta, ci\'o riduce la complessit\'a temporale
+		\item differentemente da divide-and-conquer, di solito \'e con approccio bottom-up invece che top-down, ovvero partendo da sottoproblemi pi\'u piccoli e risolvendo progressivamente quelli pi\'u grandi, fino al problema iniziale
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{uno sguardo pi\'u ravvicinato...}
+\addcontentsline{toc}{subsection}{uno sguardo pi\'u ravvicinato...}
 \begin{flushleft}
+	\begin{itemize}
+		\item il paradigma divide-and-conquer \'e basato sulla decomposzione dei problemi in sottoproblemi pi\'u piccoli:
+		\begin{itemize}
+			\item risolvi ricorsivamente i sottoproblemi
+			\item combina le soluzioni dei sottoproblemi per determinare la soluzione del problema iniziale
+		\end{itemize}
+		\item se un problema di taglia $n$ \'e decomposto in $k$ sottoproblemi di taglie $n_1,n_2,\ldots,n_k<n$, rispettivamente, allora la complessit\'a temporale pu\'o essere espressa dall ricorrenza
+			$$T(n)=T(n_1)+T(n_2)+\ldots+T(n_k)+C(n)$$
+		con $C(n)=$ tempo per combinare le $k$ sottosoluzioni
+		\item la ricorrenza pu\'o essere risolta con metodi differenti, come ad esempio il ricorso al celebre Master Theorem
+		\item un classico esempio di applicazione di divide-and-conquer \'e il calcolo dei numeri di Fibonacci
+		\item l'algoritmo deriva direttamente dalla definizione ricorsiva di tali numeri
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{algoritmo: Fibonacci}
+\addcontentsline{toc}{subsection}{algoritmo: Fibonacci}
 \begin{flushleft}
+	\begin{itemize}
+		\item caso base: ($n\leq 2$) $F(1)=F(2)=1$
+		\item caso induttivo: ($n>2$) $F(n)=F(n-1)+F(n-2),n$
+	\end{itemize}
+	\begin{algorithm}
+		\caption{Fibonacci}
+		\begin{algorithmic}
+			\IF{$n=1\text{ or }n=2$}
+				\RETURN 1
+			\ELSE
+				\RETURN Fibonacci(n-1)+Fibonacci(n-2)
+			\ENDIF
+		\end{algorithmic}
+	\end{algorithm}
+	\begin{itemize}
+		\item complessit\'a temporale:
+			$$T(n)=T(n-1)+T(n-2)+\Theta(1)$$
+		\item che restituisce:
+			$$T(n)=O(2^n)$$
+		\item albero delle chiamate ricorsive:
+		\begin{itemize}
+			\item nota:
+			\begin{itemize}
+				\item inefficiente: gli stessi sottoproblemi vengono risolti ripetutamente per molte volte
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{algoritmo: Fibonacci 2}
+\addcontentsline{toc}{subsection}{algoritmo: Fibonacci 2}
+\begin{flushleft}
+	\begin{itemize}
+		\item programmazione dinamica:
+		\begin{itemize}
+			\item memorizza la soluzione di ciascun sottoproblema in una tabella o in un array, cos\'i da evitare di risolverli ripetutamente
+			\item nell'algoritmo risultante, $F$ \'e un array esterno globale visibile a tutte le chiamate ricorsive
+		\end{itemize}
+		\item nuovo albero delle chiamate ricorsive
+	\end{itemize}
+	\begin{algorithm}
+		\caption{Fibonacci 2}
+		\begin{algorithmic}
+			\IF{$n=1\text{ or }n=2$}
+				\STATE $F[n]=1$
+				\RETURN $F[n]$
+			\ELSE
+				\IF{$F[n]$ \'e stato gi\'a assegnato}
+					\RETURN $F[n]$
+				\ELSE
+					\STATE $F[n]=Fibonacci(n-1)+Fibonacci(n-2)$
+					\RETURN $F[n]$
+				\ENDIF
+			\ENDIF
+		\end{algorithmic}
+	\end{algorithm}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{algoritmo: Fibonacci 3}
+\addcontentsline{toc}{subsection}{algoritmo: Fibonacci 3}
+\begin{flushleft}
+	\begin{algorithm}
+		\caption{Fibonacci 3}
+		\begin{algorithmic}
+			\STATE $F[1]=1$
+			\STATE $F[2]=1$
+			\FOR{$i=3$ to $n$}
+				\STATE $F[i]=F[i-1]+F[i-2]$
+			\ENDFOR
+			\RETURN $F[n]$
+		\end{algorithmic}
+	\end{algorithm}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{riassumendo}
+\addcontentsline{toc}{subsection}{riassumendo}
+\begin{flushleft}
+	\begin{itemize}
+		\item in programmazione dinamica:
+		\begin{itemize}
+			\item il problema iniziale pu\'o essere ricorsivamente decomposto in sottoproblemi
+			\item gli stessi sottoproblemi occorrono molte volte e sono risolti una volta soltanto
+			\item la soluzione di un sottoproblema pu\'o essere ottenuta combinando quelle dei sottoproblemi pi\'u piccoli
+		\end{itemize}
+		\item 2 possibili implementazioni:
+		\begin{itemize}
+			\item top-down (con annotazione in tabella)
+			\item bottom-up
+		\end{itemize}
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{top-down vs. bottom-up}
+\addcontentsline{toc}{subsection}{top-down vs. bottom-up}
+\begin{flushleft}
+	\begin{itemize}
+		\item top-down
+		\begin{itemize}
+			\item sfrutta l'annotazione in tabella
+			\item PRO: risolve solo i sottoproblemi strettamente necessari
+			\item CON: overhead derivante dalla catena di chiamate ricorsive
+		\end{itemize}
+		\item bottom-up
+		\begin{itemize}
+			\item \'e la scelta tipica nella programmazione dinamica
+			\item PRO: risolve anche i problemi non necessari
+			\item CON: \'e in ogni caso generalmente pi\'u efficiente perch\'e elimina il peso della ricorsione, il quale incide maggiormente sulle prestazioni
+		\end{itemize}
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{divide-and-conquer vs. dynamic programming}
+\addcontentsline{toc}{subsection}{divide-and-conquer vs. dynamic programming}
+\begin{flushleft}
+		\item divide-and-conquer
+		\begin{itemize}
+			\item tecnica ricorsiva
+			\item approccio top-down (problemi divisi in sottoproblemi)
+			\item utile quando i sottoproblemi sono indipendenti (ovvero differenti)
+			\item altrimenti, gli stessi sottoproblemi vengono risolti pi\'u volte
+		\end{itemize}
+		\item dynamic programming
+		\begin{itemize}
+			\item tecnica iterativa
+			\item tipicamente approccio bottom-up
+			\item utile quando i sottoproblemi si sovrapppongono (ovvero coincidono)
+			\item ciasun sottoproblema viene risolto una volta soltanto
+		\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\section*{algorithmic techniques: dynamic programming (part 2)}
+\addcontentsline{toc}{section}{algorithmic techniques: dynamic programming (part 2)}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{progettazione di algoritmi di programmazione dinamica}
+\addcontentsline{toc}{subsection}{progettazione di algoritmi di programmazione dinamica}
+\begin{flushleft}
+	\begin{itemize}
+		\item fornire una decomposizione ricorsiva dei sottoproblemi
+		\item calcolare le sottosoluzioni in maniera bottom-up, ovvero partendo dai sottoproblemi di taglia pi\'u piccola
+		\begin{itemize}
+			\item utilizzare una tabella per memorizzare i risultati dei sottoproblemi
+			\item evitare il calcolo delle stesse soluzioni sfruttando la tabella
+		\end{itemize}
+		\item combinare le soluzioni dei sottoproblemi gi\'a risolti per costruire quelle dei sottoproblemi di taglia maggiore, fino alla risoluzione del problema originale
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{complessit\'a degli algoritmi di programmazione dinamica}
+\addcontentsline{toc}{subsection}{complessit\'a degli algoritmi di programmazione dinamica}
+\begin{flushleft}
+	\begin{itemize}
+		\item consideriamo la seguente tabella:
+		\begin{itemize}
+			\item $n=$ taglia dei sottoproblemi ($1,2,\ldots,n$)
+			\item $k=$ parametri dei sottoproblemi ($p_1,p_2,\ldots,p_k$)
+		\end{itemize}
+		\item taglia della tabella $=$ numero di sottoproblemi $=nk$
+		\item complessit\'a:
+		\begin{itemize}
+			\item $[\text{ taglia della tabella }]\times[\text{ tempo per combinare le soluzioni }]$
+			\item il tempo per combinare le soluzioni \'e sempre banalmente polinomiale
+			\item la complessit\'a \'e polinomale se la tabella ha taglia polinomale, ovvero se \'e presente un numero polinomale di differenti sottoproblemi
+		\end{itemize}
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
