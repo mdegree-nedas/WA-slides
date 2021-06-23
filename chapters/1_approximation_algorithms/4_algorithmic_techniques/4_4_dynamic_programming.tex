@@ -297,6 +297,211 @@
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
+\subsection*{definizione ricorsiva per OPT}
+\addcontentsline{toc}{subsection}{definizione ricorsiva per OPT}
+\begin{flushleft}
+	\begin{itemize}
+		\item possiamo dunque fornire la seguente definizione ricorsiva per OPT:
+		\begin{itemize}
+			\item $OPT(i,w)=\emptyset$ se $i=0$
+			\item $OPT(i,w)=OPT(i-1,w)$ se $w_i>w$
+			\item $OPT(i,w)=$ scelta migliore tra $OPT(i-1,w)$ e $OPT(i-1,w-w_i)\cup\{o_i\}$ (altrimenti)
+		\end{itemize}
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{definizione ricorsiva per la misura $m$ della soluzione ottima $OPT(i,w)$}
+\addcontentsline{toc}{subsection}{definizione ricorsiva per la misura $m$ della soluzione ottima $OPT(i,w)$}
+\begin{flushleft}
+	\begin{itemize}
+		\item in termini di misura $m(i,w)$ della soluzione ottima $OPT(i,w)$
+		\begin{itemize}
+			\item $m(i,w)=0$ se $i=0$
+			\item $m(i,w)=m(i-1,w)$ se $w_i>w$
+			\item $m(i,w)=\max\{m(i-1,w),m(i-1,w-w_i)+p_i\}$ (altrimenti)
+		\end{itemize}
+		\item chiaramente, $m^*=m(n,b)$
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{riepilogo definizioni ricorsive per $m$ e $OPT$}
+\addcontentsline{toc}{subsection}{riepilogo definizioni ricorsive per $m$ e $OPT$}
+\begin{flushleft}
+	\begin{itemize}
+		\item come risultato, questo significa che il migliori sottoinsieme di $k$ oggetti con vincolo di peso $w$ \'e (mutua esclusione):
+		\begin{itemize}
+			\item il miglior sottoinsieme di $(k-1)$ oggetti con peso totale $w$
+			\item il miglior sottoinsieme di $(k-1)$ oggetti con peso totale $w-w_k$, pi\'u il contributo (il suo peso) del $k$-esimo oggetto
+			\item quindi per quando riguarda la seguente formula ricorsiva:
+			\begin{itemize}
+				\item $OPT(i,w)=\emptyset$ se $i=0$
+				\item $OPT(i,w)=OPT(i-1,w)$ se $w_i>w$
+				\item $OPT(i,w)=$ scelta migliore tra $OPT(i-1,w)$ e $OPT(i-1,w-w_i)\cup\{o_i\}$ (altrimenti)
+			\end{itemize}
+		\item o il $k$-esimo oggetto non pu\'o essere parte della soluzione (poich\'e il suo solo peso \'e cos\'i grande che l'oggetto stesso non entra nel knapsack)
+		\item altrimenti, scegliamo la soluzione migliore tra:
+		\begin{itemize}
+			\item la soluzione che include il nuovo oggetto
+			\item la soluzione migliore che non include il nuovo oggetto
+		\end{itemize}
+		\end{itemize}
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{algoritmo: Progr-Dyn-Knapsack}
+\addcontentsline{toc}{subsection}{algoritmo: Progr-Dyn-Knapsack}
+\begin{flushleft}
+	\begin{algorithm}
+		\caption{Progr-Dyn-Knapsack}
+		\begin{algorithmic}
+			\STATE \color{gray} // inizializzazione a $0$ della prima riga dell'array bidimensionale $M$ (da $1$ a $w$) \color{black}
+			\FOR{$w=1$ to $b$}
+				\STATE $M[0,w]=0$
+			\ENDFOR
+			\STATE \color{gray} // inizializzazione a $0$ della prima colonna dell'array bidimensionale $M$ (da $0$ a $n$) \color{black}
+			\FOR{$i=0$ to $n$}
+				\STATE $M[i,0]=0$
+			\ENDFOR
+			\FOR{$i=1$ to $n$}
+				\FOR{$w=1$ to $b$}
+					\IF{$w_i>w$}
+						\STATE $M[i,w]=M[i-1,w]$
+					\ELSE
+						\STATE $M[i,w]=\max\{M[i-1,w],M[i-1,w-w_i]+p_i\}$
+					\ENDIF
+				\ENDFOR
+			\ENDFOR
+			\RETURN $M[n,b]$
+		\end{algorithmic}
+	\end{algorithm}
+	\begin{itemize}
+		\item l'algoritmo Progr-Dyn-Knapsack per il problema max 0-1 knapsack, trova il massimo valore che pu\'o essere inserito dentro il knapsack
+		\item il valore viene memorizzato in $M[n,b]$ al termine della procedura
+		\item per scoprire quali sono gli oggetti che sono stati inseriti nella soluzione ottima,bisogna tornare indietro nella tabella:
+		\begin{itemize}
+			\item dobbiamo memorizzare in qualche modo ciascun oggetto aggiunto
+		\end{itemize}
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{algoritmo: Progr-Dyn-Knapsack (trovare gli oggetti inseriti)}
+\addcontentsline{toc}{subsection}{algoritmo: Progr-Dyn-Knapsack (trovare gli oggetti inseriti)}
+\begin{flushleft}
+	\begin{algorithm}
+		\caption{Progr-Dyn-Knapsack (trovare gli oggetti inseriti)}
+		\begin{algorithmic}
+			\STATE $i=n$
+			\STATE $k=w$
+			\IF{$M[i,k]\neq M[i-1,k]$}
+				\STATE marca l'oggetto $i$ come 'inserito nel knapsack'
+				\STATE $i=i-1$
+				\STATE $k=k-w_i$
+			\ELSE
+				\STATE \color{gray} // assumi che l'oggetto $i$-esimo non sia stato inserito nel knapsack \color{black}
+				\STATE $i=i-1$
+			\ENDIF
+		\end{algorithmic}
+	\end{algorithm}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{teorema: l'algoritmo Progr-Dyn-Knapsack ha complessit\'a temporale $O(nb)$}
+\addcontentsline{toc}{subsection}{teorema: l'algoritmo Progr-Dyn-Knapsack ha complessit\'a temporale $O(nb)$}
+\begin{flushleft}
+	la complessit\'a temporale dell'algoritmo Progr-Dyn-Knapsack \'e $O(nb)$ \newline \\
+	\textbf{dimostrazione:}
+	\begin{itemize}
+		\item l'algoritmo impiega $O(1)$ per ciascuna entry della tabella
+		\item vi sono $O(nb)$ entry nella tabella
+		\item dopo aver calcolato i valori possiamo risalire per trovare la soluzione ottima:
+		\begin{itemize}
+			\item prendi l'elemento $o_i$ in $OPT(i,w)\iff M[i-1,w]<M[i,w]$
+		\end{itemize}
+	\end{itemize}
+	\hfill$\square$
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{domanda: l'algoritmo Progr-Dyn-Knapsack \'e polinomiale?}
+\addcontentsline{toc}{subsection}{domanda: l'algoritmo Progr-Dyn-Knapsack \'e polinomiale?}
+\begin{flushleft}
+	l'algoritmo Progr-Dyn-Knapsack \'e polinomiale? \newline
+	(suggerimento: considera il caso in cui $b=2^n$) \newline \\
+	\textbf{risposta:}
+	\begin{itemize}
+		\item per essere polinomiale, la complessit\'a dovrebbe essere polinomiale nel logaritmo dei valori codificati nell'istanza in input, ovvero rispetto a $\log b$
+		\item questa complessit\'a \'e chiamata \textbf{pseudo-polinomale}, ovvero polinomale nella dimensione e nei valori in input, non solo nella dimensione dell'input
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{algoritmo Progr-Dyn-Knapsack: approccio duale}
+\addcontentsline{toc}{subsection}{algoritmo Progr-Dyn-Knapsack: approccio duale}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
 \subsection*{}
 \addcontentsline{toc}{subsection}{}
 \begin{flushleft}
