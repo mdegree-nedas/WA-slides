@@ -262,7 +262,7 @@
 	\begin{itemize}
 		\item semplice algoritmo che enumera tutti i possibili $2^n$ sottoinsiemi degli $n$ elementi
 		\item sceglie la migliore combinazione (miglior profitto)
-		\item l'algoritmo di programmazione solutamente ha performance migliori
+		\item l'algoritmo di programmazione solitamente ha performance migliori
 	\end{itemize}
 \end{flushleft}
 
@@ -274,7 +274,7 @@
 	\begin{itemize}
 		\item definizione:
 		\begin{itemize}
-			\item $OPT(i,w)=$ sottoinsieme con profitto massimo di oggetti $1,2,\ldots,n$ con limite di peso $w$
+			\item $OPT(i,w)=$ sottoinsieme con profitto massimo di oggetti $1,2,\ldots,i$ con limite di peso $w$
 		\end{itemize}
 		\item fatto:
 		\begin{itemize}
@@ -284,11 +284,11 @@
 		\begin{enumerate}
 			\item OPT non seleziona l'oggetto $i$
 			\begin{itemize}
-				\item OPT seleziona il migliore tra $\{1,2,\ldots,n-1\}$ utilizzando il limite di peso $w$
+				\item OPT seleziona il migliore tra $\{1,2,\ldots,i-1\}$ utilizzando il limite di peso $w$
 			\end{itemize}
 			\item OPT seleziona l'oggetto $i$
 			\begin{itemize}
-				\item OPT seleziona il migliore tra $\{1,2,\ldots,n-1\}$ utilizzando il limite di peso $w-w_i$
+				\item OPT seleziona il migliore tra $\{1,2,\ldots,i-1\}$ utilizzando il limite di peso $w-w_i$
 			\end{itemize}
 		\end{enumerate}
 		\item assumiamo che $OPT(k,w)$ sia la soluzione ottima per gli elementi $\{o_1,o_2,\ldots,o_k\}$
@@ -334,10 +334,10 @@
 \addcontentsline{toc}{subsection}{riepilogo definizioni ricorsive per $m$ e $OPT$}
 \begin{flushleft}
 	\begin{itemize}
-		\item come risultato, questo significa che il migliori sottoinsieme di $k$ oggetti con vincolo di peso $w$ \'e (mutua esclusione):
+		\item come risultato, questo significa che il miglior sottoinsieme di $k$ oggetti con vincolo di peso $w$ \'e (mutua esclusione):
 		\begin{itemize}
 			\item il miglior sottoinsieme di $(k-1)$ oggetti con peso totale $w$
-			\item il miglior sottoinsieme di $(k-1)$ oggetti con peso totale $w-w_k$, pi\'u il contributo (il suo peso) del $k$-esimo oggetto
+			\item il miglior sottoinsieme di $(k-1)$ oggetti con peso totale $w-w_k$, pi\'u il contributo (il suo profitto) del $k$-esimo oggetto
 			\item quindi per quando riguarda la seguente formula ricorsiva:
 			\begin{itemize}
 				\item $OPT(i,w)=\emptyset$ se $i=0$
