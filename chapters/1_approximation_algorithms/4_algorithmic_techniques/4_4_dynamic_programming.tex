@@ -362,7 +362,7 @@
 	\begin{algorithm}
 		\caption{Progr-Dyn-Knapsack}
 		\begin{algorithmic}
-			\STATE \color{gray} // inizializzazione a $0$ della prima riga dell'array bidimensionale $M$ (da $1$ a $w$) \color{black}
+			\STATE \color{gray} // inizializzazione a $0$ della prima riga dell'array bidimensionale $M$ (da $1$ a $b$) \color{black}
 			\FOR{$w=1$ to $b$}
 				\STATE $M[0,w]=0$
 			\ENDFOR
@@ -448,8 +448,8 @@
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{algoritmo Progr-Dyn-Knapsack: approccio duale}
-\addcontentsline{toc}{subsection}{algoritmo Progr-Dyn-Knapsack: approccio duale}
+\subsection*{algoritmo Progr-Dyn-Knapsack-Dual: approccio duale}
+\addcontentsline{toc}{subsection}{algoritmo Progr-Dyn-Knapsack-Dual: approccio duale}
 \begin{flushleft}
 	\begin{itemize}
 		\item definizione:
@@ -527,12 +527,12 @@
 					\ENDIF
 				\ENDFOR
 			\ENDFOR
-			\RETURN $\max p\vert V[n,b]\leq b$
+			\RETURN $\max p\text{ }\vert\text{ }V[n,p]\leq b$
 		\end{algorithmic}
 	\end{algorithm}
 	\begin{itemize}
 		\item problema: come dovremmo scegliere $P$?
-		\item risposta: grande abbastanza da includere l'ottimo, ovvero qualunque $upper bound$ di $m^*$, cio\'e $P\geq m^*$
+		\item risposta: grande abbastanza da includere l'ottimo, ovvero qualunque $upper\text{ }bound$ di $m^*$, cio\'e $P\geq m^*$
 		\item scelta:
 			$$P=np_{\max}\geq\sum_{i=1}^np_i\geq m^*\text{, }(p_{\max}=\max p_j)$$
 	\end{itemize}
