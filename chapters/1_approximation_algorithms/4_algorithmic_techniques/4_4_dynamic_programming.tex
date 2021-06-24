@@ -280,15 +280,15 @@
 		\begin{itemize}
 			\item $OPT(n,b)=$ soluzione ottima del problema iniziale
 		\end{itemize}
-		\item le seguente alternative possono occorrere per OPT:
+		\item le seguente alternative possono occorrere per $OPT(i,w)$:
 		\begin{enumerate}
-			\item OPT non seleziona l'oggetto $i$
+			\item $OPT$ non seleziona l'oggetto $i$
 			\begin{itemize}
-				\item OPT seleziona il migliore tra $\{1,2,\ldots,i-1\}$ utilizzando il limite di peso $w$
+				\item $OPT$ seleziona il migliore tra $\{1,2,\ldots,i-1\}$ utilizzando il limite di peso $w$
 			\end{itemize}
-			\item OPT seleziona l'oggetto $i$
+			\item $OPT$ seleziona l'oggetto $i$
 			\begin{itemize}
-				\item OPT seleziona il migliore tra $\{1,2,\ldots,i-1\}$ utilizzando il limite di peso $w-w_i$
+				\item $OPT$ seleziona il migliore tra $\{1,2,\ldots,i-1\}$ utilizzando il limite di peso $w-w_i$
 			\end{itemize}
 		\end{enumerate}
 		\item assumiamo che $OPT(k,w)$ sia la soluzione ottima per gli elementi $\{o_1,o_2,\ldots,o_k\}$
@@ -299,11 +299,11 @@
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{definizione ricorsiva per OPT}
-\addcontentsline{toc}{subsection}{definizione ricorsiva per OPT}
+\subsection*{definizione ricorsiva per $OPT$}
+\addcontentsline{toc}{subsection}{definizione ricorsiva per $OPT$}
 \begin{flushleft}
 	\begin{itemize}
-		\item possiamo dunque fornire la seguente definizione ricorsiva per OPT:
+		\item possiamo dunque fornire la seguente definizione ricorsiva per $OPT$:
 		\begin{itemize}
 			\item $OPT(i,w)=\emptyset$ se $i=0$
 			\item $OPT(i,w)=OPT(i-1,w)$ se $w_i>w$
@@ -451,90 +451,109 @@
 \subsection*{algoritmo Progr-Dyn-Knapsack: approccio duale}
 \addcontentsline{toc}{subsection}{algoritmo Progr-Dyn-Knapsack: approccio duale}
 \begin{flushleft}
+	\begin{itemize}
+		\item definizione:
+		\begin{itemize}
+			\item $OPT(i,p)=$ sottoinsieme di peso minimo di oggetti $1,2,\ldots,i$ con profitto almeno pari a $p$ ($\geq$)
+		\end{itemize}
+		\item domanda: quale sottoproblema corrisponde alla soluzione ottima?
+		\item le seguente alternative possono occorrere per $OPT(i,p)$:
+		\begin{enumerate}
+			\item $OPT$ non seleziona l'oggetto $i$
+			\begin{itemize}
+				\item $OPT$ seleziona il migliore tra $\{1,2,\ldots,i-1\}$ utilizzando il limite di profitto $p$
+			\end{itemize}
+			\item $OPT$ seleziona l'oggetto $i$
+			\begin{itemize}
+				\item $OPT$ seleziona il migliore tra $\{1,2,\ldots,i-1\}$ utilizzando il limite di profitto $p-p_i$
+			\end{itemize}
+		\end{enumerate}
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{definizione ricorsiva per $OPT$ (duale)}
+\addcontentsline{toc}{subsection}{definizione ricorsiva per $OPT$ (duale)}
 \begin{flushleft}
+	\begin{itemize}
+		\item possiamo dunque fornire la seguente definizione ricorsiva per $OPT$:
+		\begin{itemize}
+			\item $OPT(i,p)=$ non definito se $i=0$
+			\item $OPT(i,p)=$ scelta migliore tra $OPT(i-1,p)$ e $\{o_i\}$ se $p_i\geq p$
+			\item $OPT(i,p)=$ scelta migliore tra $OPT(i-1,p)$ e $OPT(i-1,p-p_i)\cup\{o_i\}$ (altrimenti, non definito se entrambi non sono definiti)
+		\end{itemize}
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{definizione ricorsiva per la misura $v$ della soluzione ottima $OPT(i,p)$}
+\addcontentsline{toc}{subsection}{definizione ricorsiva per la misura $m$ della soluzione ottima $OPT(i,w)$}
 \begin{flushleft}
+	\begin{itemize}
+		\item in termini di peso $v(i,p)$ della soluzione ottima $OPT(i,p)$
+		\begin{itemize}
+			\item $v(i,p)=\infty$ se $i=0$
+			\item $v(i,p)=\min\{v(i-1,p),w_i\}$ se $p_i\geq p$
+			\item $v(i,p)=\min\{v(i-1,p),v(i-1,p-p_i)+w_i\}$ (altrimenti)
+		\end{itemize}
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\newpage
+\subsection*{algoritmo: Progr-Dyn-Knapsack-Dual}
+\addcontentsline{toc}{subsection}{algoritmo: Progr-Dyn-Knapsack-Dual}
 \begin{flushleft}
+	\begin{algorithm}
+		\caption{Progr-Dyn-Knapsack-Dual}
+		\begin{algorithmic}
+			\STATE \color{gray} // inizializzazione a $\infty$ della prima riga dell'array bidimensionale $V$ (da $1$ a $P$) \color{black}
+			\FOR{$p=1$ to $P$}
+				\STATE $V[0,p]=\infty$
+			\ENDFOR
+			\STATE \color{gray} // inizializzazione a $\infty$ della prima colonna dell'array bidimensionale $V$ (da $0$ a $n$) \color{black}
+			\FOR{$i=0$ to $n$}
+				\STATE $V[i,0]=\infty$
+			\ENDFOR
+			\FOR{$i=1$ to $n$}
+				\FOR{$p=1$ to $P$}
+					\IF{$p_i\geq p$}
+						\STATE $V[i,p]=\min\{V[i-1,p],w_i\}$
+					\ELSE
+						\STATE $V[i,p]=\min\{V[i-1,p],V[i-1,p-p_i]+w_i\}$
+					\ENDIF
+				\ENDFOR
+			\ENDFOR
+			\RETURN $\max p\vert V[n,b]\leq b$
+		\end{algorithmic}
+	\end{algorithm}
+	\begin{itemize}
+		\item problema: come dovremmo scegliere $P$?
+		\item risposta: grande abbastanza da includere l'ottimo, ovvero qualunque $upper bound$ di $m^*$, cio\'e $P\geq m^*$
+		\item scelta:
+			$$P=np_{\max}\geq\sum_{i=1}^np_i\geq m^*\text{, }(p_{\max}=\max p_j)$$
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{teorema: l'algoritmo Progr-Dyn-Knapsack-Dual ha complessit\'a temporale $O(n^2p_{\max})$}
+\addcontentsline{toc}{subsection}{teorema: l'algoritmo Progr-Dyn-Knapsack-Dual ha complessit\'a temporale $O(n^2p_{\max})$}
 \begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
+	l'algoritmo Progr-Dyn-Knapsack-Dual ha complessit\'a temporale $O(n^2p_{\max})$ \newline \\
+	\textbf{dimostrazione:}
+	\begin{itemize}
+		\item l'algoritmo impiega $O(1)$ per ogni entry della tabella
+		\item vi sono $O(nP)=O(n^2p_{\max})$ entry nella tabella
+		\item dopo il calcolo del valori, possiamo risalire per trovare la soluzione ottima:
+		\begin{itemize}
+			\item prendi l'elemento $o_i$ in $OPT(i,p)\iff V[i-1,p]>V[i,p]$
+		\end{itemize}
+	\end{itemize}
+	\hfill$\square$
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
