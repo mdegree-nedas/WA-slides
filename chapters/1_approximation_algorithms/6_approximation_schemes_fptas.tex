@@ -3,6 +3,166 @@
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
+\subsection*{definizione: FPTAS}
+\addcontentsline{toc}{subsection}{definizione: FPTAS}
+\begin{flushleft}
+	\begin{itemize}
+		\item un algoritmo $A$ per un problema di ottimizzazione $\pi\in NPO$, \'e un fully polynomial time approximation scheme per $\pi$ se, data un'istanza in input $x\in I_\pi$ e un numero razionale $\epsilon>0$, esso ritorna una soluzione $(1+\epsilon)$-approssimata (per $\min$) o $(1-\epsilon)$-approssimata (per $\max$) in tempo polinomiale, entrambe rispetto alla dimensine dell'istanza $x$ e in $\frac{1}{\epsilon}$
+		\item \textbf{nota:} FPTAS mantiene una buona complessit\'a temporale quando $\epsilon$ decresce
+		\item esempio:
+		\begin{itemize}
+			\item $O(n\cdot\log n+2^\frac{1}{\epsilon})\rightarrow\text{non \'e un FPTAS}$
+			\item $O(\frac{n\cdot\log n}{\epsilon^2})\rightarrow\text{\'e un FPTAS}$
+		\end{itemize}
+		\item nella pratica dobbiamo stare attenti a far s\'i che $\frac{1}{\epsilon}$ (o una funzione pi\'u logaritmica) non compaia in un esponente
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{FPTAS-Knapsack}
+\addcontentsline{toc}{subsection}{FPTAS-Knapsack}
+\begin{flushleft}
+	\begin{itemize}
+		\item sappiamo che Progr-Dyn-Knapsack-Dual ha una complessit\'a temporale pseudo-polinomiale $O(n^2\cdot p_{\max})$
+		\item dove $p_{\max}=\max p_j$ \'e il massimo profitto di un oggetto
+		\item se possiamo approssimare i profitti originali con profitti pi\'u piccoli allora la complessit\'a viene ridotta, ottenendo comunque una buona approssimazione
+		\item diamo un'occhiata pi\'u ravvicinata a quest'idea:
+		\item \textbf{idea:}
+		\begin{enumerate}
+			\item approssimiamo i profitti di multipli di $k$ per un parametro intero adatto $k>0$
+				$$p_i'=\lfloor\frac{p_i}{k}\rfloor\cdot k$$
+			\item se $k$ \'e sufficiente piccolo, i nuovi profitti $p_i'$ approssimano sufficientemente i profitti originali $p_i$, quindi una soluzione ottima per $p_i'$ approssima bene la soluzione ottima per i profitti originali $p_i$
+			\item scalando tutti i profitti $p_i'$, dividendoli per $k$, ovvero
+				$$p_i'=\frac{\lfloor\frac{p_i}{k}\rfloor\cdot k}{k}=\lfloor\frac{p_i}{k}\rfloor$$
+			otteniamo un'istanza equivalente con profitti pi\'u piccoli
+			\item \textbf{complessit\'a:} l'algoritmo di programmazione dinamica duale applicato a questa istanza produce quindi una complessit\'a minore \newline \\
+				$$O(n^2\cdot p'_{\max})=O(n^2\cdot\frac{p_{\max}}{k})$$
+			\item \textbf{approssimazione:}
+			\begin{itemize}
+				\item errore al massimo $k$ per ogni oggetto scelto, ovvero al massimo $n\cdot k$ in totale
+				\item dunque, $m\geq m^*-n\cdot k$
+			\end{itemize}
+			\item \textbf{idea:} scegli $k$ sufficientemente grande da ottenere una complessit\'a polinomale e sufficientemente piccolo da fornire una buona approssimazione
+				$$k=\lfloor\frac{\epsilon\cdot p_{\max}}{n}\rfloor$$
+		\end{enumerate}
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{algoritmo: FPTAS-Knapsack}
+\addcontentsline{toc}{subsection}{algoritmo: FPTAS-Knapsack}
+\begin{flushleft}
+	\begin{algorithm}
+		\caption{FPTAS-Knapsack}
+		\begin{algorithmic}
+			\STATE $k=\lfloor\frac{\epsilon\cdot p_{\max}}{n}\rfloor$
+			\STATE trova la soluzione ottima per l'istanza con profitti scalati
+			$p_i'=\lfloor\frac{p_i}{k}\rfloor$ utilizzando l'algoritmo di programmazione dinamica
+			pseudo-polinomale Progr-Dyn-Knapsack-Dual
+			\STATE sia $S$ l'insieme di oggetti ritornati
+			\RETURN $S$
+		\end{algorithmic}
+	\end{algorithm}
+	\begin{itemize}
+		\item \textbf{complessit\'a:}
+			$$O(n^2\cdot p'_{\max})=O(n^2\cdot\frac{p_{\max}}{k})=O(\frac{n^2\cdot p_{\max}}{\frac{\epsilon\cdot p_{\max}}{n}}))=O(\frac{n^3}{\epsilon})$$
+		\item \textbf{approssimazione o errore:}
+			$$\frac{m}{m^*}\geq\frac{m^*-n\cdot k}{m^*}=1-\frac{n\cdot k}{m^*}\geq 1-\frac{n\cdot k}{p_{\max}}\geq 1-\frac{\frac{n\cdot\epsilon\cdot p_{\max}}{n}}{p_{\max}}=1-\epsilon$$
+		dunque:
+			$$\frac{m}{m^*}\geq 1-\epsilon$$
+		\item \textbf{nota:} non abbiamo scalato i pesi, perch\'e non \'e garantito che tornando ai
+			pesi originali la soluzione resti ammissibile (potrebbe superare il peso totale $b$)
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{lemma: $m\geq m^*=n\cdot k$ (FPTAS-Knapsack)}
+\addcontentsline{toc}{subsection}{lemma: $m\geq m^*=n\cdot k$ (FPTAS-Knapsack)}
+\begin{flushleft}
+	$m\geq m^*=n\cdot k$ \newline \\
+	\textbf{dimostrazione:}
+	\begin{itemize}
+		\item sia $S=\{o_{j1},o_{j2},\ldots,o_{jh}\}$ e sia $S^*=\{o_{i1},o_{i2},\ldots,o_{il}\}$ la soluzione ottima, allora:
+			$$m=p_{j1}+p_{j2}+\ldots+p_{jh}\text{ e }m^*=p_{i1}+p_{i2}+\ldots+p_{il}$$
+		\item assumiamo per contraddizione che $m<m^*-n\cdot k$
+			$$\lfloor\frac{p_{i1}}{k}\rfloor+\ldots+\lfloor\frac{p_{il}}{k}\rfloor\geq(\frac{p_{i1}}{k}-1)+\ldots+(\frac{p_{il}}{k})=$$
+			$$=\frac{p_{i1}+\ldots+p_{il}}{k}-l\geq\frac{p_{i1}+\ldots+p_{il}}{k}-n=\frac{m}{m^*}-n>\ldots$$
+		\item (dall'ipotesi $m<m^*-n\cdot k$)
+			$$\ldots>\frac{m+n\cdot
+			k}{k}-n=\frac{m}{k}=\frac{p_{j1}+\ldots+p_{jh}}{k}\geq\lfloor\frac{p_{j1}}{k}\rfloor+\ldots+\lfloor\frac{p_{jh}}{k}\rfloor$$
+		\item \textbf{contraddizione:} poich\'e $S^*$ sarebbe una soluzione strettamente migliore di $S$ per l'istanza con profitti scalati, quindi contraddicendo l'ottimalit\'a di Progr-Dyn-Knapsack-Dual per l'istanza con profitti scalati
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{teorema: FPTAS-Knapsack \'e un FPTAS per il problema max 0-1 knapsack}
+\addcontentsline{toc}{subsection}{teorema: FPTAS-Knapsack \'e un FPTAS per il problema max 0-1 knapsack}
+\begin{flushleft}
+	\begin{itemize}
+		\item \textbf{complessit\'a:}
+			$$O(\frac{n^2\cdot p_\max}{k})=O(\frac{n^2\cdot p_\max}{\frac{\epsilon\cdot
+			p_\max}{n}})=O(\frac{n^3}{\epsilon})$$
+		\item \textbf{approssimazione:} (dal lemma precedente)
+			$$\frac{m}{m^*}\geq\frac{m^*-n\cdot k}{m^*}=1-\frac{n\cdot k}{m^*}\geq1-\frac{n\cdot k}{p_{\max}}\geq 1-\frac{n\cdot\frac{\epsilon\cdot p_{\max}}{n}}{p_{\max}}=1-\epsilon$$
+	\end{itemize}
+	\hfill$\square$
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{\'e possibile ridurre la complessit\'a temporale?}
+\addcontentsline{toc}{subsection}{\'e possibile ridurre la complessit\'a temporale?}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
 \subsection*{}
 \addcontentsline{toc}{subsection}{}
 \begin{flushleft}
