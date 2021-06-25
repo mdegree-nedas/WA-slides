@@ -1,5 +1,5 @@
-\section*{approximation schemes (PTAS)}
-\addcontentsline{toc}{section}{approximation schemes (PTAS)}
+\section*{approximation schemes: polynomial time approximation scheme (PTAS)}
+\addcontentsline{toc}{section}{approximation schemes: polynomial time approximation scheme (PTAS)}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
@@ -7,7 +7,277 @@
 \addcontentsline{toc}{subsection}{definizione: PTAS}
 \begin{flushleft}
 	\begin{itemize}
+		\item un algoritmo $A$ per un problema di ottimizzazione $\pi\in NPO$, \'e un polynomial time approximation scheme per $\pi$ se, data un'istanza in input $x\in I_\pi$ e un numero razionale $\epsilon>0$, esso ritorna una soluzione $(1+\epsilon)$-approssimata (per $\min$) o $(1-\epsilon)$-approssimata (per $\max$) in tempo polinomiale rispetto alla dimensine dell'istanza $x$
+		\item \textbf{nota:} la complessit\'a temporale pu\'o essere esponenziale in $\frac{1}{\epsilon}$ (esempio $O(n^\frac{1}{\epsilon})$)
+		\item la complessit\'a di un PTAS pu\'o crescere 'drammaticamente' quando $\epsilon$ decresce
+		\item \textbf{nota:} per ogni valore fisso di $\epsilon$, un PTAS corrisponde ad un algoritmo di $(1+\epsilon)$-approssimazione di tempo polinomale (o $(1-\epsilon)$)
 	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{problema: min multiprocessor scheduling (gi\'a definito precedentemente)}
+\addcontentsline{toc}{subsection}{problema: min multiprocessor scheduling (gi\'a definito precedentemente)}
+\begin{flushleft}
+	\begin{itemize}
+		\item INPUT:
+		\begin{itemize}
+			\item insieme di $n$ jobs $P$
+			\item numero di processori $h$
+			\item tempo di esecuzione $t_j$, $\forall p_j\in P$
+		\end{itemize}
+		\item SOLUZIONE:
+		\begin{itemize}
+			\item uno schedule per $P$, ovvero una funzione
+				$$f:P\rightarrow\{1,\ldots,h\}$$
+		\end{itemize}
+		\item MISURA:
+		\begin{itemize}
+			\item $makespan$ o tempo di completamento di $f$, ovvero
+				$$\max_{i\in[1,\ldots,h]}\sum_{p_j\in P\hspace{0.1cm}\vert\hspace{0.1cm}f(p_j)=i}t_j$$
+		\end{itemize}
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{richiamiamo l'algoritmo Greedy-Graham}
+\addcontentsline{toc}{subsection}{richiamiamo l'algoritmo Greedy-Graham}
+\begin{flushleft}
+	\begin{itemize}
+		\item scelta greedy:
+		\begin{itemize}
+			\item ad ogni step assegna un job ad uno dei processori correntemente meno carichi
+		\end{itemize}
+		\item richiamiamo rapidamente gli step base della dimostrazione del rapporto di approssimazione di Greedy-Graham
+		\begin{itemize}
+			\item $T_i(j)=$ tempo di completamento del processore $i$ alla fine del tempo $j$ ($h=$ numero di processori)
+		\end{itemize}
+		\item abbiamo utilizzato i seguenti $lower\text{ }bounds$ per $m^*$:
+		\begin{itemize}
+			\item $m^*\geq\frac{T}{h}$, in qualsiasi soluzione almeno 1 processore deve avere tempo di completamento $\frac{T}{h}$ (richiamiamo che $T=\sum_j t_j$)
+			\item $m^*\geq t_j$, per ogni job $p_j$, in qualsiasi soluzione uno dei processori deve eseguire $p_j$
+		\end{itemize}
+		\item abbiamo utilizzato il seguente $upper\text{ }bound$ per il valore della soluzione restituita:
+		\begin{itemize}
+			\item per limitare superiormente il valore della soluzione restituita, se $k$ \'e uno dei processori pi\'u carichi e $p_l$ \'e l'ultimo job assegnato a $k$, per la scelta greedy:
+				$$T_k(l-1)\leq\frac{\sum_{j<l}t_j}{h}\leq\frac{T-t_l}{h}$$
+		\end{itemize}
+		\item quindi possiamo derivare la seguente disuguaglianza:
+			$$m=T_k(n)=T_k(l-1)+t_l\leq\frac{T-t_l}{h}+t_l=$$
+			$$=\color{gray}\frac{T-t_l+ht_l}{h}=\frac{T}{h}-\frac{1+h}{h}t_l\color{black}=\frac{T}{h}+\frac{h-1}{h}t_l\leq\ldots$$
+		\item poich\'e $\frac{T}{h}\leq m^*$ e $t_l\leq m^*$
+			$$\ldots\leq m^*+\frac{h-1}{h}m^*\color{gray}=\frac{hm^*+(h-1)m^*}{h}=\frac{hm^*+hm^*-m^*}{h}=$$
+			$$\color{gray}=\frac{2hm^*-m^*}{h}=\frac{2h-1}{h}m^*\color{black}=(2-\frac{1}{h})m^*$$
+		\item idea per il miglioramento: decrementa $t_l$ il pi\'u possibile e trova un rapporto di approssimazione migliore sfruttando le disuguaglianze
+			$$m\leq\frac{T}{h}+\frac{h-1}{h}t_l\leq m^*+\frac{h-1}{h}t_l$$
+		\item modificando l'algoritmo e/o migliorando l'analisi vedremo come limitare superiormente $t_l$ progressivamente con:
+		\begin{itemize}
+			\item $\frac{m^*}{2}$ ($\frac{3}{2}$-approssimante),
+			\item $\frac{m^*}{3}$ ($\frac{4}{3}$-approssimante),
+			\item e arbitrariamente piccolo, ovvero $\epsilon m^*$ ($(1+\epsilon)$-approssimante), cio\'e un PTAS 
+		\end{itemize}
+	\item mostriamo ora come far diventare $t_l$ arbitrariamente piccolo, cio\'e $\epsilon m^*$, ottenendo una $(1+\epsilon)$-approssimazione, ovvero un PTAS
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{ottenere un PTAS...}
+\addcontentsline{toc}{subsection}{ottenere un PTAS...}
+\begin{flushleft}
+	\begin{itemize}
+		\item proviamo a far diventare $t_l$ pi\'u piccolo possibile
+		\item possiamo sfruttare il seguente lemma:
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{lemma: $t_i\leq \frac{T}{i}$}
+\addcontentsline{toc}{subsection}{lemma: $t_i\leq \frac{T}{i}$}
+\begin{flushleft}
+	se $t_1,t_2,\ldots,t_n$ sono ordinati in maniera decrescente e $t_1+t_2+\ldots+t_n=T$, allora:
+		$$\forall i\text{, }1\leq i\leq n\hspace{1.5cm}t_i\leq \frac{T}{i}$$
+	\textbf{dimostrazione:}
+	\begin{itemize}
+		\item assumiamo per contraddizione che $t_i>\frac{T}{i}$, allora:
+			$$t_1+t_2+\ldots+t_n\geq i\cdot t_i>i\cdot\frac{T}{i}=T$$
+		\item contraddizione, poich\'e $T=\sum_{i=1}^nt_i$
+	\end{itemize}
+	\hfill$\square$
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{PTAS: idea sottostante}
+\addcontentsline{toc}{subsection}{PTAS: idea sottostante}
+\begin{flushleft}
+	\begin{itemize}
+		\item calcola la soluzione ottima per i primi $q$ jobs
+		\item completa assegnando in maniera greedy i restanti jobs
+		\item se otteniamo $t_l\leq\epsilon\cdot m^*$, allora:
+			$$m\leq\frac{T}{h}+(\frac{h-1}{h})\cdot t_l<\frac{T}{h}+t_l\leq m^*+\epsilon\cdot m^*=(1+\epsilon)m^*$$
+		\item partendo dal lemma precedente, \'e sufficiente assegnare $q$ in modo tale che, poich\'e $l>q$
+		\item questo vale per
+			$$q=\lceil\frac{h}{\epsilon}\rceil$$
+		\item anzi, le disuguaglianze
+			$$t_l\leq\frac{T}{l}\leq\frac{T}{q+1}\leq\epsilon\cdot\frac{T}{h}\leq\epsilon\cdot m^*$$
+		sono vere se consideriamo
+			$$q\geq\frac{h}{\epsilon}-1$$
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{algoritmo: PTAS-Scheduling}
+\addcontentsline{toc}{subsection}{algoritmo: PTAS-Scheduling}
+\begin{flushleft}
+	\begin{algorithm}
+		\caption{PTAS-Scheduling}
+		\begin{algorithmic}
+			\STATE ordina i jobs in modo decrescente rispetto ai tempi di esecuzione $t_i$
+			\STATE sia $p_1,p_2,\ldots,p_n$ la risultante sequenza ordinata con $t_1\geq t_2\geq\ldots\geq t_n$
+			\STATE calcola lo schedule ottimo $f$ per i primi $q=\lceil\frac{h}{\epsilon}\rceil$ jobs
+			\FOR{$j=q+1$ to $n$}
+				\STATE assegna $p_j$ al prcessore $i$ con minimo $T_i(j-1)$ \color{gray}// ovvero $f(p_j)=i$\color{black}
+			\ENDFOR
+			\RETURN schedule $f$
+		\end{algorithmic}
+	\end{algorithm}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{teorema: l'algoritmo PTAS-Scheduling ritorna sempre una soluzione $(1+\epsilon)$-approssimata} \addcontentsline{toc}{subsection}{teorema: l'algoritmo PTAS-Scheduling ritorna sempre una soluzione $(1+\epsilon)$-approssimata}
+\begin{flushleft}
+	l'algoritmo PTAS-Scheduling ritorna sempre una soluzione $(1+\epsilon)$-approssimata \newline \\
+	\textbf{dimostrazione:}
+	\begin{itemize}
+		\item sia $t\leq m^*$ il tempo di completamento dell asoluzione ottima per i primi $q$ jobs
+		\begin{itemize}
+			\item se $m\leq t$, ovvero la fase greedy non ha incrementato il tempo di completamento, allora l'algoritmo ritorna la soluzione ottima
+			\item se $m>t$, allora nuovamente, denotando con $k$ il processore pi\'u carico altermine dell'algoritmo e con $p_l$ l'ultimo job assegnato a $k$ nella fase greedy:
+				$$m=T_k(n)=T_k(l-1)+t_l\leq\frac{T-t_l}{h}+t_l=\frac{T}{h}+\frac{h-1}{h}t_l<\frac{T}{h}+t_l\leq m^*+\epsilon\cdot m^*=(1+\epsilon)m^*$$
+		\end{itemize}
+		\item ovvero
+			$$\frac{m}{m^*}\leq 1+\epsilon$$
+	\end{itemize}
+	\hfill$\square$
+	\begin{itemize}
+		\item quindi l'algoritmo soddisfa il requisito di approssimazioe per PTAS, ma \'e un PTAS?
+		\item complessit\'a:
+		\begin{itemize}
+			\item l'ordinamento iniziale richiede $O(n\cdot\log n)$ step temporali
+			\item la ricerca esaustiva di una soluzione ottima per i primi $q$ jobs richiede al massimo $O(h^\frac{h}{\epsilon})$, poich\'e vi sono al  massimo $h^q\approx h^\frac{h}{\epsilon}$ possibili soluzioni ($h$ possibili scelte per ciascuno dei $q$ jobs)
+			\item l'ultimo $for$ esegue al massimo $n$ iterazioni, ciascuna delle quali richiede $O(h)$
+			\item quindi, la complessit\'a temporale generale \'e:
+				$$O(n\cdot\log n+h^\frac{h}{\epsilon}+n\cdot h)$$
+			\item tale complessit\'a \'e esponenziale in $h$, e dunque pu\'o essere esponenziale nella dimensine dell'input (per esempio se $h=n$)
+			\item quindi \textbf{non abbiamo un PTAS}, a meno che non fissiamo $h$ in modo tale che sia un valore costante dato (ad esemio: $h=2,h=3,\ldots h=100,\ldots$)
+			\item fissare $h$ costante \'e equivalente a dire che $h$ non dipende dall'istanza di input, o analogamente che non \'e parte dell'input
+			\item in altre parole esso corrisponde a considerare il seguente problema:
+		\end{itemize}
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{problema: min $h$-processor scheduling}
+\addcontentsline{toc}{subsection}{problema: min $h$-processor scheduling}
+\begin{flushleft}
+	\begin{itemize}
+		\item INPUT:
+		\begin{itemize}
+			\item insieme di $n$ jobs $P$
+			\item tempo di esecuzione $t_j$, $\forall p_j\in P$
+		\end{itemize}
+		\item SOLUZIONE:
+		\begin{itemize}
+			\item uno schedule per $P$, ovvero una funzione
+				$$f:P\rightarrow\{1,\ldots,h\}$$
+		\end{itemize}
+		\item MISURA:
+		\begin{itemize}
+			\item $makespan$ o tempo di completamento di $f$, ovvero
+				$$\max_{i\in[1,\ldots,h]}\sum_{p_j\in P\hspace{0.1cm}\vert\hspace{0.1cm}f(p_j)=i}t_j$$
+		\end{itemize}
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{teorema: l'algoritmo PTAS-Scheduling \'e un PTAS per il problema min $h$-processor scheduling}
+\addcontentsline{toc}{subsection}{teorema: l'algoritmo PTAS-Scheduling \'e un PTAS per il problema min $h$-processor scheduling}
+\begin{flushleft}
+	l'algoritmo PTAS-Scheduling \'e un PTAS per il problema min $h$-processor scheduling \newline \\
+	\textbf{dimostrazione:}
+	\begin{itemize}
+		\item come gi\'a visto, la complessit\'a temporale di PTAS-Scheduling \'e:
+			$$O(n\cdot\log n+h^\frac{h}{\epsilon}+n\cdot h)$$
+		\item che \'e polinomale nella dimensione dell'input (ma esponenziale in $\frac{1}{\epsilon}$)
+		\item approssimazione: $1+\epsilon$
+	\end{itemize}
+	\hfill$\square$
+	\begin{itemize}
+		\item \textbf{nota:} min $h$-processor scheduling con $h=2$ coincide con il famoso min partition problem, che a sua volta ammette un PTAS
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{problema: min partition}
+\addcontentsline{toc}{subsection}{problema: min partition}
+\begin{flushleft}
+	\begin{itemize}
+		\item INPUT:
+		\begin{itemize}
+			\item insieme di oggetti $X$
+			\item peso intero positivo $a_i$, $\forall o_i\in X$
+		\end{itemize}
+		\item SOLUZIONE:
+		\begin{itemize}
+			\item una partizione di $X$ in $2$ sottoinsiemi $X_1$ e $X_2$, tale che
+				$$X_1\cap X_2=\emptyset\text{ e }X_1\cup X_2=X$$
+		\end{itemize}
+		\item MISURA:
+		\begin{itemize}
+			\item[] $$\max\{\sum_{o_i\in X_1}a_i,\sum_{o_i\in X_2}a_i\}$$
+		\end{itemize}
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{ottenere un PTAS per il problema min partition}
+\addcontentsline{toc}{subsection}{ottenere un PTAS per il problema min partition}
+\begin{flushleft}
+	\begin{itemize}
+		\item chiaramente, gli oggetti corrispondono ai jobs, i pesi ai tempi di esecuzione e i 2 sottoinsiemi ai 2 processori
+		\item \'e possibile estendere il precedente risultato per ottenere un PTAS per il problema min multiprocessor scheduling, ovvero per ogni (non costante) numero $h$ di processori
+		\item richiamiamo che nella precedente dimostrazione di approssimazione di PTAS, denotando con $t$ il tempo di completamento dello schedule ottimo ottenuto per i primi $q$ jobs, abbiamo 2 casi:
+		\begin{enumerate}
+			\item $m\leq t$, ovvero la fase greedy non accresce il tempo di completamento, quindi l'algoritmo restituisce la soluzione ottima poich\'e $t\leq m^*$
+			\item $m>t$, in tal caso vengono applicati gli step abituali per la parte greedy
+		\end{enumerate}
+		\item idea: la dimostrazione dell'approssimazione continua ad essere valida se, invce di determinare l'ottimo per i primi $q$ jobs, determiniamo una soluzione approssimata per questi ultimi, ovvero tale che $t\leq(1+\epsilon)m^*$
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{lemma: algoritmo di programmazione dinamica polinomiale (schedule approssimato per i primi $q$ jobs)}
+\addcontentsline{toc}{subsection}{lemma: algoritmo di programmazione dinamica polinomiale (schedule approssimato per i primi $q$ jobs)}
+\begin{flushleft}
+	esiste un algoritmo di programmazione dinamica che determina in tempo polinomale uno scheduling per i primi $q$ jobs aventi tempo di completamento $t\leq(1+\epsilon)m^*$ \newline \\
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{teorema: esiste un PTAS per il problema min multiprocessor scheduling}
+\addcontentsline{toc}{subsection}{teorema: esiste un PTAS per il problema min multiprocessor scheduling}
+\begin{flushleft}
+	esiste un PTAS per il problema min multiprocessor scheduling
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
