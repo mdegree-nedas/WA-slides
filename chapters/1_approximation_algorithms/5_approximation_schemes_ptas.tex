@@ -154,10 +154,10 @@
 	l'algoritmo PTAS-Scheduling ritorna sempre una soluzione $(1+\epsilon)$-approssimata \newline \\
 	\textbf{dimostrazione:}
 	\begin{itemize}
-		\item sia $t\leq m^*$ il tempo di completamento dell asoluzione ottima per i primi $q$ jobs
+		\item sia $t\leq m^*$ il tempo di completamento della soluzione ottima per i primi $q$ jobs
 		\begin{itemize}
 			\item se $m\leq t$, ovvero la fase greedy non ha incrementato il tempo di completamento, allora l'algoritmo ritorna la soluzione ottima
-			\item se $m>t$, allora nuovamente, denotando con $k$ il processore pi\'u carico altermine dell'algoritmo e con $p_l$ l'ultimo job assegnato a $k$ nella fase greedy:
+			\item se $m>t$, allora nuovamente, denotando con $k$ il processore pi\'u carico al termine dell'algoritmo e con $p_l$ l'ultimo job assegnato a $k$ nella fase greedy:
 				$$m=T_k(n)=T_k(l-1)+t_l\leq\frac{T-t_l}{h}+t_l=\frac{T}{h}+\frac{h-1}{h}t_l<\frac{T}{h}+t_l\leq m^*+\epsilon\cdot m^*=(1+\epsilon)m^*$$
 		\end{itemize}
 		\item ovvero
@@ -174,7 +174,7 @@
 			\item quindi, la complessit\'a temporale generale \'e:
 				$$O(n\cdot\log n+h^\frac{h}{\epsilon}+n\cdot h)$$
 			\item tale complessit\'a \'e esponenziale in $h$, e dunque pu\'o essere esponenziale nella dimensine dell'input (per esempio se $h=n$)
-			\item quindi \textbf{non abbiamo un PTAS}, a meno che non fissiamo $h$ in modo tale che sia un valore costante dato (ad esemio: $h=2,h=3,\ldots h=100,\ldots$)
+			\item quindi \textbf{non abbiamo un PTAS}, a meno che non fissiamo $h$ in modo tale che sia un valore costante dato (ad esempio: $h=2,h=3,\ldots h=100,\ldots$)
 			\item fissare $h$ costante \'e equivalente a dire che $h$ non dipende dall'istanza di input, o analogamente che non \'e parte dell'input
 			\item in altre parole esso corrisponde a considerare il seguente problema:
 		\end{itemize}
@@ -257,10 +257,10 @@
 		\item \'e possibile estendere il precedente risultato per ottenere un PTAS per il problema min multiprocessor scheduling, ovvero per ogni (non costante) numero $h$ di processori
 		\item richiamiamo che nella precedente dimostrazione di approssimazione di PTAS, denotando con $t$ il tempo di completamento dello schedule ottimo ottenuto per i primi $q$ jobs, abbiamo 2 casi:
 		\begin{enumerate}
-			\item $m\leq t$, ovvero la fase greedy non accresce il tempo di completamento, quindi l'algoritmo restituisce la soluzione ottima poich\'e $t\leq m^*$
+			\item $m\leq t$, ovvero la fase greedy non accresce il tempo di completamento, allora l'algoritmo restituisce la soluzione ottima poich\'e $t\leq m^*$
 			\item $m>t$, in tal caso vengono applicati gli step abituali per la parte greedy
 		\end{enumerate}
-		\item idea: la dimostrazione dell'approssimazione continua ad essere valida se, invce di determinare l'ottimo per i primi $q$ jobs, determiniamo una soluzione approssimata per questi ultimi, ovvero tale che $t\leq(1+\epsilon)m^*$
+		\item idea: la dimostrazione dell'approssimazione continua ad essere valida se, invece di determinare l'ottimo per i primi $q$ jobs, determiniamo una soluzione approssimata per questi ultimi, ovvero tale che $t\leq(1+\epsilon)m^*$
 	\end{itemize}
 \end{flushleft}
 
@@ -269,7 +269,7 @@
 \subsection*{lemma: algoritmo di programmazione dinamica polinomiale (schedule approssimato per i primi $q$ jobs)}
 \addcontentsline{toc}{subsection}{lemma: algoritmo di programmazione dinamica polinomiale (schedule approssimato per i primi $q$ jobs)}
 \begin{flushleft}
-	esiste un algoritmo di programmazione dinamica che determina in tempo polinomale uno scheduling per i primi $q$ jobs aventi tempo di completamento $t\leq(1+\epsilon)m^*$ \newline \\
+	esiste un algoritmo di programmazione dinamica che determina in tempo polinomale uno scheduling per i primi $q$ jobs avente tempo di completamento $t\leq(1+\epsilon)m^*$ \newline \\
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
