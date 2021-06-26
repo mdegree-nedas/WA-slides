@@ -24,8 +24,8 @@
 \addcontentsline{toc}{subsection}{FPTAS-Knapsack}
 \begin{flushleft}
 	\begin{itemize}
-		\item sappiamo che Progr-Dyn-Knapsack-Dual ha una complessit\'a temporale pseudo-polinomiale $O(n^2\cdot p_{\max})$
-		\item dove $p_{\max}=\max p_j$ \'e il massimo profitto di un oggetto
+		\item sappiamo che Progr-Dyn-Knapsack-Dual ha una complessit\'a temporale pseudo-polinomiale $O(n^2\cdot p_{max})$
+		\item dove $p_{max}=\max p_j$ \'e il massimo profitto di un oggetto
 		\item se possiamo approssimare i profitti originali con profitti pi\'u piccoli allora la complessit\'a viene ridotta, ottenendo comunque una buona approssimazione
 		\item diamo un'occhiata pi\'u ravvicinata a quest'idea:
 		\item \textbf{idea:}
@@ -37,14 +37,14 @@
 				$$p_i'=\frac{\lfloor\frac{p_i}{k}\rfloor\cdot k}{k}=\lfloor\frac{p_i}{k}\rfloor$$
 			otteniamo un'istanza equivalente con profitti pi\'u piccoli
 			\item \textbf{complessit\'a:} l'algoritmo di programmazione dinamica duale applicato a questa istanza produce quindi una complessit\'a minore \newline \\
-				$$O(n^2\cdot p'_{\max})=O(n^2\cdot\frac{p_{\max}}{k})$$
+				$$O(n^2\cdot p'_{max})=O(n^2\cdot\frac{p_{max}}{k})$$
 			\item \textbf{approssimazione:}
 			\begin{itemize}
 				\item errore al massimo $k$ per ogni oggetto scelto, ovvero al massimo $n\cdot k$ in totale
 				\item dunque, $m\geq m^*-n\cdot k$
 			\end{itemize}
 			\item \textbf{idea:} scegli $k$ sufficientemente grande da ottenere una complessit\'a polinomale e sufficientemente piccolo da fornire una buona approssimazione
-				$$k=\lfloor\frac{\epsilon\cdot p_{\max}}{n}\rfloor$$
+				$$k=\lfloor\frac{\epsilon\cdot p_{max}}{n}\rfloor$$
 		\end{enumerate}
 	\end{itemize}
 \end{flushleft}
@@ -57,19 +57,17 @@
 	\begin{algorithm}
 		\caption{FPTAS-Knapsack}
 		\begin{algorithmic}
-			\STATE $k=\lfloor\frac{\epsilon\cdot p_{\max}}{n}\rfloor$
-			\STATE trova la soluzione ottima per l'istanza con profitti scalati
-			$p_i'=\lfloor\frac{p_i}{k}\rfloor$ utilizzando l'algoritmo di programmazione dinamica
-			pseudo-polinomale Progr-Dyn-Knapsack-Dual
+			\STATE $k=\lfloor\frac{\epsilon\cdot p_{max}}{n}\rfloor$
+			\STATE trova la soluzione ottima per l'istanza con profitti scalati $p_i'=\lfloor\frac{p_i}{k}\rfloor$ utilizzando l'algoritmo di programmazione dinamica pseudo-polinomale Progr-Dyn-Knapsack-Dual
 			\STATE sia $S$ l'insieme di oggetti ritornati
 			\RETURN $S$
 		\end{algorithmic}
 	\end{algorithm}
 	\begin{itemize}
 		\item \textbf{complessit\'a:}
-			$$O(n^2\cdot p'_{\max})=O(n^2\cdot\frac{p_{\max}}{k})=O(\frac{n^2\cdot p_{\max}}{\frac{\epsilon\cdot p_{\max}}{n}}))=O(\frac{n^3}{\epsilon})$$
+			$$O(n^2\cdot p'_{max})=O(n^2\cdot\frac{p_{max}}{k})=O(\frac{n^2\cdot p_{max}}{\frac{\epsilon\cdot p_{max}}{n}}))=O(\frac{n^3}{\epsilon})$$
 		\item \textbf{approssimazione o errore:}
-			$$\frac{m}{m^*}\geq\frac{m^*-n\cdot k}{m^*}=1-\frac{n\cdot k}{m^*}\geq 1-\frac{n\cdot k}{p_{\max}}\geq 1-\frac{\frac{n\cdot\epsilon\cdot p_{\max}}{n}}{p_{\max}}=1-\epsilon$$
+			$$\frac{m}{m^*}\geq\frac{m^*-n\cdot k}{m^*}=1-\frac{n\cdot k}{m^*}\geq 1-\frac{n\cdot k}{p_{max}}\geq 1-\frac{\frac{n\cdot\epsilon\cdot p_{max}}{n}}{p_{max}}=1-\epsilon$$
 		dunque:
 			$$\frac{m}{m^*}\geq 1-\epsilon$$
 		\item \textbf{nota:} non abbiamo scalato i pesi, perch\'e non \'e garantito che tornando ai
@@ -104,10 +102,10 @@
 \begin{flushleft}
 	\begin{itemize}
 		\item \textbf{complessit\'a:}
-			$$O(\frac{n^2\cdot p_\max}{k})=O(\frac{n^2\cdot p_\max}{\frac{\epsilon\cdot
-			p_\max}{n}})=O(\frac{n^3}{\epsilon})$$
+			$$O(\frac{n^2\cdot p_{max}}{k})=O(\frac{n^2\cdot p_{max}}{\frac{\epsilon\cdot
+			p_{max}}{n}})=O(\frac{n^3}{\epsilon})$$
 		\item \textbf{approssimazione:} (dal lemma precedente)
-			$$\frac{m}{m^*}\geq\frac{m^*-n\cdot k}{m^*}=1-\frac{n\cdot k}{m^*}\geq1-\frac{n\cdot k}{p_{\max}}\geq 1-\frac{n\cdot\frac{\epsilon\cdot p_{\max}}{n}}{p_{\max}}=1-\epsilon$$
+			$$\frac{m}{m^*}\geq\frac{m^*-n\cdot k}{m^*}=1-\frac{n\cdot k}{m^*}\geq1-\frac{n\cdot k}{p_{max}}\geq 1-\frac{n\cdot\frac{\epsilon\cdot p_{max}}{n}}{p_{max}}=1-\epsilon$$
 	\end{itemize}
 	\hfill$\square$
 \end{flushleft}
@@ -117,55 +115,64 @@
 \subsection*{\'e possibile ridurre la complessit\'a temporale?}
 \addcontentsline{toc}{subsection}{\'e possibile ridurre la complessit\'a temporale?}
 \begin{flushleft}
+	\begin{itemize}
+		\item complessit\'a temporale della programmazione dinamica:
+			$$O(n\cdot\sum_{j}p_j)=O(n\cdot n\cdot p_{max})=O(n^2\cdot p_{max})$$
+		\item complessit\'a con i profitti scalati:
+			$$O(n\cdot\sum_{j}\frac{p_j}{k})=O(n\cdot\frac{n\cdot p_{max}}{k})=O(\frac{n^2\cdot p_{max}}{k})$$
+		\item approssimazione:
+			$$1-\frac{n\cdot k}{m^*}\geq 1-\frac{n\cdot k}{p_{max}}$$
+		\item \textbf{nota:} $p_{max}$ e $n\cdot p_{max}$ rispettivamente sono il $lower\text{ }bound$ e l'$upper\text{ }bound$ per $m^*$, ovvero $p_{max}\leq m^*\leq n\cdot p_{max}$
+		\item \textbf{nota:} $p_{max}$ pu\'o essere pi\'u piccolo di $m^*$ e $n\cdot p_{max}$ pu\'o essere pi\'u grande
+		\item \textbf{domanda:} \'e possibile fornire dei $bound$ migliori per $m^*$?
+		\item \textbf{osservazioni:}
+		\begin{itemize}
+			\item utilizzando un $lower\text{ }bound$ migliore per $m^*$ e mantenendo lo stesso $k$ otteniamo una migliore approssimazione e analogamente incrementando $k$ (riducendo la complessit\'a) manteniamo la stessa approssimazione
+			\item utilizzando un $upper\text{ }bound$ migliore per $m^*$ e mantenendo lo stesso $k$ otteniamo una migliore approssimazione e analogamente decrementando $k$ (miglirando l'approssimazione) manteniamo la stessa complessit\'a
+		\end{itemize}
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{come migliorare i $bound$ per $m^*$}
+\addcontentsline{toc}{subsection}{come migliorare i $bound$ per $m^*$}
 \begin{flushleft}
+	\begin{itemize}
+		\item richiamiamo l'algoritmo Modified-Greedy $\frac{1}{2}$-approssimante e sia $M_{mod}$ la misura della soluzione da esso ritornata
+		\item per definizione di approssimazione e poich\'e $M_{mod}\leq m^*$
+			$$M_{mod}\leq m^*\leq 2\cdot M_{mod}$$
+		\item quindi, considerando
+			$$P'=\lceil\frac{2\cdot M_{mod}}{k}\rceil$$
+			come massimo profitto in Progr-Dyn-Knapsack-Dual (ovvero $P'$ \'e il numero di colonne
+			nella tabella di Progr-Dyn-Knapsack-Dual), otteniamo una migliore complessit\'a...
+		\item impostando il parametro
+			$$k=\lfloor\frac{\epsilon\cdot M_{mod}}{n}\rfloor$$
+			ed eseguendo Progr-Dyn-Knapsack-Dual Modificato sull'istanza con profitti scalati
+			$$p_i'=\lfloor\frac{p_i}{k}\rfloor$$
+			otteniamo la seguente approssimazione e complessit\'a temporale
+		\item \textbf{complessit\'a:}
+			$$O(\frac{n\cdot M_{mod}}{k})=O(\frac{n\cdot M_{mod}}{\frac{\epsilon\cdot M_{mod}}{n}})=O(\frac{n^2}{\epsilon})$$
+		\item \textbf{approssimazione:}
+			$$\frac{m}{m^*}\geq 1-\frac{n\cdot k}{m^*}\geq 1-\frac{n\cdot k}{M_{mod}}\geq \frac{n\cdot\frac{\epsilon\cdot M_{mod}}{n}}{M_{mod}}=1-\epsilon$$
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{algoritmo: New-FPTAS-Knapsack}
+\addcontentsline{toc}{subsection}{algoritmo: New-FPTAS-Knapsack}
 \begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
+	\begin{algorithm}
+		\caption{New-FPTAS-Knapsack}
+		\begin{algorithmic}
+			\STATE calcola $M_{mod}$ eseguendo l'algoritmo Modified-Greedy e sia $k=\lfloor\frac{\epsilon\cdot M_{mod}}{n}\rfloor$
+			\STATE trova la soluzione ottima per l'istanza con profitti scalati $p_i'=\lfloor\frac{p_i}{k}\rfloor$ utilizzando l'algoritmo Progr-Dyn-Knapsack-Dual Modificato
+			\STATE sia $S$ l'insieme di oggetti ritornati
+			\RETURN $S$
+		\end{algorithmic}
+	\end{algorithm}
+	\item domanda: possiamo evitare il calcolo di $P'$ all'interno di Progr-Dyn-Knapsack-Dual Modificato?
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
