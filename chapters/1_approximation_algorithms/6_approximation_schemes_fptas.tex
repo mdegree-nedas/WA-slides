@@ -7,7 +7,7 @@
 \addcontentsline{toc}{subsection}{definizione: FPTAS}
 \begin{flushleft}
 	\begin{itemize}
-		\item un algoritmo $A$ per un problema di ottimizzazione $\pi\in NPO$, \'e un fully polynomial time approximation scheme per $\pi$ se, data un'istanza in input $x\in I_\pi$ e un numero razionale $\epsilon>0$, esso ritorna una soluzione $(1+\epsilon)$-approssimata (per $\min$) o $(1-\epsilon)$-approssimata (per $\max$) in tempo polinomiale, entrambe rispetto alla dimensine dell'istanza $x$ e in $\frac{1}{\epsilon}$
+		\item un algoritmo $A$ per un problema di ottimizzazione $\pi\in NPO$, \'e un fully polynomial time approximation scheme per $\pi$ se, data un'istanza in input $x\in I_\pi$ e un numero razionale $\epsilon>0$, esso ritorna una soluzione $(1+\epsilon)$-approssimata (per $\min$) o $(1-\epsilon)$-approssimata (per $\max$) in tempo polinomiale, entrambe rispetto alla dimensione dell'istanza $x$ e in $\frac{1}{\epsilon}$
 		\item \textbf{nota:} FPTAS mantiene una buona complessit\'a temporale quando $\epsilon$ decresce
 		\item esempio:
 		\begin{itemize}
@@ -77,17 +77,17 @@
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{lemma: $m\geq m^*=n\cdot k$ (FPTAS-Knapsack)}
-\addcontentsline{toc}{subsection}{lemma: $m\geq m^*=n\cdot k$ (FPTAS-Knapsack)}
+\subsection*{lemma: $m\geq m^*-n\cdot k$ (FPTAS-Knapsack)}
+\addcontentsline{toc}{subsection}{lemma: $m\geq m^*-n\cdot k$ (FPTAS-Knapsack)}
 \begin{flushleft}
-	$m\geq m^*=n\cdot k$ \newline \\
+	$m\geq m^*-n\cdot k$ \newline \\
 	\textbf{dimostrazione:}
 	\begin{itemize}
 		\item sia $S=\{o_{j1},o_{j2},\ldots,o_{jh}\}$ e sia $S^*=\{o_{i1},o_{i2},\ldots,o_{il}\}$ la soluzione ottima, allora:
 			$$m=p_{j1}+p_{j2}+\ldots+p_{jh}\text{ e }m^*=p_{i1}+p_{i2}+\ldots+p_{il}$$
 		\item assumiamo per contraddizione che $m<m^*-n\cdot k$
-			$$\lfloor\frac{p_{i1}}{k}\rfloor+\ldots+\lfloor\frac{p_{il}}{k}\rfloor\geq(\frac{p_{i1}}{k}-1)+\ldots+(\frac{p_{il}}{k})=$$
-			$$=\frac{p_{i1}+\ldots+p_{il}}{k}-l\geq\frac{p_{i1}+\ldots+p_{il}}{k}-n=\frac{m}{m^*}-n>\ldots$$
+			$$\lfloor\frac{p_{i1}}{k}\rfloor+\ldots+\lfloor\frac{p_{il}}{k}\rfloor\geq(\frac{p_{i1}}{k}-1)+\ldots+(\frac{p_{il}}{k}-1)=$$
+			$$=\frac{p_{i1}+\ldots+p_{il}}{k}-l\geq\frac{p_{i1}+\ldots+p_{il}}{k}-n=\frac{m^*}{k}-n>\ldots$$
 		\item (dall'ipotesi $m<m^*-n\cdot k$)
 			$$\ldots>\frac{m+n\cdot
 			k}{k}-n=\frac{m}{k}=\frac{p_{j1}+\ldots+p_{jh}}{k}\geq\lfloor\frac{p_{j1}}{k}\rfloor+\ldots+\lfloor\frac{p_{jh}}{k}\rfloor$$
@@ -128,7 +128,7 @@
 		\item \textbf{osservazioni:}
 		\begin{itemize}
 			\item utilizzando un $lower\text{ }bound$ migliore per $m^*$ e mantenendo lo stesso $k$ otteniamo una migliore approssimazione e analogamente incrementando $k$ (riducendo la complessit\'a) manteniamo la stessa approssimazione
-			\item utilizzando un $upper\text{ }bound$ migliore per $m^*$ e mantenendo lo stesso $k$ otteniamo una migliore approssimazione e analogamente decrementando $k$ (miglirando l'approssimazione) manteniamo la stessa complessit\'a
+			\item utilizzando un $upper\text{ }bound$ migliore per $m^*$ e mantenendo lo stesso $k$ otteniamo una migliore approssimazione e analogamente decrementando $k$ (migliorando l'approssimazione) manteniamo la stessa complessit\'a
 		\end{itemize}
 	\end{itemize}
 \end{flushleft}

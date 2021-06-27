@@ -3,72 +3,167 @@
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{performance garantite}
+\addcontentsline{toc}{subsection}{performance garantite}
 \begin{flushleft}
+	\begin{itemize}
+		\item finora abbiamo considerato approcci con performance garantite
+		\item pro:
+		\begin{itemize}
+			\item approssimazione e tempo di esecuzione garantiti per ogni istanza in input
+			\item prende in considerazione il caso peggiore
+		\end{itemize}
+		\item contro:
+		\begin{itemize}
+			\item alcuni problemi non ammettono algoritmi con performance garantite
+			\item per alcuni problemi non sono noti algoritmi con performance garantite
+			\item a volte, cattivi comportamenti nella pratica
+		\end{itemize}
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{restrizione dell'insieme delle istanze}
+\addcontentsline{toc}{subsection}{restrizione dell'insieme delle istanze}
 \begin{flushleft}
+	\begin{itemize}
+		\item performance garantite nel sottoinsieme delle istanze in input che sono significative o di interesse
+		\item pro:
+		\begin{itemize}
+			\item permette di applicare nuovamente l'approccio con performance garantite
+		\end{itemize}
+		\item contro:
+		\begin{itemize}
+			\item performance garantite solo per il sottoinsieme scelto di istanze o per un caso particolare
+		\end{itemize}
+		\item esempio: metric TSP (con disequazioni triangolari)
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{media o analisi probabilistica}
+\addcontentsline{toc}{subsection}{media o analisi probabilistica}
 \begin{flushleft}
+	\begin{itemize}
+		\item in generale, assumendo una distribuzione di probabilit\'a dell'istanza, essa eguaglia la media o la performance attesa, alcune volte con alta probabilit\'a
+		\item pro:
+		\begin{itemize}
+			\item pu\'o accorgersi di buoni comportamenti pratici dell'algoritmo
+			\item \'e un metodo analitico, ovvero basato su dimostrazioni matematiche
+		\end{itemize}
+		\item contro:
+		\begin{itemize}
+			\item non ha performance garantite
+			\item l'analisi \'e spesso complessa
+			\item spesso la distribuzione delle istanze in input \'e sconosciuta
+		\end{itemize}
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{euristiche}
+\addcontentsline{toc}{subsection}{euristiche}
 \begin{flushleft}
+	\begin{itemize}
+		\item algoritmi con un buon comportamento pratico ma solitamente ocn performance non dimostrabili
+		\item pro:
+		\begin{itemize}
+			\item buon comportamento pratico
+		\end{itemize}
+		\item contro:
+		\begin{itemize}
+			\item performance spesso non dimostrabili
+		\end{itemize}
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{algoritmi randomizzati}
+\addcontentsline{toc}{subsection}{algoritmi randomizzati}
 \begin{flushleft}
+	\begin{itemize}
+		\item effetuano scelte randomiche durante la computazione
+		\item le soluzioni ritornate possono essere differenti per esecuzioni differenti sullo stesso input
+		\item esse sono infatti variabili random (per ogni istanza vi sono diverse soluzioni, ciascuna restituita con una certa probabilit\'a determinata in accordo con le scelte randomiche dell'algoritmo)
+		\item \'e mostrato che, fissata una qualsiasi istanza, il valore atteso delle performance \'e buono o la performance \'e buona con alta probabilit\'a (sempre in accordo con le scelte randomiche)
+		\item pro:
+		\begin{itemize}
+			\item sono generalmente semplici
+			\item sono veloci (sia analiticamente che in pratica)
+		\end{itemize}
+		\item contro:
+		\begin{itemize}
+			\item incertezza del risultato per ogni istanza fissata
+			\item impossibilit\'a di fare scelte realmente randomiche (sebbene esse possano essere simulate)
+		\end{itemize}
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{algoritmi randomizzati}
+\addcontentsline{toc}{subsection}{algoritmi randomizzati}
 \begin{flushleft}
+	\begin{itemize}
+		\item $m\rightarrow$ \'e una variabile randomica
+		\item $E(m)\rightarrow$ \'e il valore atteso di $m$ calcolato in accordo con le scelte randomiche dell'algoritmo
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{definizione: algoritmi randomizzati e $r$-approssimazione}
+\addcontentsline{toc}{subsection}{definizione: algoritmi randomizzati e $r$-approssimazione}
 \begin{flushleft}
+	\begin{itemize}
+		\item un algoritmo randomizzato $A$ \'e $r$-approssimante se:
+			$$\frac{E(m)}{m^*}\leq r\hspace{2cm}\text{(per }\min\text{)}$$
+			$$\frac{E(m)}{m^*}\geq r\hspace{2cm}\text{(per }\max\text{)}$$
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{problema: max weighted cut}
+\addcontentsline{toc}{subsection}{problema: max weighted cut}
 \begin{flushleft}
+	\begin{itemize}
+		\item INPUT:
+		\begin{itemize}
+			\item grafo $G=(V,E)$
+			\item peso non-negativo $w_{ij}>0$, $\forall\{v_i,v_j\}\in E$
+		\end{itemize}
+		\item SOLUZIONE: partizione di $V$ in 2 sottoinsiemi $V_1$ e $V_2$ tale che
+			$$V_1\cap V_2=\emptyset\text{ e }V_1\cup V_2=V$$
+		\item MISURA: peso del taglio, ovvero
+			$$\sum_{\{v_i,v_j\}\in E\vert v_i\in V_1\wedge v_j\in V_2}w_{ij}$$
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\newpage
+\subsection*{algoritmo: Random-Cut}
+\addcontentsline{toc}{subsection}{algoritmo: Random-Cut}
 \begin{flushleft}
-\end{flushleft}
-
-% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
-\begin{flushleft}
+	\begin{algorithm}
+		\caption{Random-Cut}
+		\begin{algorithmic}
+			\STATE $V_1=\emptyset$
+			\STATE $V_2=\emptyset$
+			\FOR{$i=1$ to $n$}
+				\STATE inserisci $v_i$ in $V_1$ con probabilit\'a $\frac{1}{2}$ indipendentemente dagli altri nodi (oppure in $V_2$)
+			\ENDFOR
+			\RETURN $V_1$ e $V\setminus V_1$ ($\equiv V_2$)
+		\end{algorithmic}
+	\end{algorithm}
+	\begin{itemize}
+		\item chiaramente, l'algoritmo \'e polinomale
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
