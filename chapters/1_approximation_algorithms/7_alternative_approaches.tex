@@ -168,44 +168,241 @@
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{teorema: Random-Cut \'e $\frac{1}{2}$-approssimante}
+\addcontentsline{toc}{subsection}{teorema: Random-Cut \'e $\frac{1}{2}$-approssimante}
 \begin{flushleft}
+	Random-Cut \'e $\frac{1}{2}$-approssimante \newline \\
+	\textbf{dimostrazione:}
+	\begin{itemize}
+		\item sia $x_{ij}$ la variabile randomica "l'arco $\{v_i,v_j\}$" \'e nel taglio"
+		\item allora
+			$$m=\sum_{\{v_i,v_j\}\in E}w_{ij}\cdot x_{ij}$$
+		\item quindi
+			$$E(m)=E(\sum_{\{v_i,v_j\}\in E}w_{ij}\cdot x_{ij})=\sum_{\{v_i,v_j\}\in E}w_{ij}\cdot E(x_{ij})=$$
+			$$=\sum_{\{v_i,v_j\}\in E}w_{ij}\cdot P(x_{ij}=1)=$$
+			$$=\sum_{\{v_i,v_j\}\in E}w_{ij}\cdot P((v_i\in V_1\land v_j\in V_2)\lor(v_i\in V_2\land v_j\in V_1))=$$
+			$$=\sum_{\{v_i,v_j\}\in E}w_{ij}\cdot P(\frac{1}{2}\cdot\frac{1}{2}+\frac{1}{2}\cdot\frac{1}{2})=\frac{1}{2}\cdot\sum_{\{v_i,v_j\}\in E}w_{ij}\geq\frac{m^*}{2}$$
+		\item dunque
+			$$\frac{E(m)}{m^*}\geq\frac{1}{2}$$
+	\end{itemize}
+	\hfill$\square$
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{problema: min weighted set cover (gi\'a definito precedentemente)}
+\addcontentsline{toc}{subsection}{problema: min weighted set cover (gi\'a definito precedentemente)}
 \begin{flushleft}
+	\begin{itemize}
+		\item INPUT:
+		\begin{itemize}
+			\item un universo $U=\{o_1,o_2,\ldots,o_n\}$ di $n$ oggetti
+			\item una famiglia $\hat{S}=\{S_1,S_2,\ldots,S_h\}$ di $h$ sottoinsiemi di $U$
+			\item un costo intero $c_j$ associato ad ogni $S_j\in \hat{S}$
+		\end{itemize}
+		\item SOLUZIONE: un cover di $U$, ovvero una sottofamiglia $\hat{C}\subseteq\hat{S}$ tale che:
+			$$\cup_{S_j\in\hat{C}}S_j=U$$
+		\item MISURA: costo totale del cover, ovvero
+			$$\sum_{S_j\in\hat{C}}c_j$$
+	\end{itemize}
+	\vspace{0.5cm}
+	\begin{itemize}
+		\item $f=$ frequenza massima di un oggetto nel sottoinsieme $\hat{S}$, ovvero ciasun oggetto occorre in al massimo $f$ sottoinsiemi
+		\item dato un insieme di $n$ elementi $\{1,2,\ldots,n\}$ (chiamato universo) e una collezione $S$ di $m$ insiemi, la cui unione eguaglia l'universo, il problema del set cover consiste nell'identificare il pi\'u piccolo sottoinsieme di $S$ la cui unione eguaglia l'universo
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{algoritmo greedy per il problema min weighted set cover}
+\addcontentsline{toc}{subsection}{algoritmo greedy per il problema min weighted set cover}
 \begin{flushleft}
+	\begin{itemize}
+		\item \textbf{nota:} nella scelta dei sottoinsiemi da inserire nel cover:
+		\begin{itemize}
+			\item non possiamo considerare solo i costi, perch\'e in proporzione non potremmo coprire abbastanza elementi di $U$
+			\item non possiamo considerare solo il numero di oggetti coperti, poich\'e potremmo incorrere in un costo eccessivo
+		\end{itemize}
+		\item \textbf{scelta greedy:} ad ogni step scegli il sottoinsieme avente costo minimo per il nuovo oggetto coperto
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{scelta greedy}
+\addcontentsline{toc}{subsection}{scelta greedy}
 \begin{flushleft}
+	\begin{itemize}
+		\item ad un dato step $j$ in cui nell'ordine l'algoritmo ha selezionato $j-1$ sottoinsiemi $S_1,\ldots,S_{j-1}$, l'efficacia di un sottoinsieme $S_k$ non ancora scelto \'e definito come:
+			$$eff(S_k)=\frac{c_k}{\vert S_k\cap\overline{C_{j-1}}\vert}$$
+		\item dove:
+		\begin{itemize}
+			\item $c_k=$ costo di $S_k$
+			\item $C_{j-1}=$ $(S_1\cup\ldots\cup S_{j-1})$
+			\item $\overline{C_{j-1}}=$ $U\setminus C_{j-1}$ (insieme degli elementi non ancora selezionati in $U$)
+			\item $\vert S_k\cap\overline{C_{j-1}}\vert=$ insieme degli elementi in $S_k$ non ancora selezionati in $U$)
+		\end{itemize}
+		\item nello step $j$ scegli un sottoinsieme $S_j$ di efficacia minima, ovvero tale che
+			$$eff(S_j)=\min\{eff(S_k)\text{ }\vert\ S_k \text{ non \'e stato ancora scelto}\}$$
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{algoritmo: Greedy-Min-Weighted-Set-Cover}
+\addcontentsline{toc}{subsection}{algoritmo: Greedy-Min-Weighted-Set-Cover}
 \begin{flushleft}
+	\begin{algorithm}
+		\caption{Greedy-Min-Weighted-Set-Cover}
+		\begin{algorithmic}
+			\STATE \color{gray} // C = insieme degli oggetti coperti \color{black}
+			\STATE $C=\emptyset$
+			\STATE \color{gray} // $\hat{C}$ = insieme dei sottoinsiemi scelti nel cover \color{black}
+			\STATE $\hat{C}=\emptyset$
+			\STATE $j=1$
+			\WHILE{$C\neq U$}
+				\STATE sia $S_j$ il sottoinsieme di efficacia minima
+				\STATE $\hat{C}=\hat{C}\cup S_j$
+				\STATE per ogni oggetto $o_i\in S_j\cap\overline{C}$, sia $price(o_i)=eff(S_j)$
+				\STATE $C=C\cup S_j$
+				\STATE $j=j+1$
+			\ENDWHILE
+			\RETURN $\hat{C}$
+		\end{algorithmic}
+	\end{algorithm}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{}
-\addcontentsline{toc}{subsection}{}
+\subsection*{lemma: $m=\sum_{S_j\in\hat{C}}c_j=\sum_{i=1}^nprice(o_i)$}
+\addcontentsline{toc}{subsection}{lemma: $m=\sum_{S_j\in\hat{C}}c_j=\sum_{i=1}^nprice(o_i)$}
 \begin{flushleft}
+	$$m=\sum_{S_j\in\hat{C}}c_j=\sum_{i=1}^nprice(o_i)$$
+	\textbf{dimostrazione:}
+	\begin{itemize}
+		\item banale, inquanto la somma dei $price$ degli oggetti coperti durante lo step $j$ \'e proprio $c_j$
+		\item in altre parole, il costo totale $c_k$ viene suddiviso tra gli oggetti coperti
+	\end{itemize}
+	\hfill$\square$
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{lemma: $price'(o_i)\geq eff(S_j')$}
+\addcontentsline{toc}{subsection}{lemma: $price'(o_i)\geq eff(S_j')$}
+\begin{flushleft}
+	\begin{itemize}
+		\item $\forall j$, data una qualunque scelta di sottoinsiemi $S_j',\ldots,S_t'$, che forma un cover con i sottoinsiemi $S_1,\ldots,S_{j-1}$ scelti dall'algoritmo greedy all'inizio dello step $j$
+		\item $\forall o_i$ (oggetto) non ancora coperto all'inizio dello step $j$
+			$$price'(o_i)\geq eff(S_j)$$
+		dove:
+		\begin{itemize}
+			\item $S_j$ \'e il sottoinsieme scelto dall'algoritmo greedy allo step $j$
+			\item $eff(S_j)$ \'e l'efficacia del sottoinsieme $S_j$
+			\item $price'(o_i)$ \'e l'efficacia del sottoinsieme $S_l'$ che copre $o_i$ assumendo che, partendo dallo step $j$, la scelta greedy \'e effettuata solo tra i sottoinsiemi $S_j',\ldots,S_t'$
+		\end{itemize}
+	\end{itemize}
+	\textbf{dimostrazione:}
+	\begin{itemize}
+		\item \'e sufficiente osservare che $eff(S_j)$ \'e il $min\text{ }covering\text{ }price$ per l'oggetto allo step $j$ 
+		\item e che l'efficacia di un sottoinsieme non scelto pu\'o solo aumentare durante gli step successivi
+		\item poich\'e il suo costo \'e fisso, ma alcuni altri oggetti possono essere coperti durante i successivi step (scelta di ulteriori sottoinsiemi)
+		\item quindi il $price'(o_i)$, ovvero l'efficacia del sottoinsieme $S_l'$ ($eff(S_l')$) con $l\geq j$ tra $S_j',\ldots,S_t'$ che lo copre \'e almeno uguale a ($\geq$) $eff(S_j)$
+	\end{itemize}
+	\hfill$\square$
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{lemma: $price(o_i)\leq\frac{m^*}{n-i+1}$}
+\addcontentsline{toc}{subsection}{lemma: $price(o_i)\leq\frac{m^*}{n-i+1}$}
+\begin{flushleft}
+	\begin{itemize}
+		\item siano $o_1,\ldots,o_n$ gli oggetti elencati nell'ordine di covering dell'algoritmo
+			greedy (ovvero tale che gli oggetti coperti durante lo step $j$ vegono elencati dopo
+			quelli coperti negli step precedenti e prima di quelli coperti negli step successivi)
+		\item allora
+			$$price(o_i)\leq\frac{m^*}{n-i+1}\hspace{2cm}\forall i\text{, }1\leq i\leq n$$
+	\end{itemize}
+	\textbf{dimostrazione:}
+	\begin{itemize}
+		\item all'inizio dello step $j$, poich\'e gli insiemi non ancora scelti di una soluzione ottima possono coprire tutti gli oggetti non coperti con un costo generale al massimo pari a $m^*$:
+		\item esiste un sottoinsieme $S_k$ di efficacia al massimo pari a
+			$$\frac{m^*}{\vert\overline{C_{j-1}}\vert}$$
+		dove $\overline{C_{j-1}}$ \'e i sottoinsieme di oggetti non ancora coperti all'inizio dello step $j$
+		\item infatti, se non \'e questo il caso, dato che il $price(o_i)=eff(S_j)$ del sottoinsieme $S_j$ scelto dall'algoritmo greedy
+		\item dal precedente lemma, per ogni possibile scelta di sottoinsiemi restanti per completare il cover, ovvero per ogni possibile $price$ degli oggetti rimanenti:
+			$$\sum_{o_i\in\overline{C_{j-1}}}price'(o_i)\geq\sum_{o_i\in\overline{C_{j-1}}}eff(S_j)>\sum_{o_i\in\overline{C_{j-1}}}\frac{m^*}{\vert\overline{C_{j-1}}\vert}=\vert\overline{C_{j-1}}\vert\cdot\frac{m^*}{\vert\overline{C_{j-1}}\vert}=m^*$$
+		\item \textbf{contraddizione:} all'ipotesi che esiste una scelta di sottoinsiemi che copre i restanti oggetti con un costo al massimo parti a $m^*$
+		\item quindi:
+			$$price(o_i)\leq\frac{m^*}{\vert\overline{C_{j-1}}\vert}$$
+		\item ma $\vert\overline{C_{j-1}}\vert\geq n-i+1$ poich\'e $o_i,\ldots,o_n\in\overline{C_{j-1}}$ e dunque:
+			$$price(o_i)\leq\frac{m^*}{n-i+1}$$
+	\end{itemize}
+	\hfill$\square$
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{teorema: Greedy-Min-Weighted-Set-Cover \'e $H_n$-approssimante}
+\addcontentsline{toc}{subsection}{teorema: Greedy-Min-Weighted-Set-Cover \'e $H_n$-approssimante}
+\begin{flushleft}
+	l'algoritmo Greedy-Min-Weighted-Set-Cover \'e $H_n$-approssimante, con
+	$H_n=1+\frac{1}{2}+\frac{1}{3}+\ldots+1$
+	\textbf{dimostrazione:}
+	\begin{itemize}
+		\item[] $$m=\sum_{i=1}^nprice(o_i)\leq\sum_{i=1}^n\frac{m^*}{n-i+1}=m^*(\frac{1}{n}+\frac{1}{n-1}+\frac{1}{n-2}+\ldots+1)=m^*\cdot H_n$$
+		\item da cui:
+			$$\frac{m}{m^*}\leq H_n$$
+	\end{itemize}
+	\hfill$\square$
+	\begin{itemize}
+		\item \textbf{nota:} $\forall n>1\rightarrow \ln(n+1)\leq H_n\leq\ln(n)+1$
+		\item quindi $r$ ha una dipendenza logaritmica dalla dimensione dell'input
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{esempio: $H_n\cdot m^*$!}
+\addcontentsline{toc}{subsection}{esempio: $H_n\cdot m^*$!}
+\begin{flushleft}
+	\begin{itemize}
+		\item il rapporto di approssimazione dell'algoritmo greedy \'e almeno $H_n$
+		\item considera infatti la seguente istanza:
+		\begin{itemize}
+			\item $S_1$: $1$ oggetto, costo $c_1=\frac{1}{n}$
+			\item $S_2$: $1$ oggetto, costo $c_2=\frac{1}{n-1}$
+			\item $S_3$: $1$ oggetto, costo $c_3=\frac{1}{n-2}$
+			\item ...
+			\item $S_n$: $1$ oggetto, costo $c_n=1$
+			\item $S_{n+1}$: $n$ oggetti, costo $c_{n+1}=1+\epsilon$ (con $\epsilon>0$, arbitrariamente piccolo)
+		\end{itemize}
+		\item esecuzione:
+		\begin{itemize}
+			\item \textbf{step 1}:
+			\begin{itemize}
+				\item $eff(S_1)<eff(S_{n+1})=\frac{1}{n}<\frac{1+\epsilon}{n}$
+				\item scelgo l'insieme di efficacia minima $S_1$
+			\end{itemize}
+			\item \textbf{step 2}:
+			\begin{itemize}
+				\item $eff(S_2)<eff(S_{n+1})=\frac{1}{n-1}<\frac{1+\epsilon}{n-1}$
+				\item scelgo l'insieme di efficacia minima $S_2$
+			\end{itemize}
+			\item ...
+			\item l'algoritmo \textbf{non} sceglier\'a mai il sottoinsieme $S_{n+1}$
+		\end{itemize}
+		\item quindi:
+			$$m=\sum_{j=1}^n\frac{1}{j}=H_n$$
+			$$m^*=1+\epsilon\hspace{2cm}\text{(con $\epsilon>0$, arbitrariamente piccolo)}$$
+		\item dunque:
+			$$\frac{m}{m^*}=\frac{H_n}{1+\epsilon}$$
+		\item allora, per $\epsilon\rightarrow 0$:
+			$$\frac{m}{m^*}\rightarrow H_n$$
+		\item dunque la misura della soluzione restituita dall'algoritmo greedy, per alcune istanze,
+			\'e $H_n$ volte quella ottima!
+	\end{itemize}
 \end{flushleft}
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
