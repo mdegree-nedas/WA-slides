@@ -1,2 +1,131 @@
-social networks and bibliography
+\section*{social networks and bibliography}
+\addcontentsline{toc}{section}{social networks and bibliography}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{ricerca web}
+\addcontentsline{toc}{subsection}{ricerca web}
+\begin{flushleft}
+	\begin{itemize}
+		\item problematiche tipiche della ricerca web:
+		\begin{enumerate}
+			\item dinamicit\'a della collezione di pagine
+			\item eterogeneit\'a dei contenuti
+			\item abbondanza dei contenuti e delle pagine
+			\item ridondanze e duplicazioni
+			\item malvagit\'a degli autori
+			\item ...
+			\item hyperlinks
+		\end{enumerate}
+		\item \textbf{ricerca web:} information retrieval + spectral analysis + ??? (secret)
+		\begin{itemize}
+			\item information retrieval: tecniche di ricerca testuale
+			\item spectral analysis: determinazione della rilevanza di una pagina come funzione della struttura a rete delle pagine web
+			\item ??? (secret): segreto industriale + frequenti modifiche strategiche
+		\end{itemize}
+		\item gli hyperlinks forniscono informazione supplementare al normale testo e aiutano a definire delle misure di autorit\'a e popolarit\'a delle pagine (da annettere alle classiche misure di rilevanza)
+		\item tali misure hanno avuto orgine delle reti sociali (soggetto di consistente ricerca prima dell'avvendo del web, il quale \'e una rete sociale)
+		\item la teoria delle reti sociali e\'nteressante per la determinazione di propriet\'a correlate alla connetivit\'a e alla distanza nei grafi
+		\begin{itemize}
+			\item la centralit\'a
+			\item la co-citazione
+			\item il prestigio sociale
+		\end{itemize}
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{centralit\'a}
+\addcontentsline{toc}{subsection}{centralit\'a}
+\begin{flushleft}
+	\begin{itemize}
+		\item molte nozioni di centralit\'a basate sui grafi sono state proposte nella letteratura delle reti sociali
+		\item tuttavia, tra le innumerevoli formulazioni e misure, nessuna si adatta perfettamente a tutti gli scenari
+		\item $d(u,v)=$ distanza tra 2 nodi $u$ e $v$ in un grafo
+		\begin{enumerate}
+			\item non pesato: uguale al numero di archi del cammino minimo tra $u$ e $v$
+			\item pesato: uguale al costo degli archi del cammino minimo tra $u$ e $v$
+		\end{enumerate}
+		\item $r(u)=\max_vd(u,v)$ raggio di un nodo $u$
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{alcune misure di centralit\'a}
+\addcontentsline{toc}{subsection}{alcune misure di centralit\'a}
+\begin{flushleft}
+	\begin{itemize}
+		\item \textbf{centralit\'a di raggio (radius)}:
+		\begin{itemize}
+			\item[] $$c[v]=\min r(v)$$
+		\end{itemize}
+		\item \textbf{centralit\'a di grado (degree)}:
+		\begin{itemize}
+			\item[] $$c[v]=\max deg(v)$$
+		\end{itemize}
+		\item \textbf{centralit\'a di vicinanza (closeness)}:
+		\begin{itemize}
+			\item[] $$c[v]=\max\sum_{t\in V,t\neq v}\frac{1}{d(v,t)}$$
+		\end{itemize}
+		\item \textbf{centralit\'a di interazione (betweenness)}:
+		\begin{itemize}
+			\item[] $$c[v]=\max\sum_{s,t\in V,s\neq t\neq v}\frac{\sigma_{s,t}(v)}{\sigma_{s,t}}$$
+		\end{itemize}
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+	\begin{itemize}
+		\item aaa
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+	\begin{itemize}
+		\item aaa
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+	\begin{itemize}
+		\item aaa
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+	\begin{itemize}
+		\item aaa
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\subsection*{}
+\addcontentsline{toc}{subsection}{}
+\begin{flushleft}
+	\begin{itemize}
+		\item aaa
+	\end{itemize}
+\end{flushleft}
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
 \newpage
