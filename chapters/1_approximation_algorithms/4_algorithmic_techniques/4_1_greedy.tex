@@ -112,7 +112,7 @@
 		\item cos\'i che: \newline \\
 			\hspace{8cm}$(<)$ poich\'e $\frac{1}{r}>1$
 			$$\frac{m}{m^*}=\frac{n-1}{kn-1}\leq\frac{n-1}{\frac{n}{r}-1}<\frac{n-1}{\frac{n}{r}-\frac{1}{r}}=\frac{n-1}{\frac{1}{r}(n-1)}=r$$
-		\item \color{gray} $\forall r<1\rightarrow\frac{m}{m^*}\leq r$, invece di $\forall r\leq 1\rightarrow\frac{m}{m^*}\geq r$
+		\item \color{gray} $\forall r<1\rightarrow\frac{m}{m^*}<r$, invece di $\forall r\leq 1\rightarrow\frac{m}{m^*}\geq r$
 	\end{itemize}
 	\hfill$\square$
 \end{flushleft}
@@ -251,10 +251,10 @@
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{teorema: Greedy-Graham \'e $\frac{2-1}{h}$-approssimante}
+\subsection*{teorema: Greedy-Graham \'e $2-\frac{1}{h}$-approssimante}
 \addcontentsline{toc}{subsection}{teorema: Greedy-Graham \'e $\frac{2-1}{h}$-approssimante}
 \begin{flushleft}
-	l'algoritmo Greedy-Graham \'e $\frac{2-1}{h}$-approssimante, dove $h$ \'e il numero di processori \newline \\
+	l'algoritmo Greedy-Graham \'e $2-\frac{1}{h}$-approssimante, dove $h$ \'e il numero di processori \newline \\
 	\vspace{0.5cm}
 	\textbf{fatto:}
 	\begin{itemize}
@@ -292,7 +292,7 @@
 	\begin{itemize}
 		\item osservazioni:
 		\begin{itemize}
-			\item quando $h$ cresce, il rapporto di approssimazione $\frac{2-1}{h}$ tende a $2$
+			\item quando $h$ cresce, il rapporto di approssimazione $2-\frac{1}{h}$ tende a $2$
 			\item l'analisi \'e stretta, ovvero vale il seguente teorema
 		\end{itemize}
 	\end{itemize}
@@ -300,10 +300,10 @@
 
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\subsection*{teorema: Greedy-Graham non \'e $r$-approssimante per $r<\frac{2-1}{h}$}
+\subsection*{teorema: Greedy-Graham non \'e $r$-approssimante per $r<2-\frac{1}{h}$}
 \addcontentsline{toc}{subsection}{teorema: Greedy-Graham non \'e $r$-approssimante per $r<\frac{2-1}{h}$}
 \begin{flushleft}
-	Greedy-Graham non \'e $r$-approssimante per $r<\frac{2-1}{h}$ \newline \\
+	Greedy-Graham non \'e $r$-approssimante per $r<2-\frac{1}{h}$ \newline \\
 	\vspace{0.5cm}
 	\textbf{dimostrazione:}
 	\begin{itemize}
@@ -314,12 +314,12 @@
 		\end{itemize}
 		\item Greedy-Graham assegna i jobs nella seguente maniera:
 			% TODO: grafico %
-		\item e quindi: $$m=2(h-1)$$
+		\item e quindi: $$m=h+h-1=2h-1$$
 		\item la soluzione ottima pu\'o essere ottenuta assegnando il job pi\'u lungo ad un processore e distribuendo ugualmente i jobs pi\'u corti tra i processori restanti:
 			% TODO: grafico %
 		\item e quindi: $$m^*=h$$
 		\item in conclusione:
-			$$\frac{m}{m^*}=\frac{2(h-1)}{h}=2-\frac{1}{h}\hspace{2cm}\text{(diverso da }\leq 2-\frac{1}{h}\text{)}$$
+			$$\frac{m}{m^*}=\frac{2h-1}{h}=2-\frac{1}{h}\hspace{2cm}\text{(diverso da }\leq 2-\frac{1}{h}\text{)}$$
 	\end{itemize}
 	\hfill$\square$
 \end{flushleft}
@@ -422,6 +422,8 @@
 			$$m\leq\frac{T}{h}+\frac{h-1}{h}t_l\leq m^*+\frac{h-1}{h}\frac{m^*}{2}\color{gray}=$$
 			$$\color{gray}=m^*+\frac{m^*(h-1)}{2h}=\frac{2hm^*+m^*(h-1)}{2h}=\frac{2hm^*+hm^*-m^*}{2h}=$$
 			$$\color{gray}=\frac{3hm^*-m^*}{2h}=(\frac{3h-1}{2h})m^*=(\frac{3h}{2h}-\frac{1}{2h})m^*\color{black}=(\frac{3}{2}-\frac{1}{2h})m^*$$
+		\item quindi:
+			$$\frac{m}{m^*}\leq\frac{3}{2}-\frac{1}{2h}$$
 	\end{itemize}
 	\hfill$\square$
 \end{flushleft}
@@ -436,7 +438,7 @@
 		\item SOLUZIONE: una partizione di $V$ in 2 sottoinsiemi $V_1$ e $V_2$, ovvero tale che:
 			$$V_1\cup V_2=V\text{ e }V_1\cap V_2=\emptyset$$
 		\item MISURA: la cardinalit\'a del taglio, ovvero il numero di archi con un estremo (nodo) in $V_1$ e un estremo in $V_2$, cio\'e:
-			$$\vert\{\{u,v\}\hspace{0.1cm}\vert\hspace{0.1cm}u\in V_1\text{ e }v\in V_2\}\vert$$
+			$$\vert\{\{u,v\}\hspace{0.1cm}\vert\hspace{0.1cm}(u\in V_1\land v\in V_2)\lor(u\in V_2\land v\in V_1)\}\vert$$
 	\end{itemize}
 \end{flushleft}
 
