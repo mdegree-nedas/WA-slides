@@ -307,7 +307,7 @@
 		\begin{itemize}
 			\item $OPT(i,w)=\emptyset$ se $i=0$
 			\item $OPT(i,w)=OPT(i-1,w)$ se $w_i>w$
-			\item $OPT(i,w)=$ scelta migliore tra $OPT(i-1,w)$ e $OPT(i-1,w-w_i)\cup\{o_i\}$ (altrimenti)
+			\item $OPT(i,w)=$ scelta migliore tra $OPT(i-1,w)$ e $OPT(i-1,w-w_i)\cup\{o_i\}$ (altrimenti, $wi\leq w$)
 		\end{itemize}
 	\end{itemize}
 \end{flushleft}
@@ -322,7 +322,7 @@
 		\begin{itemize}
 			\item $m(i,w)=0$ se $i=0$
 			\item $m(i,w)=m(i-1,w)$ se $w_i>w$
-			\item $m(i,w)=\max\{m(i-1,w),m(i-1,w-w_i)+p_i\}$ (altrimenti)
+			\item $m(i,w)=\max\{m(i-1,w),m(i-1,w-w_i)+p_i\}$ (altrimenti, $w_i\leq w$)
 		\end{itemize}
 		\item chiaramente, $m^*=m(n,b)$
 	\end{itemize}
@@ -342,7 +342,7 @@
 			\begin{itemize}
 				\item $OPT(i,w)=\emptyset$ se $i=0$
 				\item $OPT(i,w)=OPT(i-1,w)$ se $w_i>w$
-				\item $OPT(i,w)=$ scelta migliore tra $OPT(i-1,w)$ e $OPT(i-1,w-w_i)\cup\{o_i\}$ (altrimenti)
+				\item $OPT(i,w)=$ scelta migliore tra $OPT(i-1,w)$ e $OPT(i-1,w-w_i)\cup\{o_i\}$ (altrimenti, $w_i\leq w$)
 			\end{itemize}
 		\item o il $k$-esimo oggetto non pu\'o essere parte della soluzione (poich\'e il suo solo peso \'e cos\'i grande che l'oggetto stesso non entra nel knapsack)
 		\item altrimenti, scegliamo la soluzione migliore tra:
@@ -481,7 +481,7 @@
 		\begin{itemize}
 			\item $OPT(i,p)=$ non definito se $i=0$
 			\item $OPT(i,p)=$ scelta migliore tra $OPT(i-1,p)$ e $\{o_i\}$ se $p_i\geq p$
-			\item $OPT(i,p)=$ scelta migliore tra $OPT(i-1,p)$ e $OPT(i-1,p-p_i)\cup\{o_i\}$ (altrimenti, non definito se entrambi non sono definiti)
+			\item $OPT(i,p)=$ scelta migliore tra $OPT(i-1,p)$ e $OPT(i-1,p-p_i)\cup\{o_i\}$ (altrimenti $p_i<p$, non definito se entrambi non sono definiti)
 		\end{itemize}
 	\end{itemize}
 \end{flushleft}
@@ -496,7 +496,7 @@
 		\begin{itemize}
 			\item $v(i,p)=\infty$ se $i=0$
 			\item $v(i,p)=\min\{v(i-1,p),w_i\}$ se $p_i\geq p$
-			\item $v(i,p)=\min\{v(i-1,p),v(i-1,p-p_i)+w_i\}$ (altrimenti)
+			\item $v(i,p)=\min\{v(i-1,p),v(i-1,p-p_i)+w_i\}$ (altrimenti, $p_i<p$)
 		\end{itemize}
 	\end{itemize}
 \end{flushleft}
